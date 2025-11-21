@@ -1,43 +1,68 @@
-# Astro Starter Kit: Minimal
+# Mint Prints
 
-```sh
-npm create astro@latest -- --template minimal
+Professional 3D printing, laser cutting, and custom design services website.
+
+**Live site:** [mintprints.im](https://mintprints.im)
+
+## Tech Stack
+
+- [Astro](https://astro.build) - Static site generator
+- [Tailwind CSS](https://tailwindcss.com) - Utility-first CSS framework
+- [Netlify](https://netlify.com) - Hosting and forms
+
+## Pages
+
+- **Home** - Services overview (FDM/SLA printing, laser cutting, custom design)
+- **Gallery** - Instagram feed integration
+- **Contact** - Contact form with Netlify Forms
+- **Testimonials** - Trustpilot reviews widget
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Deployment
 
-## 🚀 Project Structure
+The site is configured for Netlify deployment. Push to the `master` branch to trigger a build.
 
-Inside of your Astro project, you'll see the following folders and files:
+Build settings are configured in `netlify.toml`.
 
-```text
+## Project Structure
+
+```
 /
 ├── public/
+│   └── favicon.svg
 ├── src/
-│   └── pages/
-│       └── index.astro
+│   ├── components/
+│   │   ├── Footer.astro
+│   │   ├── Header.astro
+│   │   └── ServiceCard.astro
+│   ├── layouts/
+│   │   └── Layout.astro
+│   ├── pages/
+│   │   ├── index.astro
+│   │   ├── gallery.astro
+│   │   ├── contact.astro
+│   │   └── testimonials.astro
+│   └── styles/
+│       └── global.css
+├── netlify.toml
 └── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## License
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+All rights reserved. Mint Prints.
