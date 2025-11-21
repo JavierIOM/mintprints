@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.3] - 2025-11-21
+
+### Added
+
+- Thank you page for successful form submissions
+- Form redirect to custom thank you page after submission
+
+### Changed
+
+- Updated Etsy and Redbubble icons with official Simple Icons logos
+- Etsy now shows full wordmark logo
+- Redbubble now shows "RB" circular logo
+
+### Fixed
+
+- Form redirect now uses trailing slash for Netlify compatibility
+
 ## [0.0.2] - 2025-11-21
 
 ### Added
