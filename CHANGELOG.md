@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.2] - 2025-11-21
+
+### Added
+
+- Dark mode support with toggle button in header
+- Dark mode set as default theme
+- Theme preference saved to localStorage
+- Smooth transitions between light and dark modes
+
+### Changed
+
+- Updated all components with dark mode colour variants
+- Header, Footer, and all pages now support dark mode
+- Form inputs styled for dark mode
+- Service cards, buttons, and UI elements adapted for dark theme
+
 ## [0.0.1] - 2025-11-21
 
 ### Added

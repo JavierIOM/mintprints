@@ -6,27 +6,27 @@ import Layout from '../layouts/Layout.astro';
   <section class="py-20">
     <div class="max-w-6xl mx-auto px-4">
       <div class="text-center mb-12">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Gallery</h1>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Gallery</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
           Browse through our previous designs and projects. Follow us on Instagram for the latest updates!
         </p>
       </div>
 
       <!-- Instagram Feed Container -->
-      <div class="bg-gray-50 rounded-2xl p-8">
+      <div class="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8">
         <div id="instagram-feed" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           <!-- Instagram feed will be loaded here -->
           <div class="col-span-full text-center py-12">
             <div class="animate-pulse">
-              <div class="w-16 h-16 bg-gray-200 rounded-full mx-auto mb-4"></div>
-              <p class="text-gray-500">Loading Instagram feed...</p>
+              <div class="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-full mx-auto mb-4"></div>
+              <p class="text-gray-500 dark:text-gray-400">Loading Instagram feed...</p>
             </div>
           </div>
         </div>
 
         <!-- Fallback / Direct Link -->
         <div id="instagram-fallback" class="hidden text-center py-8">
-          <p class="text-gray-600 mb-6">
+          <p class="text-gray-600 dark:text-gray-300 mb-6">
             Check out our latest work on Instagram!
           </p>
           <a
@@ -45,7 +45,7 @@ import Layout from '../layouts/Layout.astro';
 
       <!-- Call to Action -->
       <div class="mt-12 text-center">
-        <p class="text-gray-600 mb-4">
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
           Like what you see? Let's create something amazing together.
         </p>
         <a href="/contact" class="inline-flex items-center justify-center px-8 py-4 bg-mint text-white font-semibold rounded-xl hover:bg-mint-dark transition-colors">

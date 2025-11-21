@@ -6,7 +6,10 @@
       "Bash(git remote add:*)",
       "Bash(npm run dev:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: Mint Prints website with Astro\n\n- Home page with services (FDM/SLA printing, laser cutting, custom design)\n- Gallery page with Instagram integration\n- Contact page with Netlify Forms\n- Testimonials page with Trustpilot widget\n- Responsive design with Tailwind CSS\n- Netlify deployment configuration\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: Mint Prints website with Astro\n\n- Home page with services (FDM/SLA printing, laser cutting, custom design)\n- Gallery page with Instagram integration\n- Contact page with Netlify Forms\n- Testimonials page with Trustpilot widget\n- Responsive design with Tailwind CSS\n- Netlify deployment configuration\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []

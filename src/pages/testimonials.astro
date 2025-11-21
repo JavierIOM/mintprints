@@ -6,43 +6,43 @@ import Layout from '../layouts/Layout.astro';
   <section class="py-20">
     <div class="max-w-4xl mx-auto px-4">
       <div class="text-center mb-12">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Testimonials</h1>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Testimonials</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
           What our customers are saying
         </p>
-        <p class="text-gray-500 mt-2">
+        <p class="text-gray-500 dark:text-gray-400 mt-2">
           Genuine feedback from satisfied customers
         </p>
       </div>
 
       <!-- Trust Message -->
-      <div class="bg-gradient-to-br from-mint/5 to-mint/10 rounded-2xl p-8 mb-12 text-center">
+      <div class="bg-gradient-to-br from-mint/5 to-mint/10 dark:from-mint/10 dark:to-mint/5 rounded-2xl p-8 mb-12 text-center">
         <div class="w-16 h-16 bg-mint/20 rounded-full flex items-center justify-center mx-auto mb-6">
           <svg class="w-8 h-8 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
           </svg>
         </div>
-        <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+        <p class="text-lg text-gray-700 dark:text-gray-200 max-w-2xl mx-auto">
           We pride ourselves on the quality of our work and products. Hear directly from those who have experienced the difference!
         </p>
       </div>
 
       <!-- Trustpilot Widget -->
-      <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 text-center">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700 text-center">
         <div class="mb-6">
           <svg class="w-32 h-auto mx-auto" viewBox="0 0 126 31" xmlns="http://www.w3.org/2000/svg">
             <path d="M33.3 15.5l4.6-1.4-3.8-2.8 1.4-4.6-3.8 2.8-3.8-2.8 1.4 4.6-3.8 2.8 4.6 1.4 1.4 4.6 1.8-4.6zm-8.3 0l4.6-1.4-3.8-2.8 1.4-4.6-3.8 2.8-3.8-2.8 1.4 4.6-3.8 2.8 4.6 1.4 1.4 4.6 1.8-4.6zM8.3 15.5l4.6-1.4-3.8-2.8 1.4-4.6L6.7 9.5 2.9 6.7l1.4 4.6L.5 14.1l4.6 1.4 1.4 4.6 1.8-4.6z" fill="#00B67A"/>
             <path d="M50.3 15.5l4.6-1.4-3.8-2.8 1.4-4.6-3.8 2.8-3.8-2.8 1.4 4.6-3.8 2.8 4.6 1.4 1.4 4.6 1.8-4.6zm16.7 0l4.6-1.4-3.8-2.8 1.4-4.6-3.8 2.8-3.8-2.8 1.4 4.6-3.8 2.8 4.6 1.4 1.4 4.6 1.8-4.6z" fill="#00B67A"/>
-            <path d="M77 8h3v15h-3V8zm5 15V8h2.8l.2 1.8c.9-1.4 2.3-2.1 4.2-2.1 1.7 0 3 .6 3.9 1.7.9 1.1 1.4 2.7 1.4 4.7v8.9h-3V14.5c0-1.2-.3-2.2-.8-2.8-.5-.7-1.3-1-2.4-1-1.1 0-2 .4-2.7 1.2-.7.8-1 1.8-1 3v8.1h-3.6zm20.6.3c-1.4 0-2.6-.3-3.6-.9s-1.8-1.4-2.3-2.5c-.6-1.1-.8-2.3-.8-3.7 0-1.4.3-2.6.8-3.7s1.3-1.9 2.3-2.5 2.2-.9 3.6-.9c1.4 0 2.6.3 3.6.9s1.8 1.4 2.3 2.5c.6 1.1.8 2.3.8 3.7 0 1.4-.3 2.6-.8 3.7s-1.3 1.9-2.3 2.5-2.2.9-3.6.9zm0-2.8c1 0 1.9-.4 2.5-1.1.6-.7.9-1.8.9-3.2s-.3-2.5-.9-3.2c-.6-.7-1.4-1.1-2.5-1.1s-1.9.4-2.5 1.1c-.6.7-.9 1.8-.9 3.2s.3 2.5.9 3.2c.6.7 1.4 1.1 2.5 1.1zm12.9 2.5c-1 0-1.8-.3-2.5-.8-.7-.5-1-1.3-1-2.4V10.5h-2.3V8h2.3V4.5h3V8h3.3v2.5h-3.3v8.5c0 .5.1.8.4 1 .3.2.6.3 1.1.3h1.8v2.5l-2.8.2z" fill="#1A1A1A"/>
+            <path class="fill-gray-900 dark:fill-white" d="M77 8h3v15h-3V8zm5 15V8h2.8l.2 1.8c.9-1.4 2.3-2.1 4.2-2.1 1.7 0 3 .6 3.9 1.7.9 1.1 1.4 2.7 1.4 4.7v8.9h-3V14.5c0-1.2-.3-2.2-.8-2.8-.5-.7-1.3-1-2.4-1-1.1 0-2 .4-2.7 1.2-.7.8-1 1.8-1 3v8.1h-3.6zm20.6.3c-1.4 0-2.6-.3-3.6-.9s-1.8-1.4-2.3-2.5c-.6-1.1-.8-2.3-.8-3.7 0-1.4.3-2.6.8-3.7s1.3-1.9 2.3-2.5 2.2-.9 3.6-.9c1.4 0 2.6.3 3.6.9s1.8 1.4 2.3 2.5c.6 1.1.8 2.3.8 3.7 0 1.4-.3 2.6-.8 3.7s-1.3 1.9-2.3 2.5-2.2.9-3.6.9zm0-2.8c1 0 1.9-.4 2.5-1.1.6-.7.9-1.8.9-3.2s-.3-2.5-.9-3.2c-.6-.7-1.4-1.1-2.5-1.1s-1.9.4-2.5 1.1c-.6.7-.9 1.8-.9 3.2s.3 2.5.9 3.2c.6.7 1.4 1.1 2.5 1.1zm12.9 2.5c-1 0-1.8-.3-2.5-.8-.7-.5-1-1.3-1-2.4V10.5h-2.3V8h2.3V4.5h3V8h3.3v2.5h-3.3v8.5c0 .5.1.8.4 1 .3.2.6.3 1.1.3h1.8v2.5l-2.8.2z"/>
           </svg>
         </div>
 
-        <p class="text-gray-600 mb-8">
+        <p class="text-gray-600 dark:text-gray-300 mb-8">
           We use Trustpilot to collect and display genuine customer reviews.
         </p>
 
         <!-- Trustpilot Embed Placeholder -->
-        <div class="bg-gray-50 rounded-xl p-8 mb-8">
+        <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-8 mb-8">
           <!-- TrustBox widget - Review Collector -->
           <div
             class="trustpilot-widget"
@@ -52,7 +52,7 @@ import Layout from '../layouts/Layout.astro';
             data-style-height="52px"
             data-style-width="100%"
           >
-            <a href="https://uk.trustpilot.com/review/mintprints.im" target="_blank" rel="noopener">
+            <a href="https://uk.trustpilot.com/review/mintprints.im" target="_blank" rel="noopener" class="text-mint hover:text-mint-dark">
               View our reviews on Trustpilot
             </a>
           </div>
@@ -73,7 +73,7 @@ import Layout from '../layouts/Layout.astro';
 
       <!-- CTA -->
       <div class="mt-12 text-center">
-        <p class="text-gray-600 mb-4">
+        <p class="text-gray-600 dark:text-gray-300 mb-4">
           Had a great experience? We'd love to hear from you!
         </p>
         <a href="/contact" class="inline-flex items-center justify-center px-8 py-4 bg-mint text-white font-semibold rounded-xl hover:bg-mint-dark transition-colors">
