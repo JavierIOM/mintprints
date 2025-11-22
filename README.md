@@ -1,21 +1,35 @@
 # Mint Prints
 
-Professional 3D printing, laser cutting, and custom design services website.
-
-**Live site:** [mintprints.im](https://mintprints.im)
+3D Printing, Laser Cutting & Custom Design on the Isle of Man - Where all your prints are Mint!
 
 ## Tech Stack
 
-- [Astro](https://astro.build) - Static site generator
-- [Tailwind CSS](https://tailwindcss.com) - Utility-first CSS framework
-- [Netlify](https://netlify.com) - Hosting and forms
+- **Framework:** Astro 5
+- **Styling:** Tailwind CSS 4
+- **Hosting:** Netlify
+- **Forms:** Netlify Forms
+
+## Features
+
+- Responsive design with dark mode support
+- Contact form with honeypot spam protection
+- Instagram gallery integration
+- SEO optimized (Open Graph, Twitter Cards, JSON-LD structured data)
+- Automatic sitemap generation
 
 ## Pages
 
-- **Home** - Services overview (FDM/SLA printing, laser cutting, custom design)
+- **Home** - Hero section and services overview
 - **Gallery** - Instagram feed integration
-- **Contact** - Contact form with Netlify Forms
-- **Testimonials** - Trustpilot reviews widget
+- **Testimonials** - Customer reviews via Trustpilot
+- **Contact** - Contact form and social links
+
+## Services
+
+- FDM (Plastic) 3D Printing
+- SLA (Resin) 3D Printing
+- Laser Cutting & Etching
+- Custom Design
 
 ## Development
 
@@ -35,34 +49,12 @@ npm run preview
 
 ## Deployment
 
-The site is configured for Netlify deployment. Push to the `master` branch to trigger a build.
+The site automatically deploys to Netlify on push to the main branch.
 
-Build settings are configured in `netlify.toml`.
+## Links
 
-## Project Structure
-
-```
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   ├── Footer.astro
-│   │   ├── Header.astro
-│   │   └── ServiceCard.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   ├── pages/
-│   │   ├── index.astro
-│   │   ├── gallery.astro
-│   │   ├── contact.astro
-│   │   └── testimonials.astro
-│   └── styles/
-│       └── global.css
-├── netlify.toml
-└── package.json
-```
-
-## License
-
-All rights reserved. Mint Prints.
+- Website: https://mintprints.im
+- Instagram: [@mintprintsiom](https://www.instagram.com/mintprintsiom/)
+- Facebook: [Mint Prints IOM](https://www.facebook.com/mintprintsiom)
+- Etsy: [MintPrintsIOM](https://www.etsy.com/shop/MintPrintsIOM)
+- Redbubble: [manxcraft](https://www.redbubble.com/people/manxcraft/shop)

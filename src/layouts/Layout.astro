@@ -6,9 +6,18 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title: string;
   description?: string;
+  image?: string;
 }
 
-const { title, description = "3D Printing, Laser Cutting & Custom Design - Where all your prints are Mint!" } = Astro.props;
+const {
+  title,
+  description = "3D Printing, Laser Cutting & Custom Design on the Isle of Man - Where all your prints are Mint!",
+  image = "/og-image.svg"
+} = Astro.props;
+
+const siteUrl = "https://mintprints.im";
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const fullTitle = title === "Home" ? "Mint Prints | 3D Printing & Laser Cutting" : `${title} | Mint Prints`;
 ---
 
 <!doctype html>
@@ -16,12 +25,110 @@ const { title, description = "3D Printing, Laser Cutting & Custom Design - Where
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>{fullTitle}</title>
+    <meta name="title" content={fullTitle} />
     <meta name="description" content={description} />
+    <meta name="keywords" content="3D printing, laser cutting, custom design, Isle of Man, FDM printing, SLA resin printing, laser etching, prototyping, Mint Prints" />
+    <meta name="author" content="Mint Prints" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}${image}`} />
+    <meta property="og:site_name" content="Mint Prints" />
+    <meta property="og:locale" content="en_GB" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}${image}`} />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <title>{title} | Mint Prints</title>
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#64c864" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Mint Prints",
+      "description": description,
+      "url": siteUrl,
+      "logo": `${siteUrl}/favicon.svg`,
+      "image": `${siteUrl}${image}`,
+      "email": "hello@mintprints.im",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IM"
+      },
+      "areaServed": "Isle of Man",
+      "priceRange": "$$",
+      "sameAs": [
+        "https://www.facebook.com/mintprintsiom",
+        "https://www.instagram.com/mintprintsiom/",
+        "https://www.etsy.com/shop/MintPrintsIOM",
+        "https://www.redbubble.com/people/manxcraft/shop"
+      ],
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "17:00"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "3D Printing & Laser Cutting Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "FDM (Plastic) 3D Printing"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "SLA (Resin) 3D Printing"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Laser Cutting & Etching"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom Design Services"
+            }
+          }
+        ]
+      }
+    })} />
+
     <script is:inline>
       // Check for saved theme preference or default to dark
       const theme = localStorage.getItem('theme') || 'dark';

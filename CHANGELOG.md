@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.5] - 2025-11-22
+
+### Added
+
+- Comprehensive SEO improvements
+  - Open Graph meta tags for Facebook/LinkedIn sharing
+  - Twitter Card meta tags for Twitter sharing
+  - Canonical URLs for all pages
+  - robots.txt file for search engine crawling
+  - Automatic sitemap generation via @astrojs/sitemap
+  - JSON-LD structured data (LocalBusiness schema)
+  - Custom OG image for social sharing
+  - Keywords and author meta tags
+  - Theme color meta tag
+
+### Changed
+
+- Updated Redbubble links site-wide to correct shop URL
+
 ## [0.0.4] - 2025-11-22
 
 ### Changed
