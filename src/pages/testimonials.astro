@@ -45,23 +45,6 @@ import Layout from '../layouts/Layout.astro';
           We use Trustpilot to collect and display genuine customer reviews.
         </p>
 
-        <!-- Trustpilot Embed Placeholder -->
-        <div class="bg-gray-50 dark:bg-gray-700 rounded-xl p-8 mb-8">
-          <!-- TrustBox widget - Review Collector -->
-          <div
-            class="trustpilot-widget"
-            data-locale="en-GB"
-            data-template-id="56278e9abfbbba0bdcd568bc"
-            data-businessunit-id="mintprints.im"
-            data-style-height="52px"
-            data-style-width="100%"
-          >
-            <a href="https://uk.trustpilot.com/review/mintprints.im" target="_blank" rel="noopener" class="text-mint hover:text-mint-dark">
-              View our reviews on Trustpilot
-            </a>
-          </div>
-        </div>
-
         <a
           href="https://uk.trustpilot.com/review/mintprints.im"
           target="_blank"
@@ -80,19 +63,10 @@ import Layout from '../layouts/Layout.astro';
         <p class="text-gray-600 dark:text-gray-300 mb-4">
           Had a great experience? We'd love to hear from you!
         </p>
-        <a href="/contact" class="inline-flex items-center justify-center px-8 py-4 bg-mint text-white font-semibold rounded-xl hover:bg-mint-dark transition-colors">
+        <a href="/contact/" class="inline-flex items-center justify-center px-8 py-4 bg-mint text-white font-semibold rounded-xl hover:bg-mint-dark transition-colors">
           Get in Touch
         </a>
       </div>
     </div>
   </section>
 </Layout>
-
-<script>
-  // Load Trustpilot widget script
-  const script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = '//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js';
-  script.async = true;
-  document.head.appendChild(script);
-</script>
