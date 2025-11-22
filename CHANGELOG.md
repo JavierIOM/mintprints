@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.4] - 2025-11-22
+
+### Changed
+
+- Cleaned up Trustpilot logo on testimonials page
+- Removed empty Trustpilot widget placeholder (requires valid business ID)
+
+### Fixed
+
+- Fixed 404 errors on static pages by removing SPA redirect from netlify.toml
+- Added trailingSlash config to Astro for consistent URL handling
+
 ## [0.0.3] - 2025-11-21
 
 ### Added
