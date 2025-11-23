@@ -10,7 +10,13 @@
       "Bash(git push:*)",
       "Bash(git remote set-url:*)",
       "Bash(git commit:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(npm install:*)",
+      "Bash(README.md)",
+      "Bash(\"c:\\Users\\Gavin\\OneDrive\\Documents\\GitHub\\mintprints\\README.md\")",
+      "Bash(npx sharp-cli:*)",
+      "Bash(node -e:*)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []
