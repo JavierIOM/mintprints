@@ -13,7 +13,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Updated favicon, apple-touch-icon, and OG image to use custom mint leaf logo
+- Updated favicon, apple-touch-icon, and OG image to use custom mint leaf logo with transparent background
 
 ## [0.0.6] - 2025-11-24
 
