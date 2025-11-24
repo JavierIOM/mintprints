@@ -18,7 +18,7 @@ const ELFSIGHT_WIDGET_ID = "417e8f39-9ae2-4899-b619-01cdf8d5970e";
       <div class="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8">
         {ELFSIGHT_WIDGET_ID ? (
           <!-- Elfsight Instagram Feed Widget -->
-          <div class="elfsight-app-lazy" data-elfsight-app-lazy data-app-id={ELFSIGHT_WIDGET_ID}></div>
+          <div class={`elfsight-app-${ELFSIGHT_WIDGET_ID}`} data-elfsight-app-lazy></div>
         ) : (
           <!-- Fallback when widget not configured -->
           <div class="text-center py-12">
@@ -61,5 +61,5 @@ const ELFSIGHT_WIDGET_ID = "417e8f39-9ae2-4899-b619-01cdf8d5970e";
 
 <!-- Elfsight Platform Script - only loads if widget ID is set -->
 {ELFSIGHT_WIDGET_ID && (
-  <script src="https://static.elfsight.com/platform/platform.js" async></script>
+  <script src="https://elfsightcdn.com/platform.js" async></script>
 )}
