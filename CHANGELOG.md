@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.6] - 2025-11-24
+
+### Added
+
+- Trustpilot review carousel widget on testimonials page
+- Elfsight Instagram feed widget on gallery page
+
+### Changed
+
+- Updated all email addresses from hello@mintprints.im to info@mintprints.im
+  - Footer email link
+  - Contact page email link
+  - JSON-LD structured data in Layout
+
 ## [0.0.5] - 2025-11-22
 
 ### Added
