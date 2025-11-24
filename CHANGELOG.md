@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - Equipment page showcasing Omtech 100W CO2 laser, Bambu Lab X1C printers, and Elegoo 5K resin printers
 - Detailed specifications and capabilities for each piece of equipment
 - Equipment link in header and footer navigation
+- Redbubble shop promotion section on equipment page highlighting custom apparel and accessories
 
 ## [0.0.6] - 2025-11-24
 
