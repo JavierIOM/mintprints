@@ -47,6 +47,19 @@ npm run build
 npm run preview
 ```
 
+### Version Management
+
+**IMPORTANT:** When making changes to the site:
+
+1. **Always update [CHANGELOG.md](CHANGELOG.md)** with a new version entry
+2. **Always update the version number** in [src/components/Footer.astro](src/components/Footer.astro)
+3. Follow semantic versioning: MAJOR.MINOR.PATCH (currently using 0.0.x for initial development)
+4. Document all changes under appropriate categories:
+   - **Added** - New features
+   - **Changed** - Changes to existing functionality
+   - **Fixed** - Bug fixes
+   - **Removed** - Removed features
+
 ## Deployment
 
 The site automatically deploys to Netlify on push to the main branch.
