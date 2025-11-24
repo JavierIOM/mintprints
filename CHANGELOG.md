@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - Enhanced spam protection on contact form with multiple layers:
+  - "I am not a robot" checkbox verification
   - Time-based validation (prevents instant bot submissions)
   - Multiple honeypot fields (bot-field, website, confirm-email)
   - Content filtering for suspicious patterns and spam keywords

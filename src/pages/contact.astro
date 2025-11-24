@@ -57,9 +57,25 @@ import Layout from '../layouts/Layout.astro';
                 id="message"
                 name="message"
                 rows="5"
+                required
                 class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:border-mint focus:ring-2 focus:ring-mint/20 outline-none transition-colors resize-none"
                 placeholder="Tell us about your project..."
               ></textarea>
+            </div>
+
+            <!-- Human Verification Checkbox -->
+            <div class="flex items-start gap-3 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600">
+              <input
+                type="checkbox"
+                id="human-check"
+                name="human-check"
+                required
+                class="mt-1 w-5 h-5 rounded border-gray-300 text-mint focus:ring-mint focus:ring-2 cursor-pointer"
+              />
+              <label for="human-check" class="text-sm text-gray-700 dark:text-gray-300 cursor-pointer select-none">
+                <span class="font-medium">I am not a robot</span>
+                <span class="block text-xs text-gray-500 dark:text-gray-400 mt-1">Please check this box to verify you're human</span>
+              </label>
             </div>
 
             <button
@@ -172,6 +188,14 @@ import Layout from '../layouts/Layout.astro';
       if (timeTaken < 3) {
         e.preventDefault();
         alert('Please take your time filling out the form.');
+        return false;
+      }
+
+      // Check if human verification checkbox is checked
+      const humanCheck = form.querySelector('input[name="human-check"]');
+      if (humanCheck && !humanCheck.checked) {
+        e.preventDefault();
+        alert('Please confirm that you are not a robot.');
         return false;
       }
 
