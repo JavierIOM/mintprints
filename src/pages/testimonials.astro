@@ -27,24 +27,55 @@ import Layout from '../layouts/Layout.astro';
         </p>
       </div>
 
-      <!-- Trustpilot Widget -->
+      <!-- Trustpilot Section -->
       <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
-        <!-- TrustBox widget - Carousel -->
-        <div class="trustpilot-widget" data-locale="en-GB" data-template-id="53aa8912dec7e10d38f59f36" data-businessunit-id="6764b51e9b7ec0ff2e4fb5c5" data-style-height="140px" data-style-width="100%" data-theme="light" data-stars="1,2,3,4,5" data-review-languages="en">
-          <a href="https://uk.trustpilot.com/review/mintprints.im" target="_blank" rel="noopener">Trustpilot</a>
-        </div>
+        <div class="text-center">
+          <!-- Trustpilot Logo and Branding -->
+          <div class="flex items-center justify-center gap-3 mb-6">
+            <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="#00B67A"/>
+            </svg>
+            <span class="text-4xl font-bold text-[#00B67A]">Trustpilot</span>
+          </div>
 
-        <div class="mt-6 text-center">
+          <p class="text-lg text-gray-700 dark:text-gray-200 mb-6">
+            See what our customers are saying about us
+          </p>
+
+          <!-- Review Stats Placeholder -->
+          <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-6 mb-6">
+            <div class="flex items-center justify-center gap-2 mb-3">
+              <svg class="w-8 h-8 text-[#00B67A]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              <svg class="w-8 h-8 text-[#00B67A]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              <svg class="w-8 h-8 text-[#00B67A]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              <svg class="w-8 h-8 text-[#00B67A]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              <svg class="w-8 h-8 text-[#00B67A]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-300">
+              Rated <span class="font-semibold">Excellent</span> on Trustpilot
+            </p>
+          </div>
+
           <a
             href="https://uk.trustpilot.com/review/mintprints.im"
             target="_blank"
             rel="noopener"
-            class="inline-flex items-center gap-2 px-6 py-3 bg-[#00B67A] text-white font-semibold rounded-xl hover:bg-[#009567] transition-colors text-sm"
+            class="inline-flex items-center gap-2 px-8 py-4 bg-[#00B67A] text-white font-semibold rounded-xl hover:bg-[#009567] transition-colors"
           >
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
             </svg>
-            Read All Reviews on Trustpilot
+            Read Our Reviews on Trustpilot
           </a>
         </div>
       </div>
@@ -61,6 +92,3 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 </Layout>
-
-<!-- Trustpilot Bootstrap Script -->
-<script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>

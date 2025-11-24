@@ -6,8 +6,9 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Trustpilot review carousel widget on testimonials page
+- Trustpilot branding and call-to-action on testimonials page
 - Elfsight Instagram feed widget on gallery page
+- Version management documentation in README
 
 ### Changed
 
