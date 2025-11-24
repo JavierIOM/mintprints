@@ -187,10 +187,14 @@ import Layout from '../layouts/Layout.astro';
         return false;
       }
 
-      // Check for suspicious patterns in message
+      // Check for suspicious patterns and profanity in message
       const messageField = form.querySelector('textarea[name="message"]');
+      const nameField = form.querySelector('input[name="name"]');
+
       if (messageField && messageField.value) {
         const message = messageField.value.toLowerCase();
+
+        // Spam patterns
         const suspiciousPatterns = [
           /\b(viagra|cialis|casino|poker)\b/,
           /https?:\/\/[^\s]{50,}/,  // Very long URLs
@@ -199,10 +203,58 @@ import Layout from '../layouts/Layout.astro';
           /\[link=/i
         ];
 
+        // Profanity filter - common profane words
+        const profanityPatterns = [
+          /\bf+u+c+k+/i,
+          /\bs+h+i+t+/i,
+          /\bb+i+t+c+h+/i,
+          /\ba+s+s+h+o+l+e+/i,
+          /\bc+u+n+t+/i,
+          /\bd+a+m+n+/i,
+          /\bh+e+l+l+/i,
+          /\bc+r+a+p+/i,
+          /\bb+a+s+t+a+r+d+/i,
+          /\bd+i+c+k+/i,
+          /\bp+i+s+s+/i,
+          /\ba+r+s+e+/i,
+          /\bb+u+g+g+e+r+/i,
+          /\bb+o+l+l+o+c+k+s+/i
+        ];
+
+        // Check spam patterns
         for (const pattern of suspiciousPatterns) {
           if (pattern.test(message)) {
             e.preventDefault();
             alert('Your message contains suspicious content. Please remove any inappropriate links or text.');
+            return false;
+          }
+        }
+
+        // Check profanity
+        for (const pattern of profanityPatterns) {
+          if (pattern.test(message)) {
+            e.preventDefault();
+            alert('Please keep your message professional and free from inappropriate language.');
+            return false;
+          }
+        }
+      }
+
+      // Also check name field for profanity
+      if (nameField && nameField.value) {
+        const name = nameField.value.toLowerCase();
+        const profanityPatterns = [
+          /\bf+u+c+k+/i,
+          /\bs+h+i+t+/i,
+          /\bb+i+t+c+h+/i,
+          /\ba+s+s+h+o+l+e+/i,
+          /\bc+u+n+t+/i
+        ];
+
+        for (const pattern of profanityPatterns) {
+          if (pattern.test(name)) {
+            e.preventDefault();
+            alert('Please enter a valid name.');
             return false;
           }
         }

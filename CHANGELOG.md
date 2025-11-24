@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
   - Time-based validation (prevents instant bot submissions)
   - Multiple honeypot fields (bot-field, website, confirm-email)
   - Content filtering for suspicious patterns and spam keywords
+  - Profanity filter for message and name fields
   - Client-side validation before form submission
 
 ## [0.0.7] - 2025-11-24
