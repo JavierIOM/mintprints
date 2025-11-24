@@ -16,11 +16,16 @@ import Layout from '../layouts/Layout.astro';
         <!-- Contact Form -->
         <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
           <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">Send us a message</h2>
-          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you/" class="space-y-6">
+          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you/" class="space-y-6" id="contact-form">
             <input type="hidden" name="form-name" value="contact" />
-            <p class="hidden">
-              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-            </p>
+            <input type="hidden" name="form-timestamp" id="form-timestamp" value="" />
+
+            <!-- Honeypot fields - hidden from real users -->
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+              <input type="text" name="website" tabindex="-1" autocomplete="off" placeholder="Your website" />
+              <input type="email" name="confirm-email" tabindex="-1" autocomplete="off" />
+            </div>
 
             <div>
               <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your name</label>
@@ -145,3 +150,63 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 </Layout>
+
+<script>
+  // Anti-spam protection
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form');
+    const timestampField = document.getElementById('form-timestamp');
+
+    if (!form || !timestampField) return;
+
+    // Record when the page loaded
+    const pageLoadTime = Date.now();
+    timestampField.value = pageLoadTime.toString();
+
+    // Form submission handler
+    form.addEventListener('submit', (e) => {
+      const currentTime = Date.now();
+      const timeTaken = (currentTime - pageLoadTime) / 1000; // seconds
+
+      // Check if form was filled too quickly (less than 3 seconds)
+      if (timeTaken < 3) {
+        e.preventDefault();
+        alert('Please take your time filling out the form.');
+        return false;
+      }
+
+      // Check honeypot fields
+      const botField = form.querySelector('input[name="bot-field"]');
+      const websiteField = form.querySelector('input[name="website"]');
+      const confirmEmailField = form.querySelector('input[name="confirm-email"]');
+
+      if ((botField && botField.value) ||
+          (websiteField && websiteField.value) ||
+          (confirmEmailField && confirmEmailField.value)) {
+        e.preventDefault();
+        return false;
+      }
+
+      // Check for suspicious patterns in message
+      const messageField = form.querySelector('textarea[name="message"]');
+      if (messageField && messageField.value) {
+        const message = messageField.value.toLowerCase();
+        const suspiciousPatterns = [
+          /\b(viagra|cialis|casino|poker)\b/,
+          /https?:\/\/[^\s]{50,}/,  // Very long URLs
+          /<script/i,
+          /\[url=/i,
+          /\[link=/i
+        ];
+
+        for (const pattern of suspiciousPatterns) {
+          if (pattern.test(message)) {
+            e.preventDefault();
+            alert('Your message contains suspicious content. Please remove any inappropriate links or text.');
+            return false;
+          }
+        }
+      }
+    });
+  });
+</script>
