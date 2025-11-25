@@ -58,9 +58,28 @@ import Layout from '../layouts/Layout.astro';
                 name="message"
                 rows="5"
                 required
-                class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:border-mint focus:ring-2 focus:ring-mint/20 outline-none transition-colors resize-none"
+                class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:border-mint focus:ring-2 focus:ring-mint/20 outline-none transition-colors resize-y"
                 placeholder="Tell us about your project..."
               ></textarea>
+            </div>
+
+            <div>
+              <label for="file-upload" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Attach files (optional)
+              </label>
+              <div class="relative">
+                <input
+                  type="file"
+                  id="file-upload"
+                  name="file-upload"
+                  multiple
+                  accept=".stl,.obj,.3mf,.step,.stp,.gcode,.lbrn,.lbrn2,.svg,.dxf,.pdf,.zip"
+                  class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:border-mint focus:ring-2 focus:ring-mint/20 outline-none transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-mint/10 file:text-mint hover:file:bg-mint/20 file:cursor-pointer"
+                />
+              </div>
+              <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                Accepted: STL, OBJ, 3MF, STEP, GCODE, LBRN, LBRN2, SVG, DXF, PDF, ZIP (Max 10MB per file)
+              </p>
             </div>
 
             <!-- Human Verification Checkbox -->
@@ -189,6 +208,19 @@ import Layout from '../layouts/Layout.astro';
         e.preventDefault();
         alert('Please take your time filling out the form.');
         return false;
+      }
+
+      // Check file upload size (max 10MB per file)
+      const fileInput = form.querySelector('input[name="file-upload"]');
+      if (fileInput && fileInput.files.length > 0) {
+        const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+        for (let i = 0; i < fileInput.files.length; i++) {
+          if (fileInput.files[i].size > maxSize) {
+            e.preventDefault();
+            alert(`File "${fileInput.files[i].name}" is too large. Maximum file size is 10MB.`);
+            return false;
+          }
+        }
       }
 
       // Check if human verification checkbox is checked
