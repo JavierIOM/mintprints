@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.12] - 2025-11-25
+
+### Added
+
+- Privacy Policy page with comprehensive data protection information
+  - Information collection and usage details
+  - Data sharing and storage policies
+  - Cookie and tracking technology disclosure
+  - User rights and contact information
+- Terms & Conditions page with complete legal terms
+  - Service descriptions and ordering process
+  - Payment terms and conditions
+  - Intellectual property and design file policies
+  - Quality standards and tolerances
+  - Returns, refunds, and cancellation policy
+  - Liability limitations and user responsibilities
+- Legal page links added to footer (Privacy Policy and Terms & Conditions)
+
 ## [0.0.11] - 2025-11-25
 
 ### Added
