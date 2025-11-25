@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404 - Page Not Found">
+  <section class="min-h-[70vh] flex items-center justify-center py-20 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+    <div class="max-w-2xl mx-auto px-4 text-center">
+      <!-- Large 404 -->
+      <div class="mb-8">
+        <h1 class="text-9xl font-bold text-mint dark:text-mint mb-4">404</h1>
+        <div class="flex justify-center gap-2 mb-6">
+          <span class="text-4xl">🤔</span>
+          <span class="text-4xl">🔍</span>
+          <span class="text-4xl">❓</span>
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Oops! Page Not Found
+      </h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+        The page you're looking for seems to have gone missing. Don't worry though,
+        we've got plenty of other great content for you to explore!
+      </p>
+
+      <!-- Suggested Actions -->
+      <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700 mb-8">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">
+          Here's what you can do:
+        </h3>
+        <div class="grid md:grid-cols-2 gap-4 text-left">
+          <a href="/" class="flex items-start gap-3 p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+            <svg class="w-6 h-6 text-mint flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+            <div>
+              <div class="font-medium text-gray-900 dark:text-white">Go Home</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">Back to homepage</div>
+            </div>
+          </a>
+
+          <a href="/gallery" class="flex items-start gap-3 p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+            <svg class="w-6 h-6 text-mint flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <div>
+              <div class="font-medium text-gray-900 dark:text-white">View Gallery</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">See our work</div>
+            </div>
+          </a>
+
+          <a href="/equipment" class="flex items-start gap-3 p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+            <svg class="w-6 h-6 text-mint flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+            </svg>
+            <div>
+              <div class="font-medium text-gray-900 dark:text-white">Our Equipment</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">What we use</div>
+            </div>
+          </a>
+
+          <a href="/contact" class="flex items-start gap-3 p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+            <svg class="w-6 h-6 text-mint flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            <div>
+              <div class="font-medium text-gray-900 dark:text-white">Contact Us</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">Get in touch</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/" class="inline-flex items-center justify-center px-8 py-4 bg-mint text-white font-semibold rounded-xl hover:bg-mint-dark transition-colors">
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          Back to Home
+        </a>
+        <a href="/contact" class="inline-flex items-center justify-center px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 font-semibold rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-mint dark:hover:border-mint hover:text-mint transition-colors">
+          Contact Support
+        </a>
+      </div>
+
+      <!-- Fun Error Message -->
+      <div class="mt-12 text-sm text-gray-500 dark:text-gray-400">
+        <p>Error 404: This page must have been printed with invisible filament! 🙈</p>
+      </div>
+    </div>
+  </section>
+</Layout>

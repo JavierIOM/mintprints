@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.9] - 2025-11-24
+
+### Added
+
+- Custom 404 error page with helpful navigation
+  - Large, clear 404 display with emoji decorations
+  - Quick links to all main pages (Home, Gallery, Equipment, Contact)
+  - Friendly error message and suggestions
+  - Fun 3D printing-themed error joke
+  - Consistent branding and dark mode support
+
 ## [0.0.8] - 2025-11-24
 
 ### Added
