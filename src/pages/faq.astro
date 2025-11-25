@@ -1,0 +1,185 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const faqs = [
+  {
+    category: "General Questions",
+    questions: [
+      {
+        q: "What services do you offer?",
+        a: "We offer FDM (plastic) 3D printing, SLA (resin) 3D printing, laser cutting and etching, and custom design services. We can handle everything from prototyping to finished products."
+      },
+      {
+        q: "Where are you located?",
+        a: "We're based on the Isle of Man and serve customers locally and internationally."
+      },
+      {
+        q: "How do I get a quote?",
+        a: "Contact us through our contact form with details about your project, including any files or design ideas. We'll get back to you with a quote within 1-2 business days."
+      }
+    ]
+  },
+  {
+    category: "3D Printing",
+    questions: [
+      {
+        q: "What's the difference between FDM and SLA printing?",
+        a: "FDM (Fused Deposition Modeling) uses thermoplastic filaments and is great for functional parts, prototypes, and larger objects. SLA (Stereolithography) uses liquid resin cured by UV light, producing incredibly detailed prints perfect for miniatures, jewelry, and intricate designs."
+      },
+      {
+        q: "What materials do you offer?",
+        a: "For FDM printing, we offer PLA, PETG, ASA, and TPU. For SLA printing, we use various resins depending on your needs. Contact us to discuss which material is best for your project."
+      },
+      {
+        q: "What file formats do you accept?",
+        a: "We accept STL, OBJ, and 3MF files for 3D printing. If you have a different format or need help preparing your files, get in touch and we'll assist you."
+      },
+      {
+        q: "What's the maximum print size?",
+        a: "Our Bambu Lab X1C printers can handle prints up to 256 x 256 x 256mm. For larger projects, we can split designs into multiple parts."
+      },
+      {
+        q: "How long does a 3D print take?",
+        a: "Print times vary based on size, complexity, and material. Small items may take a few hours, while larger or more detailed prints can take several days. We'll give you an estimated timeline with your quote."
+      }
+    ]
+  },
+  {
+    category: "Laser Cutting & Etching",
+    questions: [
+      {
+        q: "What materials can you laser cut or etch?",
+        a: "Our Omtech 100W CO2 laser can work with wood, acrylic (perspex), glass, slate, leather, and certain plastics. We cannot cut metal, but we can etch it. Contact us if you're unsure about your material."
+      },
+      {
+        q: "What's the maximum cutting size?",
+        a: "Our laser bed is 700x500mm, allowing us to work on fairly large projects."
+      },
+      {
+        q: "Can you personalize items I already own?",
+        a: "Yes! We can laser etch your existing items like glassware, wooden signs, or leather goods. Just bring them in or contact us to discuss."
+      }
+    ]
+  },
+  {
+    category: "Design Services",
+    questions: [
+      {
+        q: "I don't have a design - can you help?",
+        a: "Absolutely! We offer custom design services. Tell us your idea, and we'll work with you to bring it to life."
+      },
+      {
+        q: "Do you offer design modifications?",
+        a: "Yes, we can modify existing designs to suit your needs. This might include resizing, adding text, or making structural changes."
+      },
+      {
+        q: "Can I see a preview before printing?",
+        a: "Yes, we'll provide digital previews or mockups of custom designs before production begins."
+      }
+    ]
+  },
+  {
+    category: "Ordering & Delivery",
+    questions: [
+      {
+        q: "How do I place an order?",
+        a: "Contact us through our contact form with your project details. Once we provide a quote and you approve, we'll begin production."
+      },
+      {
+        q: "What payment methods do you accept?",
+        a: "We accept bank transfers, PayPal, and cash for local pickups. Payment details will be provided with your quote."
+      },
+      {
+        q: "Do you offer delivery?",
+        a: "Yes, we can arrange delivery on the Isle of Man or ship internationally. Delivery costs will be included in your quote."
+      },
+      {
+        q: "Can I collect my order in person?",
+        a: "Yes, local collection is available and can be arranged when you place your order."
+      },
+      {
+        q: "What if I'm not happy with my order?",
+        a: "Customer satisfaction is our priority. If there's an issue with your order, contact us immediately and we'll work to resolve it."
+      }
+    ]
+  },
+  {
+    category: "Technical Questions",
+    questions: [
+      {
+        q: "Can you print in multiple colours?",
+        a: "Our Bambu Lab X1C printers support multi-colour printing with an Automatic Material System (AMS). Contact us to discuss your multi-colour project."
+      },
+      {
+        q: "What's the layer height/resolution?",
+        a: "For FDM printing, we typically print at 0.2mm layer height but can go as fine as 0.08mm for detailed work. Our SLA printers achieve even finer detail with 0.05mm layers."
+      },
+      {
+        q: "Are the prints waterproof?",
+        a: "FDM prints are water-resistant but not fully waterproof due to layer lines. We can apply sealants for waterproofing if needed. Resin prints are naturally more water-resistant."
+      },
+      {
+        q: "Can you print functional parts?",
+        a: "Yes! We regularly print functional parts, mechanical components, and replacement parts. Materials like PETG and ASA are great for durable, functional prints."
+      }
+    ]
+  }
+];
+---
+
+<Layout title="FAQ - Frequently Asked Questions">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 py-16">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+        Frequently Asked Questions
+      </h1>
+      <p class="text-lg text-gray-600 dark:text-gray-300">
+        Find answers to common questions about our 3D printing, laser cutting, and design services.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-16 bg-white dark:bg-gray-900">
+    <div class="max-w-4xl mx-auto px-4">
+      {faqs.map((category, categoryIndex) => (
+        <div class="mb-12 last:mb-0">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 pb-3 border-b-2 border-mint">
+            {category.category}
+          </h2>
+          <div class="space-y-6">
+            {category.questions.map((faq, faqIndex) => (
+              <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border border-gray-100 dark:border-gray-700">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-start gap-3">
+                  <svg class="w-6 h-6 text-mint flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>{faq.q}</span>
+                </h3>
+                <p class="text-gray-700 dark:text-gray-300 pl-9">
+                  {faq.a}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16 bg-gray-50 dark:bg-gray-800/50">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+        Still have questions?
+      </h2>
+      <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+        We're here to help! Get in touch with us and we'll answer any questions you have about your project.
+      </p>
+      <a href="/contact/" class="inline-flex items-center justify-center px-8 py-4 bg-mint text-white font-semibold rounded-xl hover:bg-mint-dark transition-colors">
+        Contact Us
+      </a>
+    </div>
+  </section>
+</Layout>

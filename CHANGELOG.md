@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.10] - 2025-11-25
+
+### Added
+
+- FAQ (Frequently Asked Questions) page with comprehensive information
+  - General questions about services and location
+  - 3D printing details (FDM vs SLA, materials, file formats, sizes, timeframes)
+  - Laser cutting and etching capabilities and materials
+  - Design services and customization options
+  - Ordering, payment, and delivery information
+  - Technical specifications and requirements
+  - FAQ link added to header and footer navigation
+
 ## [0.0.9] - 2025-11-24
 
 ### Added
