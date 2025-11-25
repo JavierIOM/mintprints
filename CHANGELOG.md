@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.11] - 2025-11-25
+
+### Added
+
+- File upload capability to contact form
+  - Support for 3D printing files (STL, OBJ, 3MF, STEP, GCODE)
+  - Support for laser cutting files (LBRN, LBRN2, SVG, DXF)
+  - Support for PDF and ZIP files
+  - Multiple file upload support
+  - 10MB per file size limit with client-side validation
+  - Clear helper text showing accepted file types
+
+### Changed
+
+- Contact form message textarea is now resizable (vertical resize enabled)
+- Contact form layout updated - form box now 50% wider (2/3 width vs 1/3 for contact info)
+- Updated FAQ to include email contact option alongside contact form
+
 ## [0.0.10] - 2025-11-25
 
 ### Added
