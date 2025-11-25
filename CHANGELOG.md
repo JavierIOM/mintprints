@@ -13,7 +13,14 @@ All notable changes to this project will be documented in this file.
   - Design services and customization options
   - Ordering, payment, and delivery information
   - Technical specifications and requirements
+  - USA shipping restrictions notice
   - FAQ link added to header and footer navigation
+
+### Changed
+
+- Removed local pickup/collection options from FAQ
+- Updated payment methods (removed cash option)
+- Clarified international shipping availability
 
 ## [0.0.9] - 2025-11-24
 
