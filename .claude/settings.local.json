@@ -17,7 +17,9 @@
       "Bash(npx sharp-cli:*)",
       "Bash(node -e:*)",
       "Bash(cat:*)",
-      "Bash(del publicfavicon-temp.png publicfavicon-transparent.png)"
+      "Bash(del publicfavicon-temp.png publicfavicon-transparent.png)",
+      "Bash(grep:*)",
+      "Bash(git stash:*)"
     ],
     "deny": [],
     "ask": []
