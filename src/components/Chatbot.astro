@@ -382,7 +382,14 @@
     }
   ];
 
-  const FALLBACK = 'That\'s a great question! For the most accurate answer, please get in touch with us directly via our <a href="/contact/" style="color:var(--color-mint);font-weight:600;text-decoration:underline;">contact page</a> and we\'ll be happy to help.';
+  const FALLBACKS = [
+    'That\'s a great question! For the most accurate answer, please get in touch with us directly via our <a href="/contact/" style="color:var(--color-mint);font-weight:600;text-decoration:underline;">contact page</a> and we\'ll be happy to help.',
+    'Hmm, that one\'s a bit outside my knowledge! For the best answer, drop us a message via our <a href="/contact/" style="color:var(--color-mint);font-weight:600;text-decoration:underline;">contact page</a> and the team will get back to you.',
+    'I\'m not 100% sure on that one — I don\'t want to give you the wrong info! Head over to our <a href="/contact/" style="color:var(--color-mint);font-weight:600;text-decoration:underline;">contact page</a> and we\'ll give you a proper answer.',
+    'Good question — that\'s a bit specific for me though! Our <a href="/contact/" style="color:var(--color-mint);font-weight:600;text-decoration:underline;">contact page</a> is the best place to get a definitive answer from the team.',
+    'That one\'s best answered by the humans! Send us a message via our <a href="/contact/" style="color:var(--color-mint);font-weight:600;text-decoration:underline;">contact page</a> and we\'ll get back to you within 1-2 business days.'
+  ];
+  function getFallback() { return FALLBACKS[Math.floor(Math.random() * FALLBACKS.length)]; }
 
   const QUICK_REPLIES = [
     "What services do you offer?",
@@ -415,12 +422,12 @@
   // ---------------------------------------------------------------------------
   function findAnswer(input: string): string {
     const lower = input.toLowerCase().trim();
-    if (!lower) return FALLBACK;
+    if (!lower) return getFallback();
 
     if (containsProfanity(input)) return PROFANITY_RESPONSE;
 
     let bestScore = 0;
-    let bestAnswer = FALLBACK;
+    let bestAnswer = getFallback();
 
     for (const item of qa) {
       let score = 0;
