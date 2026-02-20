@@ -81,10 +81,13 @@
   // Knowledge base — each entry has keywords (scored on match) and an answer
   // ---------------------------------------------------------------------------
   const qa = [
+    // Greetings
     {
       keywords: ['hello', 'hi', 'hey', 'morning', 'afternoon', 'evening', 'howdy'],
       answer: "Hello! I'm Tilly, the Mint Prints virtual assistant. I can help with questions about our 3D printing, laser cutting, and design services. What would you like to know?"
     },
+
+    // General / services overview
     {
       keywords: ['services', 'offer', 'what do you do', 'provide', 'specialise', 'specialize', 'what can you do'],
       answer: "We offer four main services: FDM (plastic) 3D printing, SLA (resin) 3D printing, laser cutting and etching, and custom design services — from one-off prototypes to finished products."
@@ -97,50 +100,144 @@
       keywords: ['quote', 'cost', 'price', 'pricing', 'how much', 'charge', 'fee', 'expensive', 'affordable'],
       answer: "All jobs are priced individually based on material, size, and complexity. Contact us via our contact form with your project details and we'll get back to you with a quote within 1-2 business days."
     },
+
+    // FDM vs SLA
     {
-      keywords: ['fdm', 'sla', 'difference between', 'resin', 'plastic', 'filament', 'stereolithography', 'fused deposition'],
+      keywords: ['fdm', 'sla', 'difference between', 'stereolithography', 'fused deposition', 'which type of printing', 'which printer'],
       answer: "FDM uses thermoplastic filaments and is great for functional parts, prototypes, and larger prints. SLA uses liquid resin cured by UV light, producing incredibly fine detail — perfect for miniatures and intricate designs."
     },
+
+    // FDM materials — detailed
     {
-      keywords: ['materials', 'material', 'pla', 'petg', 'asa', 'tpu', 'filament', 'resin', 'plastic'],
-      answer: "For FDM we offer PLA, PETG, ASA, and TPU. For SLA we use various resins depending on your requirements. Not sure which is best for your project? We're happy to advise."
+      keywords: ['pla', 'what is pla', 'pla filament'],
+      answer: "PLA is our most popular FDM material — ideal for visual models, prototypes, figurines, and decorative items. It prints beautifully but isn't suited to high temperatures or prolonged outdoor use."
     },
+    {
+      keywords: ['petg', 'what is petg', 'petg filament'],
+      answer: "PETG is a stronger, slightly flexible thermoplastic that's great for functional parts, mechanical components, and items that need some impact resistance. It's also more moisture-resistant than PLA."
+    },
+    {
+      keywords: ['asa', 'what is asa', 'asa filament', 'outdoor print', 'uv resistant', 'uv stable', 'garden', 'outside'],
+      answer: "ASA is our go-to material for outdoor use — it's UV-stable, weather-resistant, and handles temperature swings well. Great for garden labels, outdoor signs, and any item exposed to sunlight."
+    },
+    {
+      keywords: ['tpu', 'flexible', 'flexible print', 'rubber', 'soft', 'bendy', 'elastic'],
+      answer: "TPU is a flexible, rubber-like material — perfect for grips, phone cases, gaskets, seals, and anything that needs to flex or absorb impact without breaking."
+    },
+    {
+      keywords: ['materials', 'material', 'filament', 'what filaments', 'which materials'],
+      answer: "For FDM we offer PLA (great for models and prototypes), PETG (strong and functional), ASA (UV-resistant for outdoor use), and TPU (flexible and rubber-like). For SLA we use various resins. Not sure which is best? We're happy to advise."
+    },
+
+    // SLA / resin types
+    {
+      keywords: ['resin', 'resin type', 'sla resin', 'what resin', 'types of resin'],
+      answer: "We use several resin types for SLA printing: standard resin for high-detail visual models, tough/ABS-like resin for functional parts needing impact resistance, and flexible resin for rubber-like pieces. Tell us your use case and we'll recommend the right one."
+    },
+    {
+      keywords: ['clear resin', 'transparent', 'translucent', 'see through', 'clear print'],
+      answer: "We can print in clear/translucent resin using our SLA printer, which can produce near-transparent results with post-processing. It's great for light-pipe effects, lenses, or display pieces. Get in touch to discuss your project."
+    },
+    {
+      keywords: ['tough resin', 'abs like', 'abs-like', 'strong resin', 'impact resistant'],
+      answer: "We use tough (ABS-like) resin for SLA prints that need to handle impact or mechanical stress — a step up from standard resin in durability while keeping the fine detail SLA is known for."
+    },
+
+    // Files
     {
       keywords: ['file', 'format', 'stl', 'obj', '3mf', 'step', 'svg', 'dxf', 'send files', 'upload'],
-      answer: "For 3D printing we accept STL, OBJ, and 3MF files. For laser work we accept SVG and DXF. If your file is in a different format or you need help, just get in touch and we'll sort it."
+      answer: "For 3D printing we accept STL, OBJ, and 3MF files. For laser work we accept SVG and DXF. If your file is in a different format or you need help preparing it, just get in touch and we'll sort it."
     },
+
+    // Print sizes
     {
       keywords: ['size', 'maximum', 'max size', 'how big', 'dimensions', '256', 'large print', 'big print'],
-      answer: "Our Bambu Lab X1C printers handle prints up to 256 x 256 x 256mm. For larger projects we can split the design into multiple parts. Our laser bed is 700x500mm."
+      answer: "Our Bambu Lab X1C printers have a 256 x 256 x 256mm build volume. For larger projects we can split the design into interlocking parts. Our laser bed is 700x500mm for cutting and etching work."
     },
     {
-      keywords: ['how long', 'turnaround', 'wait', 'days', 'hours', 'time', 'quick', 'fast', 'slow'],
-      answer: "Print times depend on size, complexity, and material. Small parts may take a few hours; larger or more detailed prints can take several days. We include an estimated timeline with every quote."
+      keywords: ['split', 'too big', 'larger than', 'oversized', 'split into parts', 'too large'],
+      answer: "If your design is larger than our 256mm build volume, we can split it into multiple interlocking sections and assemble them afterwards. This works really well for larger display pieces and props."
+    },
+
+    // Print times
+    {
+      keywords: ['how long', 'turnaround', 'wait', 'days', 'hours', 'quick', 'fast', 'slow', 'lead time'],
+      answer: "Print times depend on size, complexity, and material. Small items can take a few hours; larger or detailed prints may take several days. We always include an estimated timeline with your quote."
+    },
+
+    // Laser cutting — what we can do
+    {
+      keywords: ['laser', 'co2 laser', 'laser machine', 'laser cutter', 'laser specs', 'what laser'],
+      answer: "We use an OMTech 80W CO2 laser with a 700x500mm working bed — great for precision cutting and detailed etching across a wide range of materials."
     },
     {
-      keywords: ['laser', 'cut', 'cutting', 'etch', 'engrave', 'engraving', 'wood', 'acrylic', 'glass', 'slate', 'leather', 'perspex', 'co2'],
-      answer: "Our 80W CO2 laser (700x500mm bed) cuts and etches wood, acrylic, glass, slate, leather, and certain plastics. We can't cut metal, but we can etch it."
+      keywords: ['cut', 'cutting', 'laser cut', 'what can you cut', 'can you cut'],
+      answer: "We can cut wood, acrylic (perspex), leather (vegetable-tanned), MDF, cork, rubber, felt, fabric, foam, and certain plastics. We can't cut metal, polycarbonate sheets, or PVC. Not sure about your material? Just ask."
     },
+    {
+      keywords: ['etch', 'engrave', 'engraving', 'etching', 'laser etch', 'laser engrave'],
+      answer: "We can etch and engrave wood, acrylic, glass, slate, leather, stone, anodised aluminium, and even coated metals. Engraving is great for personalisation, branding, and decorative work."
+    },
+    {
+      keywords: ['wood', 'mdf', 'plywood', 'timber', 'wooden'],
+      answer: "Wood and MDF are among the best materials for our CO2 laser — we can cut clean shapes or engrave detailed artwork. Works beautifully for signs, decorations, and gifts."
+    },
+    {
+      keywords: ['acrylic', 'perspex', 'plexiglass', 'clear acrylic'],
+      answer: "Acrylic (perspex) is one of our most popular laser materials — we can cut it to precise shapes and engrave it for a frosted effect. Available in many colours and thicknesses."
+    },
+    {
+      keywords: ['glass', 'glassware', 'bottle', 'mirror', 'tile'],
+      answer: "Our CO2 laser can etch glass and mirrored surfaces beautifully — think personalised glassware, wine bottles, or decorative tiles. We can etch but not cut glass."
+    },
+    {
+      keywords: ['slate', 'stone', 'granite', 'ceramic'],
+      answer: "Slate and stone etch really well with our CO2 laser — popular for memorial plaques, house signs, and gifts. Results are crisp and permanent."
+    },
+    {
+      keywords: ['leather', 'leather goods', 'laser leather'],
+      answer: "We can cut and engrave vegetable-tanned leather with great results — ideal for keyrings, wallets, patches, and personalised leather goods. Note: chrome-tanned leather should not be laser processed."
+    },
+    {
+      keywords: ['fabric', 'felt', 'cork', 'rubber', 'foam', 'textile'],
+      answer: "Our laser can cut fabric, felt, cork, rubber, and foam cleanly and precisely — great for craft projects, gaskets, packaging inserts, and costume work."
+    },
+    {
+      keywords: ['metal', 'steel', 'aluminium', 'aluminum', 'brass', 'copper'],
+      answer: "Our CO2 laser can't cut metal, but it can etch anodised aluminium and coated metals. For cutting metal you'd need a fibre laser. We can engrave many metal surfaces — contact us to discuss."
+    },
+    {
+      keywords: ['cannot cut', "can't cut", 'not cut', 'avoid', 'dangerous', 'pvc', 'vinyl', 'polycarbonate', 'what not to laser'],
+      answer: "Materials we avoid with our laser include PVC/vinyl (releases toxic chlorine gas), polycarbonate sheets (burns rather than cuts cleanly), chrome-tanned leather, and anything containing halogens or epoxy resins. Safety first — if you're unsure about a material, please ask."
+    },
+
+    // Personalisation
     {
       keywords: ['personalise', 'personalize', 'existing item', 'my own', 'bring my own', 'engrave my', 'etch my'],
-      answer: "Yes! We can laser etch your own items — glassware, wooden signs, leather goods, and more. Get in touch to discuss your item."
+      answer: "Yes! We can laser etch your own items — glassware, wooden signs, leather goods, slate, and more. Just get in touch to discuss your item and what you'd like on it."
     },
+
+    // Design services
     {
       keywords: ['design', 'no design', "don't have a design", 'custom design', 'help with design', 'idea', 'artwork', 'bespoke', 'from scratch'],
       answer: "No problem — we offer custom design services. Tell us your idea and we'll work with you to create it. We can also modify existing designs: resizing, adding text, structural changes, and more."
     },
     {
       keywords: ['preview', 'mockup', 'see before', 'proof', 'approval'],
-      answer: "Yes, we'll provide a digital preview or mockup of custom designs before production begins so you can approve it first."
+      answer: "Yes, we'll provide a digital preview or mockup of custom designs before production begins so you can sign off before anything is made."
     },
+
+    // Ordering & payment
     {
       keywords: ['order', 'how to order', 'place an order', 'get started', 'start a project'],
-      answer: "Simple — use our contact form with your project details (and attach any files if you have them). We'll reply with a quote within 1-2 business days and guide you from there."
+      answer: "Simple — use our contact form with your project details (and attach any files if you have them). We'll reply with a quote within 1-2 business days and take it from there."
     },
     {
       keywords: ['payment', 'pay', 'paypal', 'bank transfer', 'card', 'invoice', 'how to pay'],
       answer: "We accept bank transfers and PayPal. Payment details are included with your quote."
     },
+
+    // Delivery
     {
       keywords: ['deliver', 'delivery', 'ship', 'shipping', 'post', 'international', 'worldwide', 'courier'],
       answer: "We deliver locally on the Isle of Man and ship internationally to most countries (excluding the USA). Delivery costs are included in your quote."
@@ -149,41 +246,59 @@
       keywords: ['usa', 'america', 'united states', 'us delivery', 'american'],
       answer: "Unfortunately we're unable to deliver to the USA at this time due to post office restrictions. We apologise for the inconvenience."
     },
+
+    // Technical / print quality
     {
       keywords: ['colour', 'color', 'multi colour', 'multicolour', 'multicolor', 'multiple colours', 'ams', 'coloured'],
-      answer: "Yes! Our Bambu Lab X1C printers support multi-colour printing using an Automatic Material System (AMS). Get in touch to discuss your multi-colour project."
+      answer: "Yes! Our Bambu Lab X1C printers support multi-colour printing using an Automatic Material System (AMS) — up to 16 colours in a single print. Get in touch to discuss your multi-colour project."
     },
     {
-      keywords: ['resolution', 'layer height', 'layer', 'detail', 'accuracy', 'precision', 'quality'],
-      answer: "FDM printing is typically at 0.2mm layer height, going as fine as 0.08mm for detailed work. SLA achieves 0.05mm layers for exceptional precision."
+      keywords: ['resolution', 'layer height', 'layer', 'accuracy', 'precision', 'quality', 'how detailed'],
+      answer: "FDM printing is typically at 0.2mm layer height, going as fine as 0.08mm for detailed work. SLA achieves 0.05mm layers for exceptional precision — ideal for miniatures and jewellery-grade detail."
     },
     {
-      keywords: ['waterproof', 'water resistant', 'outdoor', 'weather', 'sealed', 'sealing'],
-      answer: "FDM prints are water-resistant but not fully waterproof — we can apply a sealant if needed. SLA resin prints are naturally more water-resistant."
+      keywords: ['waterproof', 'water resistant', 'outdoor', 'weather', 'sealed', 'sealing', 'weatherproof'],
+      answer: "FDM prints are water-resistant but not fully waterproof due to layer lines. We can apply a sealant if needed. SLA resin prints are naturally more water-resistant. For outdoor items, ASA filament is also a great weather-resistant option."
     },
     {
       keywords: ['functional', 'functional part', 'mechanical', 'engineering', 'replacement part', 'component', 'working part'],
-      answer: "Absolutely — we regularly print functional parts, mechanical components, and replacement parts. PETG and ASA are particularly good for strong, durable functional prints."
+      answer: "Absolutely — we regularly print functional parts, mechanical components, and replacement parts. PETG is great for durable functional work, and ASA is ideal for anything going outdoors."
     },
     {
       keywords: ['miniature', 'miniatures', 'wargame', 'wargaming', 'd&d', 'dnd', 'tabletop', 'figurine', 'figure', 'model'],
-      answer: "SLA resin printing is ideal for miniatures and tabletop figures — the detail is exceptional even at small scales. Get in touch with your project for a quote."
+      answer: "SLA resin printing is ideal for miniatures and tabletop figures — the detail is exceptional even at very small scales. Get in touch with your project details for a quote."
     },
+    {
+      keywords: ['heat resistant', 'high temp', 'temperature', 'heat', 'hot'],
+      answer: "Standard PLA softens around 60°C, so it's not suitable for high-heat environments. PETG handles up to around 80°C, and ASA up to around 95°C. For extreme heat applications, please contact us to discuss options."
+    },
+    {
+      keywords: ['food safe', 'food', 'cup', 'bowl', 'kitchen', 'edible'],
+      answer: "Food-safe 3D printing is a complex topic — while some filaments are technically food-safe, layer lines can harbour bacteria. We'd recommend contacting us to discuss your specific use case so we can advise properly."
+    },
+
+    // After-sales / returns
     {
       keywords: ['happy', 'unhappy', 'not happy', 'issue', 'problem', 'return', 'refund', 'complaint', 'wrong', 'broken', 'damaged'],
       answer: "Customer satisfaction is our priority. If there's any issue with your order, contact us straight away and we'll do our best to put it right."
     },
+
+    // Contact / social
     {
       keywords: ['contact', 'email', 'phone', 'get in touch', 'reach you', 'talk to someone'],
-      answer: "You can reach us via the contact form on our website, or find us on Instagram (@mintprintsiom) and Facebook (Mint Prints IOM)."
+      answer: "You can reach us via the contact form on our website (mintprints.im/contact), or find us on Instagram (@mintprintsiom) and Facebook (Mint Prints IOM)."
     },
     {
-      keywords: ['etsy', 'redbubble', 'shop', 'online store', 'buy ready made', 'premade'],
+      keywords: ['etsy', 'redbubble', 'shop', 'online store', 'buy ready made', 'premade', 'ready to buy'],
       answer: "You can also find us on Etsy (MintPrintsIOM) for ready-made items, and Redbubble (manxcraft) for Isle of Man-themed apparel and merchandise."
+    },
+    {
+      keywords: ['instagram', 'facebook', 'social media', 'social', 'follow'],
+      answer: "Find us on Instagram at @mintprintsiom and on Facebook as Mint Prints IOM — we regularly post photos of our work there."
     }
   ];
 
-  const FALLBACK = "That's a great question! For the most accurate answer please contact us directly via our contact form and we'll get back to you within 1-2 business days.";
+  const FALLBACK = "That's a great question! For the most accurate answer, please get in touch with us directly — visit mintprints.im/contact or find us on Instagram @mintprintsiom and we'll be happy to help.";
 
   const QUICK_REPLIES = [
     "What services do you offer?",
@@ -238,7 +353,6 @@
       bubble.style.color = '#fff';
     } else {
       bubble.style.borderTopLeftRadius = '0.25rem';
-      bubble.style.backgroundColor = '';
       bubble.className = 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 shadow-sm border border-gray-100 dark:border-gray-700';
       bubble.style.maxWidth = '80%';
       bubble.style.fontSize = '0.875rem';
@@ -268,17 +382,6 @@
       });
       wrap.appendChild(btn);
     }
-    return wrap;
-  }
-
-  function makeContactLink(): HTMLElement {
-    const wrap = document.createElement('div');
-    wrap.className = 'flex justify-start pl-1';
-    const a = document.createElement('a');
-    a.href = '/contact/';
-    a.className = 'text-xs text-mint underline underline-offset-2 hover:text-mint-dark';
-    a.textContent = 'Go to contact form';
-    wrap.appendChild(a);
     return wrap;
   }
 
@@ -314,9 +417,6 @@
       document.getElementById('chat-typing')?.remove();
       const answer = findAnswer(trimmed);
       addMessage(answer, false);
-      if (answer === FALLBACK) {
-        document.getElementById('chat-messages')?.appendChild(makeContactLink());
-      }
       scrollBottom();
     }, 450);
   }
