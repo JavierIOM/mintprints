@@ -1,0 +1,383 @@
+---
+// Chatbot — keyword-based FAQ assistant for Mint Prints
+---
+
+<!-- Fixed chat widget, bottom-right -->
+<div id="chat-widget" class="fixed bottom-6 right-6 z-50">
+
+  <!-- Toggle button -->
+  <button
+    id="chat-toggle"
+    aria-label="Open chat assistant"
+    class="w-14 h-14 bg-mint hover:bg-mint-dark text-white rounded-full shadow-xl flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95"
+  >
+    <!-- Chat icon (shown when closed) -->
+    <svg id="chat-icon-open" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+    </svg>
+    <!-- Close icon (shown when open) -->
+    <svg id="chat-icon-close" class="w-6 h-6" style="display:none;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+
+  <!-- Chat panel -->
+  <div
+    id="chat-panel"
+    style="display:none; position:absolute; bottom:4.5rem; right:0; width:340px; max-height:calc(100vh - 8rem); flex-direction:column;"
+    class="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden"
+    role="dialog"
+    aria-label="Chat with Tilly, the Mint Prints virtual assistant"
+  >
+    <!-- Header -->
+    <div class="bg-mint px-4 py-3 flex items-center gap-3 flex-shrink-0">
+      <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/>
+          <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"/>
+        </svg>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="text-white font-semibold text-sm leading-tight">Tilly</p>
+        <p class="text-white/80 text-xs">Mint Prints virtual assistant</p>
+      </div>
+    </div>
+
+    <!-- Messages area -->
+    <div
+      id="chat-messages"
+      class="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 dark:bg-gray-800/50"
+      style="min-height:0; height:380px;"
+      aria-live="polite"
+    ></div>
+
+    <!-- Input area -->
+    <div class="px-3 py-3 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 flex-shrink-0">
+      <div class="flex gap-2">
+        <input
+          id="chat-input"
+          type="text"
+          placeholder="Ask a question..."
+          maxlength="200"
+          autocomplete="off"
+          class="flex-1 px-3 py-2 text-sm bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg border-0 outline-none focus:ring-2 focus:ring-mint placeholder-gray-400 dark:placeholder-gray-500"
+        />
+        <button
+          id="chat-send"
+          aria-label="Send message"
+          class="px-3 py-2 bg-mint hover:bg-mint-dark text-white rounded-lg transition-colors flex-shrink-0"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---------------------------------------------------------------------------
+  // Knowledge base — each entry has keywords (scored on match) and an answer
+  // ---------------------------------------------------------------------------
+  const qa = [
+    {
+      keywords: ['hello', 'hi', 'hey', 'morning', 'afternoon', 'evening', 'howdy'],
+      answer: "Hello! I'm Tilly, the Mint Prints virtual assistant. I can help with questions about our 3D printing, laser cutting, and design services. What would you like to know?"
+    },
+    {
+      keywords: ['services', 'offer', 'what do you do', 'provide', 'specialise', 'specialize', 'what can you do'],
+      answer: "We offer four main services: FDM (plastic) 3D printing, SLA (resin) 3D printing, laser cutting and etching, and custom design services — from one-off prototypes to finished products."
+    },
+    {
+      keywords: ['where', 'located', 'location', 'based', 'isle of man', 'iom', 'address'],
+      answer: "We're based on the Isle of Man and serve customers locally and internationally (excluding the USA at this time)."
+    },
+    {
+      keywords: ['quote', 'cost', 'price', 'pricing', 'how much', 'charge', 'fee', 'expensive', 'affordable'],
+      answer: "All jobs are priced individually based on material, size, and complexity. Contact us via our contact form with your project details and we'll get back to you with a quote within 1-2 business days."
+    },
+    {
+      keywords: ['fdm', 'sla', 'difference between', 'resin', 'plastic', 'filament', 'stereolithography', 'fused deposition'],
+      answer: "FDM uses thermoplastic filaments and is great for functional parts, prototypes, and larger prints. SLA uses liquid resin cured by UV light, producing incredibly fine detail — perfect for miniatures and intricate designs."
+    },
+    {
+      keywords: ['materials', 'material', 'pla', 'petg', 'asa', 'tpu', 'filament', 'resin', 'plastic'],
+      answer: "For FDM we offer PLA, PETG, ASA, and TPU. For SLA we use various resins depending on your requirements. Not sure which is best for your project? We're happy to advise."
+    },
+    {
+      keywords: ['file', 'format', 'stl', 'obj', '3mf', 'step', 'svg', 'dxf', 'send files', 'upload'],
+      answer: "For 3D printing we accept STL, OBJ, and 3MF files. For laser work we accept SVG and DXF. If your file is in a different format or you need help, just get in touch and we'll sort it."
+    },
+    {
+      keywords: ['size', 'maximum', 'max size', 'how big', 'dimensions', '256', 'large print', 'big print'],
+      answer: "Our Bambu Lab X1C printers handle prints up to 256 x 256 x 256mm. For larger projects we can split the design into multiple parts. Our laser bed is 700x500mm."
+    },
+    {
+      keywords: ['how long', 'turnaround', 'wait', 'days', 'hours', 'time', 'quick', 'fast', 'slow'],
+      answer: "Print times depend on size, complexity, and material. Small parts may take a few hours; larger or more detailed prints can take several days. We include an estimated timeline with every quote."
+    },
+    {
+      keywords: ['laser', 'cut', 'cutting', 'etch', 'engrave', 'engraving', 'wood', 'acrylic', 'glass', 'slate', 'leather', 'perspex', 'co2'],
+      answer: "Our 80W CO2 laser (700x500mm bed) cuts and etches wood, acrylic, glass, slate, leather, and certain plastics. We can't cut metal, but we can etch it."
+    },
+    {
+      keywords: ['personalise', 'personalize', 'existing item', 'my own', 'bring my own', 'engrave my', 'etch my'],
+      answer: "Yes! We can laser etch your own items — glassware, wooden signs, leather goods, and more. Get in touch to discuss your item."
+    },
+    {
+      keywords: ['design', 'no design', "don't have a design", 'custom design', 'help with design', 'idea', 'artwork', 'bespoke', 'from scratch'],
+      answer: "No problem — we offer custom design services. Tell us your idea and we'll work with you to create it. We can also modify existing designs: resizing, adding text, structural changes, and more."
+    },
+    {
+      keywords: ['preview', 'mockup', 'see before', 'proof', 'approval'],
+      answer: "Yes, we'll provide a digital preview or mockup of custom designs before production begins so you can approve it first."
+    },
+    {
+      keywords: ['order', 'how to order', 'place an order', 'get started', 'start a project'],
+      answer: "Simple — use our contact form with your project details (and attach any files if you have them). We'll reply with a quote within 1-2 business days and guide you from there."
+    },
+    {
+      keywords: ['payment', 'pay', 'paypal', 'bank transfer', 'card', 'invoice', 'how to pay'],
+      answer: "We accept bank transfers and PayPal. Payment details are included with your quote."
+    },
+    {
+      keywords: ['deliver', 'delivery', 'ship', 'shipping', 'post', 'international', 'worldwide', 'courier'],
+      answer: "We deliver locally on the Isle of Man and ship internationally to most countries (excluding the USA). Delivery costs are included in your quote."
+    },
+    {
+      keywords: ['usa', 'america', 'united states', 'us delivery', 'american'],
+      answer: "Unfortunately we're unable to deliver to the USA at this time due to post office restrictions. We apologise for the inconvenience."
+    },
+    {
+      keywords: ['colour', 'color', 'multi colour', 'multicolour', 'multicolor', 'multiple colours', 'ams', 'coloured'],
+      answer: "Yes! Our Bambu Lab X1C printers support multi-colour printing using an Automatic Material System (AMS). Get in touch to discuss your multi-colour project."
+    },
+    {
+      keywords: ['resolution', 'layer height', 'layer', 'detail', 'accuracy', 'precision', 'quality'],
+      answer: "FDM printing is typically at 0.2mm layer height, going as fine as 0.08mm for detailed work. SLA achieves 0.05mm layers for exceptional precision."
+    },
+    {
+      keywords: ['waterproof', 'water resistant', 'outdoor', 'weather', 'sealed', 'sealing'],
+      answer: "FDM prints are water-resistant but not fully waterproof — we can apply a sealant if needed. SLA resin prints are naturally more water-resistant."
+    },
+    {
+      keywords: ['functional', 'functional part', 'mechanical', 'engineering', 'replacement part', 'component', 'working part'],
+      answer: "Absolutely — we regularly print functional parts, mechanical components, and replacement parts. PETG and ASA are particularly good for strong, durable functional prints."
+    },
+    {
+      keywords: ['miniature', 'miniatures', 'wargame', 'wargaming', 'd&d', 'dnd', 'tabletop', 'figurine', 'figure', 'model'],
+      answer: "SLA resin printing is ideal for miniatures and tabletop figures — the detail is exceptional even at small scales. Get in touch with your project for a quote."
+    },
+    {
+      keywords: ['happy', 'unhappy', 'not happy', 'issue', 'problem', 'return', 'refund', 'complaint', 'wrong', 'broken', 'damaged'],
+      answer: "Customer satisfaction is our priority. If there's any issue with your order, contact us straight away and we'll do our best to put it right."
+    },
+    {
+      keywords: ['contact', 'email', 'phone', 'get in touch', 'reach you', 'talk to someone'],
+      answer: "You can reach us via the contact form on our website, or find us on Instagram (@mintprintsiom) and Facebook (Mint Prints IOM)."
+    },
+    {
+      keywords: ['etsy', 'redbubble', 'shop', 'online store', 'buy ready made', 'premade'],
+      answer: "You can also find us on Etsy (MintPrintsIOM) for ready-made items, and Redbubble (manxcraft) for Isle of Man-themed apparel and merchandise."
+    }
+  ];
+
+  const FALLBACK = "That's a great question! For the most accurate answer please contact us directly via our contact form and we'll get back to you within 1-2 business days.";
+
+  const QUICK_REPLIES = [
+    "What services do you offer?",
+    "How do I get a quote?",
+    "What file formats do you accept?",
+    "Do you ship internationally?"
+  ];
+
+  // ---------------------------------------------------------------------------
+  // Matching logic
+  // ---------------------------------------------------------------------------
+  function findAnswer(input: string): string {
+    const lower = input.toLowerCase().trim();
+    if (!lower) return FALLBACK;
+
+    let bestScore = 0;
+    let bestAnswer = FALLBACK;
+
+    for (const item of qa) {
+      let score = 0;
+      for (const kw of item.keywords) {
+        if (lower.includes(kw.toLowerCase())) {
+          score += kw.split(' ').length; // multi-word phrases score higher
+        }
+      }
+      if (score > bestScore) {
+        bestScore = score;
+        bestAnswer = item.answer;
+      }
+    }
+
+    return bestAnswer;
+  }
+
+  // ---------------------------------------------------------------------------
+  // DOM helpers
+  // ---------------------------------------------------------------------------
+  function makeBubble(text: string, isUser: boolean): HTMLElement {
+    const wrap = document.createElement('div');
+    wrap.className = isUser ? 'flex justify-end' : 'flex justify-start';
+
+    const bubble = document.createElement('div');
+    bubble.style.maxWidth = '80%';
+    bubble.style.fontSize = '0.875rem';
+    bubble.style.lineHeight = '1.5';
+    bubble.style.padding = '0.5rem 0.875rem';
+    bubble.style.borderRadius = '1rem';
+
+    if (isUser) {
+      bubble.style.borderTopRightRadius = '0.25rem';
+      bubble.style.backgroundColor = 'var(--color-mint)';
+      bubble.style.color = '#fff';
+    } else {
+      bubble.style.borderTopLeftRadius = '0.25rem';
+      bubble.style.backgroundColor = '';
+      bubble.className = 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 shadow-sm border border-gray-100 dark:border-gray-700';
+      bubble.style.maxWidth = '80%';
+      bubble.style.fontSize = '0.875rem';
+      bubble.style.lineHeight = '1.5';
+      bubble.style.padding = '0.5rem 0.875rem';
+      bubble.style.borderRadius = '1rem';
+      bubble.style.borderTopLeftRadius = '0.25rem';
+    }
+
+    bubble.textContent = text;
+    wrap.appendChild(bubble);
+    return wrap;
+  }
+
+  function makeQuickReplies(): HTMLElement {
+    const wrap = document.createElement('div');
+    wrap.id = 'chat-quick-replies';
+    wrap.className = 'flex flex-wrap gap-2 pt-1';
+
+    for (const reply of QUICK_REPLIES) {
+      const btn = document.createElement('button');
+      btn.className = 'text-xs px-3 py-1.5 rounded-full border border-mint text-mint hover:bg-mint hover:text-white transition-colors';
+      btn.textContent = reply;
+      btn.addEventListener('click', () => {
+        wrap.remove();
+        sendMessage(reply);
+      });
+      wrap.appendChild(btn);
+    }
+    return wrap;
+  }
+
+  function makeContactLink(): HTMLElement {
+    const wrap = document.createElement('div');
+    wrap.className = 'flex justify-start pl-1';
+    const a = document.createElement('a');
+    a.href = '/contact/';
+    a.className = 'text-xs text-mint underline underline-offset-2 hover:text-mint-dark';
+    a.textContent = 'Go to contact form';
+    wrap.appendChild(a);
+    return wrap;
+  }
+
+  function scrollBottom() {
+    const el = document.getElementById('chat-messages');
+    if (el) el.scrollTop = el.scrollHeight;
+  }
+
+  function addMessage(text: string, isUser: boolean) {
+    const msgs = document.getElementById('chat-messages');
+    if (!msgs) return;
+    msgs.appendChild(makeBubble(text, isUser));
+    scrollBottom();
+  }
+
+  // ---------------------------------------------------------------------------
+  // Send / receive
+  // ---------------------------------------------------------------------------
+  function sendMessage(text: string) {
+    const trimmed = text.trim();
+    if (!trimmed) return;
+
+    addMessage(trimmed, true);
+
+    const typing = document.createElement('div');
+    typing.className = 'flex justify-start';
+    typing.id = 'chat-typing';
+    typing.innerHTML = `<div class="bg-white dark:bg-gray-800 text-gray-400 text-sm px-4 py-2 rounded-2xl rounded-tl-sm border border-gray-100 dark:border-gray-700 shadow-sm">...</div>`;
+    document.getElementById('chat-messages')?.appendChild(typing);
+    scrollBottom();
+
+    setTimeout(() => {
+      document.getElementById('chat-typing')?.remove();
+      const answer = findAnswer(trimmed);
+      addMessage(answer, false);
+      if (answer === FALLBACK) {
+        document.getElementById('chat-messages')?.appendChild(makeContactLink());
+      }
+      scrollBottom();
+    }, 450);
+  }
+
+  // ---------------------------------------------------------------------------
+  // Initialise
+  // ---------------------------------------------------------------------------
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle   = document.getElementById('chat-toggle');
+    const panel    = document.getElementById('chat-panel');
+    const iconOpen = document.getElementById('chat-icon-open');
+    const iconClose= document.getElementById('chat-icon-close');
+    const input    = document.getElementById('chat-input') as HTMLInputElement | null;
+    const sendBtn  = document.getElementById('chat-send');
+    const msgs     = document.getElementById('chat-messages');
+
+    let isOpen = false;
+    let initialised = false;
+
+    function openChat() {
+      if (!panel) return;
+      panel.style.display = 'flex';
+      if (iconOpen) iconOpen.style.display = 'none';
+      if (iconClose) iconClose.style.display = '';
+      isOpen = true;
+
+      if (!initialised && msgs) {
+        initialised = true;
+        msgs.appendChild(makeBubble("Hi, I'm Tilly! I can answer common questions about our 3D printing, laser cutting, and design services. Try one of the quick options below, or type your own question.", false));
+        msgs.appendChild(makeQuickReplies());
+        scrollBottom();
+      }
+      setTimeout(() => input?.focus(), 100);
+    }
+
+    function closeChat() {
+      if (!panel) return;
+      panel.style.display = 'none';
+      if (iconOpen) iconOpen.style.display = '';
+      if (iconClose) iconClose.style.display = 'none';
+      isOpen = false;
+    }
+
+    toggle?.addEventListener('click', () => {
+      if (isOpen) closeChat();
+      else openChat();
+    });
+
+    sendBtn?.addEventListener('click', () => {
+      if (!input) return;
+      const text = input.value;
+      input.value = '';
+      sendMessage(text);
+    });
+
+    input?.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter') {
+        const text = input.value;
+        input.value = '';
+        sendMessage(text);
+      }
+    });
+  });
+</script>
