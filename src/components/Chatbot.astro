@@ -81,6 +81,56 @@
   // Knowledge base — each entry has keywords (scored on match) and an answer
   // ---------------------------------------------------------------------------
   const qa = [
+    // Wall thickness / design guidelines
+    {
+      keywords: ['wall thickness', 'minimum wall', 'thin walls', 'wall too thin', 'how thin'],
+      answer: "For FDM printing, we recommend a minimum wall thickness of around 1.2mm for solid walls. Thinner than that and walls may not print reliably. For SLA, features down to around 0.5mm are achievable. If you're unsure whether your design is printable, share your file and we'll check it over."
+    },
+    {
+      keywords: ['hollow', 'make hollow', 'hollow print', 'save material', 'reduce cost', 'cheaper print'],
+      answer: "Yes, prints can be made hollow or with low infill to save material and reduce cost — especially for larger display pieces where strength isn't critical. Just mention it when you get in touch and we can advise the best approach for your design."
+    },
+    {
+      keywords: ['infill', 'infill density', 'how strong', 'strength', 'strong print', 'solid print', 'percentage'],
+      answer: "Infill is the internal structure of a print — we adjust it based on your needs. Display pieces typically use 15-20% infill, while functional or load-bearing parts may need 40-100%. Higher infill means stronger but heavier and more expensive prints. We'll recommend the right density for your project."
+    },
+    {
+      keywords: ['support', 'supports', 'support structures', 'support marks', 'overhangs', 'overhang'],
+      answer: "Overhanging sections of a print need support structures to stop them drooping during printing. We remove these after printing, but they can leave slight marks on the supported surface. For parts where surface quality matters on all sides, SLA or careful design orientation can minimise this. We always consider this when setting up your print."
+    },
+    {
+      keywords: ['paint', 'painting', 'painted', 'can you paint', 'colour finish', 'colored'],
+      answer: "Yes, 3D prints can be painted — we recommend a light sanding followed by a primer coat for best results. FDM prints in particular take paint well once primed. If you'd like us to handle finishing and painting, just ask and we can discuss what's possible."
+    },
+    {
+      keywords: ['sand', 'sanding', 'smooth', 'smoothing', 'surface finish', 'rough', 'layer lines', 'visible layers', 'finish'],
+      answer: "FDM prints have visible layer lines which can be sanded smooth — finer layer heights result in a better surface straight off the printer. SLA prints have a much smoother finish by default. Post-processing such as sanding and priming can significantly improve the look of FDM parts if required."
+    },
+    {
+      keywords: ['tolerance', 'tolerances', 'accuracy', 'accurate', 'precise', 'dimensional', 'exact size'],
+      answer: "Our Bambu Lab X1C FDM printers achieve tolerances of around ±0.1-0.2mm for most prints. SLA is more precise, achieving ±0.05mm or better. For tight-tolerance functional parts, let us know your requirements and we'll advise on the best process and whether test prints are needed."
+    },
+    {
+      keywords: ['prototype', 'prototyping', 'rapid prototype', 'proof of concept', 'test print', 'sample'],
+      answer: "Rapid prototyping is one of our most popular uses — 3D printing lets you test designs quickly and affordably before committing to tooling or production. We can turn around small prototypes in a matter of days."
+    },
+    {
+      keywords: ['prepare file', 'file preparation', 'file tips', 'design tips', 'design for printing', 'how to design', 'manifold', 'watertight'],
+      answer: "For best results, your 3D file should be a closed, watertight mesh (no holes or gaps in the surface). STL, OBJ, and 3MF formats work best. If you're unsure, send us the file anyway — we can often repair minor issues and will let you know if anything needs fixing before printing."
+    },
+    {
+      keywords: ['multiple', 'copies', 'quantity', 'bulk', 'batch', 'how many', 'more than one'],
+      answer: "Absolutely — we can print multiple copies of the same design. Batching items together on the print bed often makes unit costs more economical. Just let us know the quantity you need when requesting a quote."
+    },
+    {
+      keywords: ['scale', 'resize', 'make bigger', 'make smaller', 'scale up', 'scale down', 'different size'],
+      answer: "Yes, we can scale your design up or down before printing. Bear in mind that scaling affects wall thicknesses and fine details, so very small scales may lose detail and very large scales may require splitting into parts. Let us know the size you need."
+    },
+    {
+      keywords: ['assembly', 'assemble', 'multiple parts', 'kit', 'snap fit', 'glue'],
+      answer: "We can print parts that assemble together — whether snap-fit, glued, or bolted. If you need parts to fit together precisely, let us know the tolerances required and we'll set up the print accordingly. We can also advise on the best jointing method for your design."
+    },
+
     // Greetings
     {
       keywords: ['hello', 'hi', 'hey', 'morning', 'afternoon', 'evening', 'howdy'],
