@@ -361,6 +361,12 @@
       answer: "Customer satisfaction is our priority. If there's any issue with your order, contact us straight away and we'll do our best to put it right."
     },
 
+    // Gallery / examples
+    {
+      keywords: ['gallery', 'images', 'pictures', 'photos', 'examples', 'see your work', 'what have you made', 'portfolio', 'previous work', 'samples', 'show me', 'see some', 'show your work', 'work examples'],
+      answer: 'We have a gallery showcasing some of our work — head over for inspiration and to get a feel for what we can do! <a href="/gallery/" style="color:var(--color-mint);font-weight:600;text-decoration:underline;">View our gallery</a>'
+    },
+
     // Contact / social
     {
       keywords: ['contact', 'email', 'phone', 'get in touch', 'reach you', 'talk to someone'],
@@ -461,7 +467,11 @@
       bubble.style.borderTopLeftRadius = '0.25rem';
     }
 
-    bubble.textContent = text;
+    if (isUser) {
+      bubble.textContent = text;
+    } else {
+      bubble.innerHTML = text;
+    }
     wrap.appendChild(bubble);
     return wrap;
   }
