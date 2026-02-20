@@ -81,6 +81,34 @@
   // Knowledge base — each entry has keywords (scored on match) and an answer
   // ---------------------------------------------------------------------------
   const qa = [
+    // Minimum print size / text legibility
+    {
+      keywords: ['minimum size', 'smallest', 'how small', 'tiny', 'very small', 'miniature size', 'min size'],
+      answer: "The minimum practical size for a 3D print is around 5 x 5 x 5mm. Smaller parts can be attempted but may not print reliably — get in touch and we can advise for your specific design."
+    },
+    {
+      keywords: ['text', 'lettering', 'font', 'words on print', 'writing', 'engraved text', 'embossed text', 'letters'],
+      answer: "Text and lettering on 3D prints works best at 6pt or larger — smaller than that and characters become very difficult to read. Raised (embossed) text tends to be clearer than recessed text on FDM prints. For very fine text, laser etching onto acrylic or wood often gives sharper results."
+    },
+
+    // Pricing factors
+    {
+      keywords: ['what affects price', 'why is it expensive', 'price calculation', 'how is price calculated', 'cost factors', 'what determines cost'],
+      answer: "The price for a 3D print is based on: the material chosen, the volume of material used, the estimated print time, any data preparation needed, and post-processing such as support removal or finishing. Hollowing out a design or reducing infill can bring costs down for large parts."
+    },
+
+    // File formats — add STEP
+    {
+      keywords: ['step', 'stp', 'step file', 'stp file', 'cad file', 'solidworks', 'fusion 360', 'autocad'],
+      answer: "Yes, we can work with STEP and STP files as well as STL, OBJ, and 3MF. STEP files are great if you're exporting from CAD software like Fusion 360 or SolidWorks. For laser work we also accept SVG and DXF."
+    },
+
+    // Lacquering / finishing
+    {
+      keywords: ['lacquer', 'lacquering', 'varnish', 'coat', 'coating', 'spray paint', 'glossy', 'matte finish', 'finish options'],
+      answer: "3D printed parts can be lacquered or varnished to achieve a smooth, professional finish — either matte or gloss. We recommend sanding and priming first for the best result. If you'd like a finished part rather than a raw print, just mention it when you request a quote."
+    },
+
     // Wall thickness / design guidelines
     {
       keywords: ['wall thickness', 'minimum wall', 'thin walls', 'wall too thin', 'how thin'],
