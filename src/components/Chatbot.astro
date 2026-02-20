@@ -386,11 +386,32 @@
   ];
 
   // ---------------------------------------------------------------------------
+  // Profanity filter
+  // ---------------------------------------------------------------------------
+  const PROFANITY = [
+    'fuck','shit','cunt','bastard','bitch','wanker','twat','prick','arse','arsehole',
+    'asshole','ass','bollocks','bugger','dick','cock','knob','tosser','bellend',
+    'motherfucker','fucker','damn','crap','bloody hell','piss off','piss'
+  ];
+
+  const PROFANITY_RESPONSE = "Let's keep things friendly! If you have a genuine question about our services I'm happy to help, or you can reach us directly at mintprints.im/contact.";
+
+  function containsProfanity(text: string): boolean {
+    const lower = text.toLowerCase();
+    return PROFANITY.some(word => {
+      const re = new RegExp(`(?<![a-z])${word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![a-z])`, 'i');
+      return re.test(lower);
+    });
+  }
+
+  // ---------------------------------------------------------------------------
   // Matching logic
   // ---------------------------------------------------------------------------
   function findAnswer(input: string): string {
     const lower = input.toLowerCase().trim();
     if (!lower) return FALLBACK;
+
+    if (containsProfanity(input)) return PROFANITY_RESPONSE;
 
     let bestScore = 0;
     let bestAnswer = FALLBACK;
