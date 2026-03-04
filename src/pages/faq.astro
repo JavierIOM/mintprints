@@ -49,7 +49,7 @@ const faqs = [
     questions: [
       {
         q: "What materials can you laser cut or etch?",
-        a: "Our Omtech 100W CO2 laser can work with wood, acrylic (perspex), glass, slate, leather, and certain plastics. We cannot cut metal, but we can etch it. Contact us if you're unsure about your material."
+        a: "Our Omtech 80W CO2 laser can work with wood, acrylic (perspex), glass, slate, leather, and certain plastics. We cannot cut metal, but we can etch it. Contact us if you're unsure about your material."
       },
       {
         q: "What's the maximum cutting size?",
@@ -143,13 +143,13 @@ const faqs = [
   <!-- FAQ Section -->
   <section class="py-16 bg-white dark:bg-gray-900">
     <div class="max-w-4xl mx-auto px-4">
-      {faqs.map((category, categoryIndex) => (
+      {faqs.map((category) => (
         <div class="mb-12 last:mb-0">
           <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 pb-3 border-b-2 border-mint">
             {category.category}
           </h2>
           <div class="space-y-6">
-            {category.questions.map((faq, faqIndex) => (
+            {category.questions.map((faq) => (
               <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border border-gray-100 dark:border-gray-700">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-start gap-3">
                   <svg class="w-6 h-6 text-mint flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
