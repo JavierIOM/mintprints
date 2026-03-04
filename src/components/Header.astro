@@ -76,7 +76,7 @@ const currentPath = Astro.url.pathname;
               href={link.href}
               class:list={[
                 "text-gray-600 dark:text-gray-300 hover:text-mint transition-colors font-medium",
-                { "text-mint": currentPath === link.href }
+                { "text-mint": currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href)) }
               ]}
             >
               {link.label}

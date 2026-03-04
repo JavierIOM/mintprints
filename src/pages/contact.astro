@@ -187,6 +187,32 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
+  // Compiled once at load time, not on every submit
+  const SPAM_PATTERNS = [
+    /\b(viagra|cialis|casino|poker)\b/,
+    /https?:\/\/[^\s]{50,}/,
+    /<script/i,
+    /\[url=/i,
+    /\[link=/i
+  ];
+
+  const PROFANITY_PATTERNS = [
+    /\bf+u+c+k+/i,
+    /\bs+h+i+t+/i,
+    /\bb+i+t+c+h+/i,
+    /\ba+s+s+h+o+l+e+/i,
+    /\bc+u+n+t+/i,
+    /\bd+a+m+n+/i,
+    /\bh+e+l+l+/i,
+    /\bc+r+a+p+/i,
+    /\bb+a+s+t+a+r+d+/i,
+    /\bd+i+c+k+/i,
+    /\bp+i+s+s+/i,
+    /\ba+r+s+e+/i,
+    /\bb+u+g+g+e+r+/i,
+    /\bb+o+l+l+o+c+k+s+/i
+  ];
+
   // Anti-spam protection
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contact-form');
@@ -250,35 +276,8 @@ import Layout from '../layouts/Layout.astro';
       if (messageField && messageField.value) {
         const message = messageField.value.toLowerCase();
 
-        // Spam patterns
-        const suspiciousPatterns = [
-          /\b(viagra|cialis|casino|poker)\b/,
-          /https?:\/\/[^\s]{50,}/,  // Very long URLs
-          /<script/i,
-          /\[url=/i,
-          /\[link=/i
-        ];
-
-        // Profanity filter - common profane words
-        const profanityPatterns = [
-          /\bf+u+c+k+/i,
-          /\bs+h+i+t+/i,
-          /\bb+i+t+c+h+/i,
-          /\ba+s+s+h+o+l+e+/i,
-          /\bc+u+n+t+/i,
-          /\bd+a+m+n+/i,
-          /\bh+e+l+l+/i,
-          /\bc+r+a+p+/i,
-          /\bb+a+s+t+a+r+d+/i,
-          /\bd+i+c+k+/i,
-          /\bp+i+s+s+/i,
-          /\ba+r+s+e+/i,
-          /\bb+u+g+g+e+r+/i,
-          /\bb+o+l+l+o+c+k+s+/i
-        ];
-
         // Check spam patterns
-        for (const pattern of suspiciousPatterns) {
+        for (const pattern of SPAM_PATTERNS) {
           if (pattern.test(message)) {
             e.preventDefault();
             alert('Your message contains suspicious content. Please remove any inappropriate links or text.');
@@ -287,7 +286,7 @@ import Layout from '../layouts/Layout.astro';
         }
 
         // Check profanity
-        for (const pattern of profanityPatterns) {
+        for (const pattern of PROFANITY_PATTERNS) {
           if (pattern.test(message)) {
             e.preventDefault();
             alert('Please keep your message professional and free from inappropriate language.');
@@ -299,15 +298,7 @@ import Layout from '../layouts/Layout.astro';
       // Also check name field for profanity
       if (nameField && nameField.value) {
         const name = nameField.value.toLowerCase();
-        const profanityPatterns = [
-          /\bf+u+c+k+/i,
-          /\bs+h+i+t+/i,
-          /\bb+i+t+c+h+/i,
-          /\ba+s+s+h+o+l+e+/i,
-          /\bc+u+n+t+/i
-        ];
-
-        for (const pattern of profanityPatterns) {
+        for (const pattern of PROFANITY_PATTERNS) {
           if (pattern.test(name)) {
             e.preventDefault();
             alert('Please enter a valid name.');
