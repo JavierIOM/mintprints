@@ -19,7 +19,14 @@
       "Bash(cat:*)",
       "Bash(del publicfavicon-temp.png publicfavicon-transparent.png)",
       "Bash(grep:*)",
-      "Bash(git stash:*)"
+      "Bash(git stash:*)",
+      "Bash(git -C \"c:/Users/Gavin/OneDrive/Documents/GitHub/mintprints\" checkout:*)",
+      "Skill(claude-developer-platform)",
+      "Skill(claude-developer-platform:*)",
+      "WebFetch(domain:omtech.com)",
+      "WebFetch(domain:www.additive-x.com)",
+      "WebFetch(domain:www.rapidobject.com)",
+      "WebFetch(domain:web.archive.org)"
     ],
     "deny": [],
     "ask": []

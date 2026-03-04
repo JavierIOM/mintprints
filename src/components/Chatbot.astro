@@ -326,7 +326,7 @@
     // Delivery
     {
       keywords: ['deliver', 'delivery', 'ship', 'shipping', 'post', 'international', 'worldwide', 'courier'],
-      answer: "We deliver locally on the Isle of Man and ship internationally to most countries (excluding the USA). Delivery costs are included in your quote."
+      answer: "We deliver on the Isle of Man, the UK and ship internationally to most countries (excluding the USA). Delivery costs are included in your quote."
     },
     {
       keywords: ['usa', 'america', 'united states', 'us delivery', 'american'],
@@ -481,6 +481,12 @@
     } else {
       bubble.style.borderTopLeftRadius = '0.25rem';
       bubble.className = 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 shadow-sm border border-gray-100 dark:border-gray-700';
+      bubble.style.maxWidth = '80%';
+      bubble.style.fontSize = '0.875rem';
+      bubble.style.lineHeight = '1.5';
+      bubble.style.padding = '0.5rem 0.875rem';
+      bubble.style.borderRadius = '1rem';
+      bubble.style.borderTopLeftRadius = '0.25rem';
     }
 
     if (isUser) {
