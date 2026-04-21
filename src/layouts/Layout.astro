@@ -28,7 +28,6 @@ const fullTitle = title === "Home" ? "Mint Prints | 3D Printing & Laser Cutting"
 
     <!-- Primary Meta Tags -->
     <title>{fullTitle}</title>
-    <meta name="title" content={fullTitle} />
     <meta name="description" content={description} />
     <meta name="keywords" content="3D printing, laser cutting, custom design, Isle of Man, FDM printing, SLA resin printing, laser etching, prototyping, Mint Prints" />
     <meta name="author" content="Mint Prints" />
@@ -69,7 +68,7 @@ const fullTitle = title === "Home" ? "Mint Prints | 3D Printing & Laser Cutting"
     <meta name="theme-color" content="#64c864" />
 
     <!-- Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify({
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "Mint Prints",
@@ -147,7 +146,7 @@ const fullTitle = title === "Home" ? "Mint Prints | 3D Printing & Laser Cutting"
         (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "upjfnipapo");
       </script>
   </head>
-  <body class="min-h-screen flex flex-col bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans transition-colors">
+  <body class="min-h-screen flex flex-col bg-[#FAF7F4] dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans transition-colors">
     <Header />
     <main class="flex-grow">
       <slot />

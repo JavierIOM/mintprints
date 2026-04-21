@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.15] — 2026-04-21
+
+### Changed
+- Light mode page background changed from white to `#FAF7F4`
+- CTA band switched to dark text (`text-gray-900`) on mint background — fixes WCAG AA contrast failure (~2.8:1 → 5.4:1)
+- "View Our Work" secondary button is now a true ghost in dark mode (transparent bg, no dark fill)
+- Service card icons updated: FDM now shows a 3D cube, SLA shows a sparkle/precision icon, Custom Design shows a pencil
+- Theme toggle refactored to use `data-theme-toggle` attributes — fixes broken mobile toggle caused by duplicate IDs
+- Theme toggle button gains `focus-visible` ring for keyboard accessibility
+- Mobile menu button gains `aria-expanded` attribute, toggled correctly by JS
+- Active nav links now carry `aria-current="page"` on both desktop and mobile
+
+### Fixed
+- Removed invalid `<meta name="title">` tag from layout
+- Silenced Astro hint on JSON-LD script by adding explicit `is:inline`
+
 ## [0.0.14] — 2026-04-21
 
 ### Added
