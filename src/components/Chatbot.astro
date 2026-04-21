@@ -9,6 +9,7 @@
   <button
     id="chat-toggle"
     aria-label="Open chat assistant"
+    aria-expanded="false"
     class="w-14 h-14 bg-mint hover:bg-mint-dark text-white rounded-full shadow-xl flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95"
   >
     <!-- Chat icon (shown when closed) -->
@@ -583,6 +584,8 @@
       panel.style.display = 'flex';
       if (iconOpen) iconOpen.style.display = 'none';
       if (iconClose) iconClose.style.display = '';
+      toggle?.setAttribute('aria-expanded', 'true');
+      toggle?.setAttribute('aria-label', 'Close chat assistant');
       isOpen = true;
 
       if (!initialised && msgs) {
@@ -599,6 +602,8 @@
       panel.style.display = 'none';
       if (iconOpen) iconOpen.style.display = '';
       if (iconClose) iconClose.style.display = 'none';
+      toggle?.setAttribute('aria-expanded', 'false');
+      toggle?.setAttribute('aria-label', 'Open chat assistant');
       isOpen = false;
     }
 

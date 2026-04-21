@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.17] — 2026-04-21
+
+### Added
+- 16 hero images now cycle across 4 slots with staggered 9s fade transitions
+- Mobile hero: single full-width image (separate from desktop grid)
+- Chat widget `aria-expanded` and dynamic `aria-label` on open/close
+
+### Changed
+- Hero images moved from `public/images/hero/` to `src/assets/images/hero/` — now use Astro `<Image />` for optimisation and CLS prevention
+- CTA subtext: removed opacity modifier, now full `text-gray-900` for WCAG AA compliance
+
+### Removed
+- `<meta name="keywords">` — ignored by all major search engines
+
 ## [0.0.16] — 2026-04-21
 
 ### Added

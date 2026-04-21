@@ -2,6 +2,16 @@
 import Layout from '../layouts/Layout.astro';
 import ServiceCard from '../components/ServiceCard.astro';
 import Chatbot from '../components/Chatbot.astro';
+import { Image } from 'astro:assets';
+
+const imageModules = import.meta.glob<{ default: ImageMetadata }>('../assets/images/hero/*.jpg', { eager: true });
+const heroImages = Object.entries(imageModules)
+  .sort(([a], [b]) => {
+    const nA = parseInt(a.match(/hero-(\d+)/)?.[1] ?? '0');
+    const nB = parseInt(b.match(/hero-(\d+)/)?.[1] ?? '0');
+    return nA - nB;
+  })
+  .map(([, mod]) => mod.default);
 
 const services = [
   {
@@ -52,46 +62,53 @@ const services = [
           </div>
         </div>
 
-        <!-- Images -->
-        <div class="grid grid-cols-2 gap-3 h-[460px]">
-          <!-- Tall main image -->
+        <!-- Images — desktop grid -->
+        <div class="hidden md:grid grid-cols-2 gap-3 h-[460px]">
           <div class="row-span-3 rounded-2xl overflow-hidden shadow-lg">
-            <img
+            <Image
               data-hero-img="0"
-              src="/images/hero/hero-1.jpg"
-              alt="Work by Mint Prints"
+              src={heroImages[0]}
+              alt="Laser-etched Star Wars acrylic by Mint Prints"
               class="w-full h-full object-cover transition-opacity duration-[1500ms]"
               loading="eager"
+              fetchpriority="high"
             />
           </div>
-          <!-- Three smaller images stacked -->
           <div class="rounded-2xl overflow-hidden shadow-lg">
-            <img
+            <Image
               data-hero-img="1"
-              src="/images/hero/hero-4.jpg"
-              alt="Work by Mint Prints"
+              src={heroImages[3]}
+              alt="3D printed custom accessory by Mint Prints"
               class="w-full h-full object-cover transition-opacity duration-[1500ms]"
               loading="eager"
             />
           </div>
           <div class="rounded-2xl overflow-hidden shadow-lg">
-            <img
+            <Image
               data-hero-img="2"
-              src="/images/hero/hero-2.jpg"
+              src={heroImages[1]}
               alt="Work by Mint Prints"
               class="w-full h-full object-cover transition-opacity duration-[1500ms]"
-              loading="eager"
             />
           </div>
           <div class="rounded-2xl overflow-hidden shadow-lg">
-            <img
+            <Image
               data-hero-img="3"
-              src="/images/hero/hero-3.jpg"
+              src={heroImages[2]}
               alt="Work by Mint Prints"
               class="w-full h-full object-cover transition-opacity duration-[1500ms]"
-              loading="eager"
             />
           </div>
+        </div>
+        <!-- Single image — mobile only -->
+        <div class="block md:hidden rounded-2xl overflow-hidden shadow-lg h-64 mt-2">
+          <Image
+            src={heroImages[0]}
+            alt="Work by Mint Prints"
+            class="w-full h-full object-cover"
+            loading="eager"
+            fetchpriority="high"
+          />
         </div>
 
       </div>
@@ -125,7 +142,7 @@ const services = [
   <section class="py-20 bg-mint">
     <div class="max-w-4xl mx-auto px-4 text-center">
       <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Ready to start your project?</h2>
-      <p class="text-xl text-gray-900/75 mb-10">
+      <p class="text-xl text-gray-900 mb-10">
         Get in touch and let's discuss how we can bring your ideas to life.
       </p>
       <a href="/contact" class="inline-flex items-center justify-center px-8 py-4 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors">
@@ -135,44 +152,22 @@ const services = [
   </section>
 </Layout>
 
-<script>
-  const images = [
-    '/images/hero/hero-1.jpg',
-    '/images/hero/hero-2.jpg',
-    '/images/hero/hero-3.jpg',
-    '/images/hero/hero-4.jpg',
-    '/images/hero/hero-5.jpg',
-    '/images/hero/hero-6.jpg',
-    '/images/hero/hero-7.jpg',
-    '/images/hero/hero-8.jpg',
-    '/images/hero/hero-9.jpg',
-    '/images/hero/hero-10.jpg',
-    '/images/hero/hero-11.jpg',
-    '/images/hero/hero-12.jpg',
-    '/images/hero/hero-13.jpg',
-    '/images/hero/hero-14.jpg',
-    '/images/hero/hero-15.jpg',
-    '/images/hero/hero-16.jpg',
-  ];
-
+<script is:inline define:vars={{ imageSrcs: heroImages.map(img => img.src) }}>
   // Preload all images so swaps are instant
-  images.forEach(src => { new Image().src = src; });
+  imageSrcs.forEach(src => { new window.Image().src = src; });
 
-  const slots = document.querySelectorAll<HTMLImageElement>('[data-hero-img]');
-
-  // Each slot starts at a different offset so they don't all cycle together
+  const slots = document.querySelectorAll('[data-hero-img]');
   const startOffsets = [0, 3, 5, 1];
 
   slots.forEach((img, i) => {
-    let current = startOffsets[i] % images.length;
+    let current = startOffsets[i] % imageSrcs.length;
 
-    // Stagger when each slot begins cycling
     setTimeout(() => {
       setInterval(() => {
         img.style.opacity = '0';
         setTimeout(() => {
-          current = (current + 1) % images.length;
-          img.src = images[current];
+          current = (current + 1) % imageSrcs.length;
+          img.src = imageSrcs[current];
           img.style.opacity = '1';
         }, 1500);
       }, 9000);
