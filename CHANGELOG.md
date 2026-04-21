@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.13] — 2026-04-21
+
+### Added
+- Tilly — keyword-based FAQ chatbot on the homepage with quick-reply buttons
+- Tilly knowledge base: materials, laser, file formats, sizing, turnaround, pricing, ordering, delivery, post-processing
+- Profanity filter on Tilly inputs
+- Randomised fallback messages when Tilly can't match a question
+- Human escalation entry in Tilly linking to info@mintprints.im
+- Facebook link in Tilly social media responses
+- Gallery link in Tilly for image/examples questions
+- `og:image:width`, `og:image:height`, and `fb:app_id` Open Graph meta tags
+
+### Changed
+- Laser wattage corrected to 80W continuous / 100W peak across equipment page, FAQ, and chatbot
+- Mobile nav active state fixed
+
+### Fixed
+- All hyperlinks in Tilly responses corrected
+- Duplicate `</head>` tag removed from Layout.astro
+- `.claude/` added to `.gitignore`
+- Removed stray `tillysmall.jpg` from repo root
+- `package.json` version synced to match CHANGELOG (was stuck at 0.0.1)
+
 ## [0.0.12] - 2025-11-25
 
 ### Added
