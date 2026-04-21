@@ -60,7 +60,7 @@ const services = [
               data-hero-img="0"
               src="/images/hero/hero-1.jpg"
               alt="Work by Mint Prints"
-              class="w-full h-full object-cover transition-opacity duration-500"
+              class="w-full h-full object-cover transition-opacity duration-[1500ms]"
               loading="eager"
             />
           </div>
@@ -70,7 +70,7 @@ const services = [
               data-hero-img="1"
               src="/images/hero/hero-4.jpg"
               alt="Work by Mint Prints"
-              class="w-full h-full object-cover transition-opacity duration-500"
+              class="w-full h-full object-cover transition-opacity duration-[1500ms]"
               loading="eager"
             />
           </div>
@@ -79,7 +79,7 @@ const services = [
               data-hero-img="2"
               src="/images/hero/hero-2.jpg"
               alt="Work by Mint Prints"
-              class="w-full h-full object-cover transition-opacity duration-500"
+              class="w-full h-full object-cover transition-opacity duration-[1500ms]"
               loading="eager"
             />
           </div>
@@ -88,7 +88,7 @@ const services = [
               data-hero-img="3"
               src="/images/hero/hero-3.jpg"
               alt="Work by Mint Prints"
-              class="w-full h-full object-cover transition-opacity duration-500"
+              class="w-full h-full object-cover transition-opacity duration-[1500ms]"
               loading="eager"
             />
           </div>
@@ -165,8 +165,8 @@ const services = [
           current = (current + 1) % images.length;
           img.src = images[current];
           img.style.opacity = '1';
-        }, 500);
-      }, 4000);
-    }, i * 1200);
+        }, 1500);
+      }, 9000);
+    }, i * 3000);
   });
 </script>
