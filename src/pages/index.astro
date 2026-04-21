@@ -57,34 +57,38 @@ const services = [
           <!-- Tall main image -->
           <div class="row-span-3 rounded-2xl overflow-hidden shadow-lg">
             <img
+              data-hero-img="0"
               src="/images/hero/hero-1.jpg"
-              alt="Laser-etched Star Wars acrylic by Mint Prints"
-              class="w-full h-full object-cover"
+              alt="Work by Mint Prints"
+              class="w-full h-full object-cover transition-opacity duration-500"
               loading="eager"
             />
           </div>
           <!-- Three smaller images stacked -->
           <div class="rounded-2xl overflow-hidden shadow-lg">
             <img
+              data-hero-img="1"
               src="/images/hero/hero-4.jpg"
-              alt="3D printed custom accessory by Mint Prints"
-              class="w-full h-full object-cover"
+              alt="Work by Mint Prints"
+              class="w-full h-full object-cover transition-opacity duration-500"
               loading="eager"
             />
           </div>
           <div class="rounded-2xl overflow-hidden shadow-lg">
             <img
+              data-hero-img="2"
               src="/images/hero/hero-2.jpg"
-              alt="3D printed work by Mint Prints"
-              class="w-full h-full object-cover"
+              alt="Work by Mint Prints"
+              class="w-full h-full object-cover transition-opacity duration-500"
               loading="eager"
             />
           </div>
           <div class="rounded-2xl overflow-hidden shadow-lg">
             <img
+              data-hero-img="3"
               src="/images/hero/hero-3.jpg"
-              alt="Custom design work by Mint Prints"
-              class="w-full h-full object-cover"
+              alt="Work by Mint Prints"
+              class="w-full h-full object-cover transition-opacity duration-500"
               loading="eager"
             />
           </div>
@@ -130,3 +134,39 @@ const services = [
     </div>
   </section>
 </Layout>
+
+<script>
+  const images = [
+    '/images/hero/hero-1.jpg',
+    '/images/hero/hero-2.jpg',
+    '/images/hero/hero-3.jpg',
+    '/images/hero/hero-4.jpg',
+    '/images/hero/hero-5.jpg',
+    '/images/hero/hero-6.jpg',
+    '/images/hero/hero-7.jpg',
+  ];
+
+  // Preload all images so swaps are instant
+  images.forEach(src => { new Image().src = src; });
+
+  const slots = document.querySelectorAll<HTMLImageElement>('[data-hero-img]');
+
+  // Each slot starts at a different offset so they don't all cycle together
+  const startOffsets = [0, 3, 5, 1];
+
+  slots.forEach((img, i) => {
+    let current = startOffsets[i] % images.length;
+
+    // Stagger when each slot begins cycling
+    setTimeout(() => {
+      setInterval(() => {
+        img.style.opacity = '0';
+        setTimeout(() => {
+          current = (current + 1) % images.length;
+          img.src = images[current];
+          img.style.opacity = '1';
+        }, 500);
+      }, 4000);
+    }, i * 1200);
+  });
+</script>
