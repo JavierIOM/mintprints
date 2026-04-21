@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.16] — 2026-04-21
+
+### Added
+- Split hero layout: text left, product photo grid right (three real images of prints and laser work)
+- Hero images added to `public/images/hero/`
+
+### Changed
+- Hero section redesigned from centred text-only to a two-column layout with product imagery
+- `temporary screenshots/` added to `.gitignore`
+
 ## [0.0.15] — 2026-04-21
 
 ### Changed
