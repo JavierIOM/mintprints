@@ -531,7 +531,7 @@
   // ---------------------------------------------------------------------------
   // Send / receive
   // ---------------------------------------------------------------------------
-  function sendMessage(text: string) {
+  async function sendMessage(text: string) {
     const trimmed = text.trim();
     if (!trimmed) return;
 
@@ -544,12 +544,23 @@
     document.getElementById('chat-messages')?.appendChild(typing);
     scrollBottom();
 
-    setTimeout(() => {
-      document.getElementById('chat-typing')?.remove();
-      const answer = findAnswer(trimmed);
-      addMessage(answer, false);
-      scrollBottom();
-    }, 450);
+    let answer: string;
+    try {
+      const res = await fetch('/.netlify/functions/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: trimmed }),
+      });
+      if (!res.ok) throw new Error('API error');
+      const data = await res.json();
+      answer = data.answer || getFallback();
+    } catch {
+      answer = findAnswer(trimmed);
+    }
+
+    document.getElementById('chat-typing')?.remove();
+    addMessage(answer, false);
+    scrollBottom();
   }
 
   // ---------------------------------------------------------------------------
@@ -596,19 +607,24 @@
       else openChat();
     });
 
-    sendBtn?.addEventListener('click', () => {
+    function submitInput() {
       if (!input) return;
-      const text = input.value;
+      const text = input.value.trim();
+      if (!text) return;
       input.value = '';
-      sendMessage(text);
-    });
+      input.disabled = true;
+      if (sendBtn) (sendBtn as HTMLButtonElement).disabled = true;
+      sendMessage(text).finally(() => {
+        input.disabled = false;
+        (sendBtn as HTMLButtonElement).disabled = false;
+        input.focus();
+      });
+    }
+
+    sendBtn?.addEventListener('click', submitInput);
 
     input?.addEventListener('keydown', (e: KeyboardEvent) => {
-      if (e.key === 'Enter') {
-        const text = input.value;
-        input.value = '';
-        sendMessage(text);
-      }
+      if (e.key === 'Enter') submitInput();
     });
   });
 </script>

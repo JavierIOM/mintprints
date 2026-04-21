@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.14] — 2026-04-21
+
+### Added
+- AI-powered Tilly chatbot via Claude Haiku (`netlify/functions/chat.js`) — replaces keyword matching with natural language responses
+- Keyword matcher kept as silent fallback if the API call fails
+- Input disabled during API call to prevent double-sends
+
+### Changed
+- `sendMessage` is now async; send button and Enter key both route through a shared `submitInput` handler
+
 ## [0.0.13] — 2026-04-21
 
 ### Added
