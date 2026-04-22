@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.19] — 2026-04-22
+
+### Added
+- 8 new hero images (hero-17 to hero-24), converted from desktop JFIF files
+
 ## [0.0.18] — 2026-04-22
 
 ### Fixed
