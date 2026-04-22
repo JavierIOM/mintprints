@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.18] — 2026-04-22
+
+### Fixed
+- Hero image cycling: slots now coordinate so the same image can never appear in two slots at once
+
 ## [0.0.17] — 2026-04-21
 
 ### Added

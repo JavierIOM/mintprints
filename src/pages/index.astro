@@ -153,21 +153,24 @@ const services = [
 </Layout>
 
 <script is:inline define:vars={{ imageSrcs: heroImages.map(img => img.src) }}>
-  // Preload all images so swaps are instant
   imageSrcs.forEach(src => { new window.Image().src = src; });
 
-  const slots = document.querySelectorAll('[data-hero-img]');
-  const startOffsets = [0, 3, 5, 1];
+  const slots = Array.from(document.querySelectorAll('[data-hero-img]'));
+  const current = [0, 3, 5, 1].map(o => o % imageSrcs.length);
+
+  function pickNext() {
+    const used = new Set(current);
+    const available = imageSrcs.map((_, i) => i).filter(i => !used.has(i));
+    return available[Math.floor(Math.random() * available.length)];
+  }
 
   slots.forEach((img, i) => {
-    let current = startOffsets[i] % imageSrcs.length;
-
     setTimeout(() => {
       setInterval(() => {
         img.style.opacity = '0';
         setTimeout(() => {
-          current = (current + 1) % imageSrcs.length;
-          img.src = imageSrcs[current];
+          current[i] = pickNext();
+          img.src = imageSrcs[current[i]];
           img.style.opacity = '1';
         }, 1500);
       }, 9000);
