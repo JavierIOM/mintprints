@@ -39,30 +39,29 @@ const services = [
 
 <Layout title="Home">
   <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 py-16 md:py-24 overflow-hidden">
+  <section class="py-16 md:py-24 overflow-hidden">
     <div class="max-w-6xl mx-auto px-4">
       <div class="grid md:grid-cols-2 gap-12 items-center">
 
         <!-- Text -->
         <div>
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 dark:text-white mb-6 leading-tight">
             Where all your prints are <span class="text-mint">Mint!</span>
           </h1>
           <p class="text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-lg">
-            Professional 3D printing, laser cutting, and custom design services on the Isle of Man.
-            From prototypes to finished products, we bring your ideas to life.
+            3D printing, laser cutting and custom design on the Isle of Man, from one-off prototypes to finished products.
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
-            <a href="/contact" class="inline-flex items-center justify-center px-8 py-4 bg-mint text-white font-semibold rounded-xl hover:bg-mint-dark transition-colors">
+            <a href="/contact" class="inline-flex items-center justify-center px-8 py-4 bg-mint text-gray-900 font-semibold rounded-xl hover:bg-mint-light active:scale-[0.98] transition">
               Get in Touch
             </a>
-            <a href="/gallery" class="inline-flex items-center justify-center px-8 py-4 bg-white dark:bg-transparent text-gray-700 dark:text-gray-200 font-semibold rounded-xl border-2 border-gray-200 dark:border-gray-500 hover:border-mint dark:hover:border-current hover:text-mint transition-colors">
+            <a href="/gallery" class="inline-flex items-center justify-center px-8 py-4 bg-white dark:bg-transparent text-gray-700 dark:text-gray-200 font-semibold rounded-xl border-2 border-gray-200 dark:border-gray-500 hover:border-mint dark:hover:border-mint hover:text-mint active:scale-[0.98] transition">
               View Our Work
             </a>
           </div>
         </div>
 
-        <!-- Images — desktop grid -->
+        <!-- Images - desktop grid -->
         <div class="hidden md:grid grid-cols-2 gap-3 h-[460px]">
           <div class="row-span-3 rounded-2xl overflow-hidden shadow-lg">
             <Image
@@ -100,7 +99,7 @@ const services = [
             />
           </div>
         </div>
-        <!-- Single image — mobile only -->
+        <!-- Single image - mobile only -->
         <div class="block md:hidden rounded-2xl overflow-hidden shadow-lg h-64 mt-2">
           <Image
             src={heroImages[0]}
@@ -118,10 +117,10 @@ const services = [
   <!-- Services Section -->
   <section class="py-20 bg-gray-50 dark:bg-gray-800/50">
     <div class="max-w-6xl mx-auto px-4">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Our Services</h2>
-        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-          From rapid prototyping to bespoke finished products, we offer a range of services to meet your needs.
+      <div class="mb-16 max-w-2xl">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">Our Services</h2>
+        <p class="text-lg text-gray-600 dark:text-gray-300">
+          Four ways we can help, all under one roof on the Isle of Man.
         </p>
       </div>
       <div class="grid md:grid-cols-2 gap-8">
@@ -141,12 +140,12 @@ const services = [
   <!-- CTA Section -->
   <section class="py-20 bg-mint">
     <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Ready to start your project?</h2>
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 mb-6">Ready to start your project?</h2>
       <p class="text-xl text-gray-900 mb-10">
-        Get in touch and let's discuss how we can bring your ideas to life.
+        Send us your idea or your files and we'll come back with a quote.
       </p>
-      <a href="/contact" class="inline-flex items-center justify-center px-8 py-4 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors">
-        Contact Us Today
+      <a href="/contact" class="inline-flex items-center justify-center px-8 py-4 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 active:scale-[0.98] transition">
+        Get in Touch
       </a>
     </div>
   </section>

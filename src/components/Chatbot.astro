@@ -10,7 +10,7 @@
     id="chat-toggle"
     aria-label="Open chat assistant"
     aria-expanded="false"
-    class="w-14 h-14 bg-mint hover:bg-mint-dark text-white rounded-full shadow-xl flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95"
+    class="w-14 h-14 bg-mint hover:bg-mint-light text-gray-900 rounded-full shadow-xl flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95"
   >
     <!-- Chat icon (shown when closed) -->
     <svg id="chat-icon-open" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -32,15 +32,15 @@
   >
     <!-- Header -->
     <div class="bg-mint px-4 py-3 flex items-center gap-3 flex-shrink-0">
-      <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-        <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+      <div class="w-8 h-8 bg-gray-900/10 rounded-full flex items-center justify-center flex-shrink-0">
+        <svg class="w-4 h-4 text-gray-900" fill="currentColor" viewBox="0 0 20 20">
           <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/>
           <path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h2a2 2 0 002-2V9a2 2 0 00-2-2h-1z"/>
         </svg>
       </div>
       <div class="flex-1 min-w-0">
-        <p class="text-white font-semibold text-sm leading-tight">Tilly</p>
-        <p class="text-white/80 text-xs">Mint Prints virtual assistant</p>
+        <p class="text-gray-900 font-semibold text-sm leading-tight">Tilly</p>
+        <p class="text-gray-900/70 text-xs">Mint Prints virtual assistant</p>
       </div>
     </div>
 
@@ -66,7 +66,7 @@
         <button
           id="chat-send"
           aria-label="Send message"
-          class="px-3 py-2 bg-mint hover:bg-mint-dark text-white rounded-lg transition-colors flex-shrink-0"
+          class="px-3 py-2 bg-mint hover:bg-mint-light text-gray-900 rounded-lg transition-colors flex-shrink-0"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
@@ -93,17 +93,17 @@
     // Minimum print size / text legibility
     {
       keywords: ['minimum size', 'smallest', 'how small', 'tiny', 'very small', 'miniature size', 'min size'],
-      answer: "Generally the smallest we'd recommend printing is around 5mm in any direction — below that, fine details and thin walls become unreliable. If you have a very small part in mind, share the design with us and we'll let you know if it's achievable."
+      answer: "Generally the smallest we'd recommend printing is around 5mm in any direction. Below that, fine details and thin walls become unreliable. If you have a very small part in mind, share the design with us and we'll let you know if it's achievable."
     },
     {
       keywords: ['text', 'lettering', 'font', 'words on print', 'writing', 'engraved text', 'embossed text', 'letters'],
-      answer: "Text on 3D prints works best when it's reasonably sized — very small characters tend to lose definition, especially recessed into the surface. Raised text reads more clearly than recessed on FDM. For really crisp small text, our laser is often the better route — it can etch sharply onto wood, acrylic, slate, and more."
+      answer: "Text on 3D prints works best when it's reasonably sized: very small characters tend to lose definition, especially recessed into the surface. Raised text reads more clearly than recessed on FDM. For really crisp small text, our laser is often the better route, as it can etch sharply onto wood, acrylic, slate, and more."
     },
 
     // Pricing factors
     {
       keywords: ['what affects price', 'why is it expensive', 'price calculation', 'how is price calculated', 'cost factors', 'what determines cost'],
-      answer: "Pricing depends on the material, how much of it your design uses, and how long it takes to print. Any finishing work such as support removal, sanding, or painting also factors in. If you're working to a budget, let us know — we can often suggest design tweaks to bring costs down."
+      answer: "Pricing depends on the material, how much of it your design uses, and how long it takes to print. Any finishing work such as support removal, sanding, or painting also factors in. If you're working to a budget, let us know and we can often suggest design tweaks to bring costs down."
     },
 
     // File formats — add STEP
@@ -115,7 +115,7 @@
     // Lacquering / finishing
     {
       keywords: ['lacquer', 'lacquering', 'varnish', 'coat', 'coating', 'spray paint', 'glossy', 'matte finish', 'finish options'],
-      answer: "3D printed parts can be lacquered or varnished to achieve a smooth, professional finish — either matte or gloss. We recommend sanding and priming first for the best result. If you'd like a finished part rather than a raw print, just mention it when you request a quote."
+      answer: "3D printed parts can be lacquered or varnished to achieve a smooth, professional finish, either matte or gloss. We recommend sanding and priming first for the best result. If you'd like a finished part rather than a raw print, just mention it when you request a quote."
     },
 
     // Wall thickness / design guidelines
@@ -125,11 +125,11 @@
     },
     {
       keywords: ['hollow', 'make hollow', 'hollow print', 'save material', 'reduce cost', 'cheaper print'],
-      answer: "Yes, prints can be made hollow or with low infill to save material and reduce cost — especially for larger display pieces where strength isn't critical. Just mention it when you get in touch and we can advise the best approach for your design."
+      answer: "Yes, prints can be made hollow or with low infill to save material and reduce cost, especially for larger display pieces where strength isn't critical. Just mention it when you get in touch and we can advise the best approach for your design."
     },
     {
       keywords: ['infill', 'infill density', 'how strong', 'strength', 'strong print', 'solid print', 'percentage'],
-      answer: "Infill is the internal structure of a print — we adjust it based on your needs. Display pieces typically use 15-20% infill, while functional or load-bearing parts may need 40-100%. Higher infill means stronger but heavier and more expensive prints. We'll recommend the right density for your project."
+      answer: "Infill is the internal structure of a print. We adjust it based on your needs. Display pieces typically use 15-20% infill, while functional or load-bearing parts may need 40-100%. Higher infill means stronger but heavier and more expensive prints. We'll recommend the right density for your project."
     },
     {
       keywords: ['support', 'supports', 'support structures', 'support marks', 'overhangs', 'overhang'],
@@ -137,11 +137,11 @@
     },
     {
       keywords: ['paint', 'painting', 'painted', 'can you paint', 'colour finish', 'colored'],
-      answer: "Yes, 3D prints can be painted — we recommend a light sanding followed by a primer coat for best results. FDM prints in particular take paint well once primed. If you'd like us to handle finishing and painting, just ask and we can discuss what's possible."
+      answer: "Yes, 3D prints can be painted. We recommend a light sanding followed by a primer coat for best results. FDM prints in particular take paint well once primed. If you'd like us to handle finishing and painting, just ask and we can discuss what's possible."
     },
     {
       keywords: ['sand', 'sanding', 'smooth', 'smoothing', 'surface finish', 'rough', 'layer lines', 'visible layers', 'finish'],
-      answer: "FDM prints have visible layer lines which can be sanded smooth — finer layer heights result in a better surface straight off the printer. SLA prints have a much smoother finish by default. Post-processing such as sanding and priming can significantly improve the look of FDM parts if required."
+      answer: "FDM prints have visible layer lines which can be sanded smooth, and finer layer heights result in a better surface straight off the printer. SLA prints have a much smoother finish by default. Post-processing such as sanding and priming can significantly improve the look of FDM parts if required."
     },
     {
       keywords: ['tolerance', 'tolerances', 'accuracy', 'accurate', 'precise', 'dimensional', 'exact size'],
@@ -149,15 +149,15 @@
     },
     {
       keywords: ['prototype', 'prototyping', 'rapid prototype', 'proof of concept', 'test print', 'sample'],
-      answer: "Rapid prototyping is one of our most popular uses — 3D printing lets you test designs quickly and affordably before committing to tooling or production. We can turn around small prototypes in a matter of days."
+      answer: "Rapid prototyping is one of our most popular uses. 3D printing lets you test designs quickly and affordably before committing to tooling or production. We can turn around small prototypes in a matter of days."
     },
     {
       keywords: ['prepare file', 'file preparation', 'file tips', 'design tips', 'design for printing', 'how to design', 'manifold', 'watertight'],
-      answer: "For best results, your 3D file should be a closed, watertight mesh (no holes or gaps in the surface). STL, OBJ, and 3MF formats work best. If you're unsure, send us the file anyway — we can often repair minor issues and will let you know if anything needs fixing before printing."
+      answer: "For best results, your 3D file should be a closed, watertight mesh (no holes or gaps in the surface). STL, OBJ, and 3MF formats work best. If you're unsure, send us the file anyway. We can often repair minor issues and will let you know if anything needs fixing before printing."
     },
     {
       keywords: ['multiple', 'copies', 'quantity', 'bulk', 'batch', 'how many', 'more than one'],
-      answer: "Absolutely — we can print multiple copies of the same design. Batching items together on the print bed often makes unit costs more economical. Just let us know the quantity you need when requesting a quote."
+      answer: "Absolutely, we can print multiple copies of the same design. Batching items together on the print bed often makes unit costs more economical. Just let us know the quantity you need when requesting a quote."
     },
     {
       keywords: ['scale', 'resize', 'make bigger', 'make smaller', 'scale up', 'scale down', 'different size'],
@@ -165,7 +165,7 @@
     },
     {
       keywords: ['assembly', 'assemble', 'multiple parts', 'kit', 'snap fit', 'glue'],
-      answer: "We can print parts that assemble together — whether snap-fit, glued, or bolted. If you need parts to fit together precisely, let us know the tolerances required and we'll set up the print accordingly. We can also advise on the best jointing method for your design."
+      answer: "We can print parts that assemble together, whether snap-fit, glued, or bolted. If you need parts to fit together precisely, let us know the tolerances required and we'll set up the print accordingly. We can also advise on the best jointing method for your design."
     },
 
     // Greetings
@@ -177,7 +177,7 @@
     // General / services overview
     {
       keywords: ['services', 'offer', 'what do you do', 'provide', 'specialise', 'specialize', 'what can you do'],
-      answer: "We offer four main services: FDM (plastic) 3D printing, SLA (resin) 3D printing, laser cutting and etching, and custom design services — from one-off prototypes to finished products."
+      answer: "We offer four main services: FDM (plastic) 3D printing, SLA (resin) 3D printing, laser cutting and etching, and custom design services, from one-off prototypes to finished products."
     },
     {
       keywords: ['where', 'located', 'location', 'based', 'isle of man', 'iom', 'address'],
@@ -191,13 +191,13 @@
     // FDM vs SLA
     {
       keywords: ['fdm', 'sla', 'difference between', 'stereolithography', 'fused deposition', 'which type of printing', 'which printer'],
-      answer: "FDM uses thermoplastic filaments and is great for functional parts, prototypes, and larger prints. SLA uses liquid resin cured by UV light, producing incredibly fine detail — perfect for miniatures and intricate designs."
+      answer: "FDM uses thermoplastic filaments and is great for functional parts, prototypes, and larger prints. SLA uses liquid resin cured by UV light, producing incredibly fine detail, perfect for miniatures and intricate designs."
     },
 
     // FDM materials — detailed
     {
       keywords: ['pla', 'what is pla', 'pla filament'],
-      answer: "PLA is our most popular FDM material — ideal for visual models, prototypes, figurines, and decorative items. It prints beautifully but isn't suited to high temperatures or prolonged outdoor use."
+      answer: "PLA is our most popular FDM material, ideal for visual models, prototypes, figurines, and decorative items. It prints beautifully but isn't suited to high temperatures or prolonged outdoor use."
     },
     {
       keywords: ['petg', 'what is petg', 'petg filament'],
@@ -205,11 +205,11 @@
     },
     {
       keywords: ['asa', 'what is asa', 'asa filament', 'outdoor print', 'uv resistant', 'uv stable', 'garden', 'outside'],
-      answer: "ASA is our go-to material for outdoor use — it's UV-stable, weather-resistant, and handles temperature swings well. Great for garden labels, outdoor signs, and any item exposed to sunlight."
+      answer: "ASA is our go-to material for outdoor use: it's UV-stable, weather-resistant, and handles temperature swings well. Great for garden labels, outdoor signs, and any item exposed to sunlight."
     },
     {
       keywords: ['tpu', 'flexible', 'flexible print', 'rubber', 'soft', 'bendy', 'elastic'],
-      answer: "TPU is a flexible, rubber-like material — perfect for grips, phone cases, gaskets, seals, and anything that needs to flex or absorb impact without breaking."
+      answer: "TPU is a flexible, rubber-like material, perfect for grips, phone cases, gaskets, seals, and anything that needs to flex or absorb impact without breaking."
     },
     {
       keywords: ['materials', 'material', 'filament', 'what filaments', 'which materials'],
@@ -227,7 +227,7 @@
     },
     {
       keywords: ['tough resin', 'abs like', 'abs-like', 'strong resin', 'impact resistant'],
-      answer: "We use tough (ABS-like) resin for SLA prints that need to handle impact or mechanical stress — a step up from standard resin in durability while keeping the fine detail SLA is known for."
+      answer: "We use tough (ABS-like) resin for SLA prints that need to handle impact or mechanical stress, a step up from standard resin in durability while keeping the fine detail SLA is known for."
     },
 
     // Files
@@ -255,7 +255,7 @@
     // Laser cutting — what we can do
     {
       keywords: ['laser', 'co2 laser', 'laser machine', 'laser cutter', 'laser specs', 'what laser'],
-      answer: "We use an OMTech 80W CO2 laser with a 700x500mm working bed — great for precision cutting and detailed etching across a wide range of materials."
+      answer: "We use an OMTech 80W CO2 laser with a 700x500mm working bed, great for precision cutting and detailed etching across a wide range of materials."
     },
     {
       keywords: ['cut', 'cutting', 'laser cut', 'what can you cut', 'can you cut'],
@@ -267,47 +267,47 @@
     },
     {
       keywords: ['wood', 'mdf', 'plywood', 'timber', 'wooden'],
-      answer: "Wood and MDF are among the best materials for our CO2 laser — we can cut clean shapes or engrave detailed artwork. Works beautifully for signs, decorations, and gifts."
+      answer: "Wood and MDF are among the best materials for our CO2 laser. We can cut clean shapes or engrave detailed artwork. Works beautifully for signs, decorations, and gifts."
     },
     {
       keywords: ['acrylic', 'perspex', 'plexiglass', 'clear acrylic'],
-      answer: "Acrylic (perspex) is one of our most popular laser materials — we can cut it to precise shapes and engrave it for a frosted effect. Available in many colours and thicknesses."
+      answer: "Acrylic (perspex) is one of our most popular laser materials. We can cut it to precise shapes and engrave it for a frosted effect. Available in many colours and thicknesses."
     },
     {
       keywords: ['glass', 'glassware', 'bottle', 'mirror', 'tile'],
-      answer: "Our CO2 laser can etch glass and mirrored surfaces beautifully — think personalised glassware, wine bottles, or decorative tiles. We can etch but not cut glass."
+      answer: "Our CO2 laser can etch glass and mirrored surfaces beautifully: think personalised glassware, wine bottles, or decorative tiles. We can etch but not cut glass."
     },
     {
       keywords: ['slate', 'stone', 'granite', 'ceramic'],
-      answer: "Slate and stone etch really well with our CO2 laser — popular for memorial plaques, house signs, and gifts. Results are crisp and permanent."
+      answer: "Slate and stone etch really well with our CO2 laser, popular for memorial plaques, house signs, and gifts. Results are crisp and permanent."
     },
     {
       keywords: ['leather', 'leather goods', 'laser leather'],
-      answer: "We can cut and engrave vegetable-tanned leather with great results — ideal for keyrings, wallets, patches, and personalised leather goods. Note: chrome-tanned leather should not be laser processed."
+      answer: "We can cut and engrave vegetable-tanned leather with great results, ideal for keyrings, wallets, patches, and personalised leather goods. Note: chrome-tanned leather should not be laser processed."
     },
     {
       keywords: ['fabric', 'felt', 'cork', 'rubber', 'foam', 'textile'],
-      answer: "Our laser can cut fabric, felt, cork, rubber, and foam cleanly and precisely — great for craft projects, gaskets, packaging inserts, and costume work."
+      answer: "Our laser can cut fabric, felt, cork, rubber, and foam cleanly and precisely, great for craft projects, gaskets, packaging inserts, and costume work."
     },
     {
       keywords: ['metal', 'steel', 'aluminium', 'aluminum', 'brass', 'copper'],
-      answer: "Our CO2 laser can't cut metal, but it can etch anodised aluminium and coated metals. For cutting metal you'd need a fibre laser. We can engrave many metal surfaces — contact us to discuss."
+      answer: "Our CO2 laser can't cut metal, but it can etch anodised aluminium and coated metals. For cutting metal you'd need a fibre laser. We can engrave many metal surfaces, so contact us to discuss."
     },
     {
       keywords: ['cannot cut', "can't cut", 'not cut', 'avoid', 'dangerous', 'pvc', 'vinyl', 'polycarbonate', 'what not to laser'],
-      answer: "Materials we avoid with our laser include PVC/vinyl (releases toxic chlorine gas), polycarbonate sheets (burns rather than cuts cleanly), chrome-tanned leather, and anything containing halogens or epoxy resins. Safety first — if you're unsure about a material, please ask."
+      answer: "Materials we avoid with our laser include PVC/vinyl (releases toxic chlorine gas), polycarbonate sheets (burns rather than cuts cleanly), chrome-tanned leather, and anything containing halogens or epoxy resins. Safety first: if you're unsure about a material, please ask."
     },
 
     // Personalisation
     {
       keywords: ['personalise', 'personalize', 'existing item', 'my own', 'bring my own', 'engrave my', 'etch my'],
-      answer: "Yes! We can laser etch your own items — glassware, wooden signs, leather goods, slate, and more. Just get in touch to discuss your item and what you'd like on it."
+      answer: "Yes! We can laser etch your own items: glassware, wooden signs, leather goods, slate, and more. Just get in touch to discuss your item and what you'd like on it."
     },
 
     // Design services
     {
       keywords: ['design', 'no design', "don't have a design", 'custom design', 'help with design', 'idea', 'artwork', 'bespoke', 'from scratch'],
-      answer: "No problem — we offer custom design services. Tell us your idea and we'll work with you to create it. We can also modify existing designs: resizing, adding text, structural changes, and more."
+      answer: "No problem, we offer custom design services. Tell us your idea and we'll work with you to create it. We can also modify existing designs: resizing, adding text, structural changes, and more."
     },
     {
       keywords: ['preview', 'mockup', 'see before', 'proof', 'approval'],
@@ -317,7 +317,7 @@
     // Ordering & payment
     {
       keywords: ['order', 'how to order', 'place an order', 'get started', 'start a project'],
-      answer: 'Simple — use our <a href="/contact/" class="tilly-link">contact form</a> with your project details (and attach any files if you have them). We\'ll reply with a quote within 1-2 business days and take it from there.'
+      answer: 'Simple: use our <a href="/contact/" class="tilly-link">contact form</a> with your project details (and attach any files if you have them). We\'ll reply with a quote within 1-2 business days and take it from there.'
     },
     {
       keywords: ['payment', 'pay', 'paypal', 'bank transfer', 'card', 'invoice', 'how to pay'],
@@ -337,11 +337,11 @@
     // Technical / print quality
     {
       keywords: ['colour', 'color', 'multi colour', 'multicolour', 'multicolor', 'multiple colours', 'ams', 'coloured'],
-      answer: "Yes! Our Bambu Lab X1C printers support multi-colour printing using an Automatic Material System (AMS) — up to 16 colours in a single print. Get in touch to discuss your multi-colour project."
+      answer: "Yes! Our Bambu Lab X1C printers support multi-colour printing using an Automatic Material System (AMS), up to 16 colours in a single print. Get in touch to discuss your multi-colour project."
     },
     {
       keywords: ['resolution', 'layer height', 'layer', 'accuracy', 'precision', 'quality', 'how detailed'],
-      answer: "FDM printing is typically at 0.2mm layer height, going as fine as 0.08mm for detailed work. SLA achieves 0.05mm layers for exceptional precision — ideal for miniatures and jewellery-grade detail."
+      answer: "FDM printing is typically at 0.2mm layer height, going as fine as 0.08mm for detailed work. SLA achieves 0.05mm layers for exceptional precision, ideal for miniatures and jewellery-grade detail."
     },
     {
       keywords: ['waterproof', 'water resistant', 'outdoor', 'weather', 'sealed', 'sealing', 'weatherproof'],
@@ -349,11 +349,11 @@
     },
     {
       keywords: ['functional', 'functional part', 'mechanical', 'engineering', 'replacement part', 'component', 'working part'],
-      answer: "Absolutely — we regularly print functional parts, mechanical components, and replacement parts. PETG is great for durable functional work, and ASA is ideal for anything going outdoors."
+      answer: "Absolutely, we regularly print functional parts, mechanical components, and replacement parts. PETG is great for durable functional work, and ASA is ideal for anything going outdoors."
     },
     {
       keywords: ['miniature', 'miniatures', 'wargame', 'wargaming', 'd&d', 'dnd', 'tabletop', 'figurine', 'figure', 'model'],
-      answer: "SLA resin printing is ideal for miniatures and tabletop figures — the detail is exceptional even at very small scales. Get in touch with your project details for a quote."
+      answer: "SLA resin printing is ideal for miniatures and tabletop figures. The detail is exceptional even at very small scales. Get in touch with your project details for a quote."
     },
     {
       keywords: ['heat resistant', 'high temp', 'temperature', 'heat', 'hot'],
@@ -361,7 +361,7 @@
     },
     {
       keywords: ['food safe', 'food', 'cup', 'bowl', 'kitchen', 'edible'],
-      answer: "Food-safe 3D printing is a complex topic — while some filaments are technically food-safe, layer lines can harbour bacteria. We'd recommend contacting us to discuss your specific use case so we can advise properly."
+      answer: "Food-safe 3D printing is a complex topic: while some filaments are technically food-safe, layer lines can harbour bacteria. We'd recommend contacting us to discuss your specific use case so we can advise properly."
     },
 
     // After-sales / returns
@@ -373,13 +373,13 @@
     // Gallery / examples
     {
       keywords: ['gallery', 'images', 'pictures', 'photos', 'examples', 'see your work', 'what have you made', 'portfolio', 'previous work', 'samples', 'show me', 'see some', 'show your work', 'work examples'],
-      answer: 'We have a gallery showcasing some of our work — head over for inspiration and to get a feel for what we can do! <a href="/gallery/" class="tilly-link">View our gallery</a>'
+      answer: 'We have a gallery showcasing some of our work. Head over for inspiration and to get a feel for what we can do! <a href="/gallery/" class="tilly-link">View our gallery</a>'
     },
 
     // Speak to a human
     {
       keywords: ['human', 'agent', 'person', 'real person', 'someone', 'speak to someone', 'talk to someone', 'speak to a human', 'talk to a human', 'speak to a person', 'real human', 'actual person', 'not a bot', 'not a robot', 'staff', 'team', 'representative'],
-      answer: 'No problem — you can email us directly at <a href="mailto:info@mintprints.im" class="tilly-link">info@mintprints.im</a> and a member of the team will get back to you.'
+      answer: 'No problem, you can email us directly at <a href="mailto:info@mintprints.im" class="tilly-link">info@mintprints.im</a> and a member of the team will get back to you.'
     },
 
     // Contact / social
@@ -393,15 +393,15 @@
     },
     {
       keywords: ['instagram', 'facebook', 'social media', 'social', 'follow'],
-      answer: 'Find us on <a href="https://www.instagram.com/mintprintsiom/" target="_blank" rel="noopener noreferrer" class="tilly-link">Instagram</a> (@mintprintsiom) and <a href="https://www.facebook.com/mintprintsiom" target="_blank" rel="noopener noreferrer" class="tilly-link">Facebook</a> — we regularly post photos of our work there.'
+      answer: 'Find us on <a href="https://www.instagram.com/mintprintsiom/" target="_blank" rel="noopener noreferrer" class="tilly-link">Instagram</a> (@mintprintsiom) and <a href="https://www.facebook.com/mintprintsiom" target="_blank" rel="noopener noreferrer" class="tilly-link">Facebook</a>, where we regularly post photos of our work.'
     }
   ];
 
   const FALLBACKS = [
     'That\'s a great question! For the most accurate answer, please get in touch with us directly via our <a href="/contact/" class="tilly-link">contact page</a> and we\'ll be happy to help.',
     'Hmm, that one\'s a bit outside my knowledge! For the best answer, drop us a message via our <a href="/contact/" class="tilly-link">contact page</a> and the team will get back to you.',
-    'I\'m not 100% sure on that one — I don\'t want to give you the wrong info! Head over to our <a href="/contact/" class="tilly-link">contact page</a> and we\'ll give you a proper answer.',
-    'Good question — that\'s a bit specific for me though! Our <a href="/contact/" class="tilly-link">contact page</a> is the best place to get a definitive answer from the team.',
+    'I\'m not 100% sure on that one, and I don\'t want to give you the wrong info! Head over to our <a href="/contact/" class="tilly-link">contact page</a> and we\'ll give you a proper answer.',
+    'Good question, but that\'s a bit specific for me though! Our <a href="/contact/" class="tilly-link">contact page</a> is the best place to get a definitive answer from the team.',
     'That one\'s best answered by the humans! Send us a message via our <a href="/contact/" class="tilly-link">contact page</a> and we\'ll get back to you within 1-2 business days.'
   ];
   function getFallback() { return FALLBACKS[Math.floor(Math.random() * FALLBACKS.length)]; }
@@ -478,7 +478,7 @@
     if (isUser) {
       bubble.style.borderTopRightRadius = '0.25rem';
       bubble.style.backgroundColor = 'var(--color-mint)';
-      bubble.style.color = '#fff';
+      bubble.style.color = '#111827';
     } else {
       bubble.style.borderTopLeftRadius = '0.25rem';
       bubble.className = 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 shadow-sm border border-gray-100 dark:border-gray-700';
@@ -506,7 +506,7 @@
 
     for (const reply of QUICK_REPLIES) {
       const btn = document.createElement('button');
-      btn.className = 'text-xs px-3 py-1.5 rounded-full border border-mint text-mint hover:bg-mint hover:text-white transition-colors';
+      btn.className = 'text-xs px-3 py-1.5 rounded-full border border-mint text-mint hover:bg-mint hover:text-gray-900 transition-colors';
       btn.textContent = reply;
       btn.addEventListener('click', () => {
         wrap.remove();

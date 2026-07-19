@@ -3,24 +3,23 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="404 - Page Not Found">
-  <section class="min-h-[70vh] flex items-center justify-center py-20 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+  <section class="min-h-[70vh] flex items-center justify-center py-20">
     <div class="max-w-2xl mx-auto px-4 text-center">
       <!-- Large 404 -->
       <div class="mb-8">
-        <h1 class="text-9xl font-bold text-mint dark:text-mint mb-6">404</h1>
+        <h1 class="text-9xl font-bold tracking-tight text-mint mb-6">404</h1>
       </div>
 
       <!-- Error Message -->
-      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-        Oops! Page Not Found
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">
+        Page Not Found
       </h2>
       <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
-        The page you're looking for seems to have gone missing. Don't worry though,
-        we've got plenty of other great content for you to explore!
+        That page doesn't exist. It may have moved, or the link is wrong.
       </p>
 
       <!-- Suggested Actions -->
-      <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700 mb-8">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 mb-8">
         <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">
           Here's what you can do:
         </h3>
@@ -67,21 +66,8 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
 
-      <!-- CTA Buttons -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/" class="inline-flex items-center justify-center px-8 py-4 bg-mint text-white font-semibold rounded-xl hover:bg-mint-dark transition-colors">
-          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-          </svg>
-          Back to Home
-        </a>
-        <a href="/contact" class="inline-flex items-center justify-center px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 font-semibold rounded-xl border-2 border-gray-200 dark:border-gray-700 hover:border-mint dark:hover:border-mint hover:text-mint transition-colors">
-          Contact Support
-        </a>
-      </div>
-
       <!-- Fun Error Message -->
-      <div class="mt-12 text-sm text-gray-500 dark:text-gray-400">
+      <div class="mt-4 text-sm text-gray-500 dark:text-gray-400">
         <p>Error 404: This page must have been printed with invisible filament!</p>
       </div>
     </div>

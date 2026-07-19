@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "@fontsource-variable/outfit";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -6,5 +7,10 @@
   --color-mint: #64c864;
   --color-mint-dark: #4da64d;
   --color-mint-light: #8dd88d;
-  --font-family-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Outfit Variable', system-ui, sans-serif;
+}
+
+::selection {
+  background-color: var(--color-mint);
+  color: #111827;
 }

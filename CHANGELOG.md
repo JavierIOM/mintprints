@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.0] — 2026-07-19
+
+### Added
+- Self-hosted Outfit Variable font via Fontsource (replaces the Google Fonts Inter link, which was never actually applied due to a wrong Tailwind token)
+- Real product photography on the Equipment page: mirror etch for the laser, multi-colour Grinch print for the FDM card
+- Mint-tinted text selection colour
+- Tactile press feedback (subtle scale) on all primary buttons
+
+### Changed
+- Typography: headings now use tracked-tight Outfit across the site
+- All mint buttons switched from white text (2.1:1, WCAG fail) to dark ink text (8:1, passes AA)
+- Page headers left-aligned site-wide for a more crafted, less templated feel
+- Cards flattened: borders instead of heavy shadows, consistent radius scale
+- FAQ answers: removed decorative per-question icons, cleaner left-accent cards
+- Equipment page: resin card restructured to full-width (no placeholder panel), Redbubble section simplified (fake icon grid removed)
+- Homepage hero and CTA copy tightened; duplicate contact CTA labels unified to "Get in Touch"
+- Tilly chat header, send button and user bubbles now dark-on-mint for contrast
+- Contact form placeholder examples localised (no more "John Smith")
+- 404 page decluttered: removed duplicate CTA buttons, tightened copy
+
+### Fixed
+- Tailwind v4 font token (`--font-sans`) so the chosen webfont is actually applied
+- Every em-dash removed from visible site copy and all of Tilly's answers (including the Haiku system prompt, which now instructs against them)
+
 ## [0.0.19] — 2026-04-22
 
 ### Added
