@@ -13,7 +13,7 @@ const navLinks = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="bg-white dark:bg-gray-800 shadow-sm dark:shadow-gray-900/50 sticky top-0 z-50 transition-colors">
+<header class="bg-white/85 dark:bg-gray-950/85 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50 transition-colors">
   <nav class="max-w-6xl mx-auto px-4 py-4">
     <div class="flex items-center justify-between">
       <a href="/" class="flex items-center gap-2">
@@ -72,7 +72,7 @@ const currentPath = Astro.url.pathname;
     </div>
 
     <!-- Mobile Nav -->
-    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-gray-200 dark:border-gray-700 pt-4">
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-gray-200 dark:border-gray-800 pt-4">
       <ul class="flex flex-col gap-4">
         {navLinks.map(link => {
           const isActive = link.href === '/' ? currentPath === '/' : currentPath.startsWith(link.href);
@@ -92,7 +92,7 @@ const currentPath = Astro.url.pathname;
           );
         })}
       </ul>
-      <div class="flex items-center gap-4 mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+      <div class="flex items-center gap-4 mt-4 pt-4 border-t border-gray-200 dark:border-gray-800">
         <a href="https://www.facebook.com/mintprintsiom" target="_blank" rel="noopener" class="text-gray-500 dark:text-gray-400 hover:text-mint transition-colors" aria-label="Facebook">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.77,7.46H14.5v-1.9c0-.9.6-1.1,1-1.1h3V.5L14.17.5C10.24.5,9.25,3.39,9.25,5.47v2H6.77v4h2.48V22h5.25V11.5h3.54l.72-4Z"/></svg>
         </a>

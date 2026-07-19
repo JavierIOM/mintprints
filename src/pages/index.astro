@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ServiceCard from '../components/ServiceCard.astro';
 import Chatbot from '../components/Chatbot.astro';
 import { Image } from 'astro:assets';
 
@@ -13,28 +12,9 @@ const heroImages = Object.entries(imageModules)
   })
   .map(([, mod]) => mod.default);
 
-const services = [
-  {
-    title: "FDM (Plastic) Printing",
-    description: "High-quality thermoplastic printing using PLA, PETG, ASA, and TPU. Perfect for modelling, prototyping, and low-volume finished products.",
-    icon: `<svg class="w-8 h-8 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>`
-  },
-  {
-    title: "SLA (Resin) Printing",
-    description: "Incredibly detailed models using UV laser technology. Ideal for wargamers, miniatures, and anything requiring precision at 30mm scale and beyond.",
-    icon: `<svg class="w-8 h-8 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>`
-  },
-  {
-    title: "Laser Cutting & Etching",
-    description: "Precision work with our 80-watt CO2 laser and 700x500mm workbed. Personalise wood, glass, perspex, slate and more with custom designs.",
-    icon: `<svg class="w-8 h-8 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`
-  },
-  {
-    title: "Custom Design",
-    description: "Original artwork and bespoke designs tailored to your needs. From concept to creation, we bring your ideas to life.",
-    icon: `<svg class="w-8 h-8 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>`
-  }
-];
+const laserPhoto = heroImages[9];   // hero-10: laser-cut acrylic TT parts
+const fdmPhoto = heroImages[5];     // hero-6: functional FDM part
+const marqueeImages = [1, 3, 7, 11, 13, 15, 19, 21, 23, 16].map(i => heroImages[i]);
 ---
 
 <Layout title="Home">
@@ -45,7 +25,7 @@ const services = [
 
         <!-- Text -->
         <div>
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 dark:text-white mb-6 leading-tight">
+          <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 dark:text-white mb-6 leading-[1.05]">
             Where all your prints are <span class="text-mint">Mint!</span>
           </h1>
           <p class="text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-lg">
@@ -55,55 +35,60 @@ const services = [
             <a href="/contact" class="inline-flex items-center justify-center px-8 py-4 bg-mint text-gray-900 font-semibold rounded-xl hover:bg-mint-light active:scale-[0.98] transition">
               Get in Touch
             </a>
-            <a href="/gallery" class="inline-flex items-center justify-center px-8 py-4 bg-white dark:bg-transparent text-gray-700 dark:text-gray-200 font-semibold rounded-xl border-2 border-gray-200 dark:border-gray-500 hover:border-mint dark:hover:border-mint hover:text-mint active:scale-[0.98] transition">
+            <a href="/gallery" class="inline-flex items-center justify-center px-8 py-4 bg-white dark:bg-transparent text-gray-700 dark:text-gray-200 font-semibold rounded-xl border-2 border-gray-200 dark:border-gray-800 hover:border-mint dark:hover:border-mint hover:text-mint active:scale-[0.98] transition">
               View Our Work
             </a>
           </div>
         </div>
 
-        <!-- Images - desktop grid -->
-        <div class="hidden md:grid grid-cols-2 gap-3 h-[460px]">
-          <div class="row-span-3 rounded-2xl overflow-hidden shadow-lg">
+        <!-- Images - desktop mosaic -->
+        <div class="hidden md:grid grid-cols-2 grid-rows-3 gap-3 h-[520px]">
+          <div class="row-span-2 rounded-2xl overflow-hidden">
             <Image
               data-hero-img="0"
               src={heroImages[0]}
               alt="Laser-etched Star Wars acrylic by Mint Prints"
+              width={800}
               class="w-full h-full object-cover transition-opacity duration-[1500ms]"
               loading="eager"
               fetchpriority="high"
             />
           </div>
-          <div class="rounded-2xl overflow-hidden shadow-lg">
+          <div class="rounded-2xl overflow-hidden">
             <Image
               data-hero-img="1"
               src={heroImages[3]}
               alt="3D printed custom accessory by Mint Prints"
+              width={600}
               class="w-full h-full object-cover transition-opacity duration-[1500ms]"
               loading="eager"
             />
           </div>
-          <div class="rounded-2xl overflow-hidden shadow-lg">
+          <div class="rounded-2xl overflow-hidden">
             <Image
               data-hero-img="2"
               src={heroImages[1]}
               alt="Work by Mint Prints"
+              width={600}
               class="w-full h-full object-cover transition-opacity duration-[1500ms]"
             />
           </div>
-          <div class="rounded-2xl overflow-hidden shadow-lg">
+          <div class="col-span-2 rounded-2xl overflow-hidden">
             <Image
               data-hero-img="3"
               src={heroImages[2]}
               alt="Work by Mint Prints"
+              width={1000}
               class="w-full h-full object-cover transition-opacity duration-[1500ms]"
             />
           </div>
         </div>
         <!-- Single image - mobile only -->
-        <div class="block md:hidden rounded-2xl overflow-hidden shadow-lg h-64 mt-2">
+        <div class="block md:hidden rounded-2xl overflow-hidden h-72 mt-2">
           <Image
             src={heroImages[0]}
             alt="Work by Mint Prints"
+            width={800}
             class="w-full h-full object-cover"
             loading="eager"
             fetchpriority="high"
@@ -114,23 +99,107 @@ const services = [
     </div>
   </section>
 
-  <!-- Services Section -->
-  <section class="py-20 bg-gray-50 dark:bg-gray-800/50">
+  <!-- Services Bento -->
+  <section class="py-20 bg-gray-100/70 dark:bg-gray-900/50">
     <div class="max-w-6xl mx-auto px-4">
-      <div class="mb-16 max-w-2xl">
+      <div class="mb-12 max-w-2xl" data-reveal>
         <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">Our Services</h2>
         <p class="text-lg text-gray-600 dark:text-gray-300">
           Four ways we can help, all under one roof on the Isle of Man.
         </p>
       </div>
-      <div class="grid md:grid-cols-2 gap-8">
-        {services.map(service => (
-          <ServiceCard
-            title={service.title}
-            description={service.description}
-            icon={service.icon}
+
+      <div class="grid md:grid-cols-3 gap-4" data-reveal>
+        <!-- Laser: photo cell, wide -->
+        <a href="/contact" class="group relative md:col-span-2 rounded-2xl overflow-hidden min-h-[280px] flex items-end">
+          <Image
+            src={laserPhoto}
+            alt="Laser-cut and etched acrylic parts on the workbench"
+            width={1200}
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
           />
-        ))}
+          <div class="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-950/40 to-gray-950/10"></div>
+          <div class="relative p-8">
+            <h3 class="text-2xl font-semibold text-white mb-2">Laser Cutting & Etching</h3>
+            <p class="text-gray-200 max-w-md">80W CO2 laser, 700x500mm bed. Wood, glass, perspex, slate and more.</p>
+          </div>
+        </a>
+
+        <!-- FDM: photo cell -->
+        <a href="/contact" class="group relative rounded-2xl overflow-hidden min-h-[280px] flex items-end">
+          <Image
+            src={fdmPhoto}
+            alt="Functional FDM 3D printed part"
+            width={700}
+            class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-950/40 to-gray-950/10"></div>
+          <div class="relative p-8">
+            <h3 class="text-2xl font-semibold text-white mb-2">FDM Printing</h3>
+            <p class="text-gray-200">PLA, PETG, ASA and TPU for models, prototypes and working parts.</p>
+          </div>
+        </a>
+
+        <!-- SLA: text cell -->
+        <div class="bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 hover:border-mint/60 dark:hover:border-mint/60 transition-colors">
+          <div class="w-14 h-14 bg-mint/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">SLA (Resin) Printing</h3>
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Incredibly detailed models using UV laser technology. Ideal for wargamers, miniatures, and anything requiring precision at 30mm scale and beyond.</p>
+        </div>
+
+        <!-- Custom Design: text cell, wide -->
+        <div class="md:col-span-2 bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 hover:border-mint/60 dark:hover:border-mint/60 transition-colors">
+          <div class="w-14 h-14 bg-mint/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-8 h-8 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Custom Design</h3>
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl">Original artwork and bespoke designs tailored to your needs. Bring us a sketch, a photo or just an idea and we'll take it from concept to finished piece.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Work Marquee -->
+  <section class="py-20 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 mb-10 flex items-end justify-between gap-4" data-reveal>
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">Recent Work</h2>
+      <a href="/gallery" class="text-mint font-semibold hover:text-mint-dark dark:hover:text-mint-light transition-colors whitespace-nowrap">View the gallery</a>
+    </div>
+    <div class="marquee-track">
+      {marqueeImages.map(img => (
+        <div class="h-44 md:h-56 aspect-[4/3] rounded-xl overflow-hidden flex-shrink-0">
+          <Image src={img} alt="Recent work by Mint Prints" width={520} class="w-full h-full object-cover" />
+        </div>
+      ))}
+      {marqueeImages.map(img => (
+        <div class="h-44 md:h-56 aspect-[4/3] rounded-xl overflow-hidden flex-shrink-0" aria-hidden="true">
+          <Image src={img} alt="" width={520} class="w-full h-full object-cover" />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="py-20 bg-gray-100/70 dark:bg-gray-900/50">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="mb-12 max-w-2xl" data-reveal>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">How It Works</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8" data-reveal>
+        <div class="border-t-2 border-mint/60 pt-6">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Send it over</h3>
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Use the contact form with your files, a photo or just the idea. STL, STEP, SVG, DXF and most common formats are all fine.</p>
+        </div>
+        <div class="border-t-2 border-mint/60 pt-6">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Get a quote</h3>
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">We'll come back within a couple of business days with a price and a realistic timeline. No obligation.</p>
+        </div>
+        <div class="border-t-2 border-mint/60 pt-6">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">We make it</h3>
+          <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Printed or cut here on the island, checked over, then delivered locally or shipped further afield.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -138,9 +207,9 @@ const services = [
   <Chatbot />
 
   <!-- CTA Section -->
-  <section class="py-20 bg-mint">
+  <section class="py-24 bg-mint">
     <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 mb-6">Ready to start your project?</h2>
+      <h2 class="text-5xl md:text-6xl font-bold tracking-tight text-gray-900 mb-6">Ready to start your project?</h2>
       <p class="text-xl text-gray-900 mb-10">
         Send us your idea or your files and we'll come back with a quote.
       </p>

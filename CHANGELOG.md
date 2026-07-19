@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0] — 2026-07-19
+
+### Added
+- Recent Work marquee on the homepage: continuous strip of 10 real product photos, pauses on hover, static under reduced motion
+- How It Works section (Send it over / Get a quote / We make it)
+- Services bento grid: laser and FDM cells use full-bleed product photos with scrim overlays, linking to contact
+- Scroll-reveal animations on homepage sections (IntersectionObserver, honours prefers-reduced-motion, content never hidden without JS)
+- Sticky header now uses backdrop blur with a hairline border
+
+### Changed
+- Dark theme deepened site-wide: near-black gray-950 base with gray-900 surfaces and gray-800 borders (was uniform gray-900/800)
+- Hero rebuilt: display type up to 7xl, asymmetric 4-slot photo mosaic (tall + two small + wide); image cycling behaviour unchanged
+- Page titles bumped to 5xl/6xl across all pages, including Privacy and Terms
+- Footer restyled to match the deeper dark theme
+- ServiceCard component removed; services now live in the homepage bento
+
 ## [0.1.0] — 2026-07-19
 
 ### Added
