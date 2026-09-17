@@ -2,11 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.21] - 2026-09-17
+
+### Fixed
+- **Chat rate limiting now actually persists.** The v0.0.20 limiter kept its counters in a module-level Map, which on Netlify is worthless: in-memory state in a function only survives a single invocation, so every request started from an empty counter and passed. Counters now live in Netlify Blobs (`chat-ratelimit` store), so the 8/min and 40/hour per-IP caps and the 300/hour global breaker are real.
+- The endpoint now fails closed. If Blobs is unavailable, or a counter cannot be written, the request is refused with a 503 rather than served uncounted. An open endpoint that spends money is worse than a brief chat outage.
+
+### Added
+- `@netlify/blobs` dependency, same ^8.1.0 as rapt uses.
+
 ## [0.0.20] - 2026-09-17
 
 ### Fixed
 - **Tilly chat endpoint was open to the internet.** `/.netlify/functions/chat` accepted an unauthenticated POST from anywhere, forwarded it to Claude and returned the answer, with no origin check and no rate limit. Anyone who found the URL could spend the Anthropic balance at roughly $0.0025 a request. Now: requests must come from a mintprints.im origin (or localhost in dev), each IP is capped at 8 requests a minute and 40 an hour, and the whole function instance trips a breaker at 300 an hour. Throttled callers get a 429 with Retry-After.
-- Note the per-IP and instance limits live in memory, so they apply per warm function instance and a distributed flood can still get through. The only hard cap on spend is a spend limit set on the Anthropic account itself.
+- Note: the limits in this release lived in memory and therefore did nothing on Netlify. Superseded by 0.0.21, which moves them to Blobs. The only hard cap on spend remains a spend limit set on the Anthropic account itself.
 
 ## [0.0.19] — 2026-04-22
 
