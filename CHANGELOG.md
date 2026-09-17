@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.2] - 2026-09-17
+
+### Fixed
+- **Chat rate limiting now actually persists.** The v0.2.1 limiter kept its counters in a module-level Map, which on Netlify is worthless: in-memory state in a function only survives a single invocation, so every request started from an empty counter and passed. Counters now live in Netlify Blobs (`chat-ratelimit` store), so the 8/min and 40/hour per-IP caps and the 300/hour global breaker are real.
+- The endpoint now fails closed. If Blobs is unavailable, or a counter cannot be written, the request is refused with a 503 rather than served uncounted. An open endpoint that spends money is worse than a brief chat outage.
+
+### Added
+- `@netlify/blobs` dependency, same ^8.1.0 as rapt uses.
+
 ## [0.2.1] - 2026-09-17
 
 ### Fixed

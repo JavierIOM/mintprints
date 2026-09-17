@@ -45,15 +45,25 @@ Facebook: <a href="https://www.facebook.com/mintprintsiom" target="_blank" rel="
 // The only reason it was never abused is that the Anthropic account happened to
 // be out of credit.
 //
-// Three layers below. Be honest about what each one is worth:
+// State lives in Netlify Blobs, NOT in memory. Wiki `netlify-gotchas.md`:
+// "In-memory caches inside a function only survive a single invocation. They
+// reset on cold start. Do not build logic that assumes persistence." A counter
+// in a module-level Map is therefore worth nothing here: every invocation would
+// start from empty and every request would pass. The first cut of this fix made
+// exactly that mistake.
+//
+// Blobs is documented as unreliable inside SCHEDULED functions. This one is
+// on-demand, which is the case that works, and it follows the same getStore
+// pattern as rapt's cold-crash.js.
+//
+// Layers:
 //   1. Origin allowlist  - stops drive-by and embedding on someone else's site.
-//                          Bypassable with a forged header, so it is the cheap
-//                          filter, not the defence.
-//   2. Per-IP limit      - stops one source hammering it.
-//   3. Instance ceiling  - circuit breaker if something gets through 1 and 2.
-// Layers 2 and 3 are in-memory, so they are PER WARM INSTANCE. A distributed
-// attack across many cold starts defeats them. The only true cap on spend is a
-// spend limit set on the Anthropic account itself. Set one.
+//                          Forgeable, so it is the cheap filter, not the defence.
+//   2. Per-IP limit      - 8/min and 40/hour, persisted.
+//   3. Global breaker    - 300/hour across the whole site, persisted.
+// If Blobs itself is unavailable the request is refused rather than waved
+// through: this endpoint costs money, so it fails closed. The true ceiling on
+// spend is still a spend limit set on the Anthropic account. Set one.
 
 const ALLOWED_ORIGINS = new Set([
   'https://mintprints.im',
@@ -62,18 +72,12 @@ const ALLOWED_ORIGINS = new Set([
   'http://localhost:8888',   // netlify dev
 ]);
 
-const PER_IP_MAX    = 8;           // requests per window, per IP
-const PER_IP_WINDOW = 60 * 1000;   // 1 minute
-const IP_HOURLY_MAX = 40;          // requests per hour, per IP
+const STORE_NAME    = 'chat-ratelimit';
+const PER_IP_MAX    = 8;           // per minute, per IP
+const PER_IP_WINDOW = 60 * 1000;
+const IP_HOURLY_MAX = 40;          // per hour, per IP
 const HOUR          = 60 * 60 * 1000;
-const INSTANCE_MAX  = 300;         // requests per hour for this whole instance
-
-const hits = new Map();            // ip -> number[] (timestamps)
-let instanceHits = [];
-
-function prune(list, now, window) {
-  return list.filter(t => now - t < window);
-}
+const GLOBAL_MAX    = 300;         // per hour, whole site
 
 function clientIp(event) {
   return event.headers['x-nf-client-connection-ip']
@@ -81,35 +85,58 @@ function clientIp(event) {
       || 'unknown';
 }
 
-// Returns null when allowed, or a { statusCode, retryAfter } refusal.
-function checkLimits(event) {
-  const now = Date.now();
+function prune(list, now, window) {
+  return list.filter(t => now - t < window);
+}
 
-  instanceHits = prune(instanceHits, now, HOUR);
-  if (instanceHits.length >= INSTANCE_MAX) {
-    return { statusCode: 429, retryAfter: 600 };
+async function readHits(store, key) {
+  try {
+    const raw = await store.get(key, { type: 'json' });
+    return Array.isArray(raw?.hits) ? raw.hits : [];
+  } catch {
+    return [];   // a missing key is the normal case on a first request
   }
+}
 
-  const ip = clientIp(event);
-  const recent = prune(hits.get(ip) || [], now, HOUR);
+// null when allowed, otherwise { statusCode, retryAfter }.
+// Split from checkLimits so the counting can be tested against a fake store
+// without a Netlify context. Nothing else should call this directly.
+export async function _checkLimitsWith(store, event, now = Date.now()) {
+  const ip  = clientIp(event);
+  const ipKey = `ip-${ip.replace(/[^a-zA-Z0-9.:_-]/g, '_')}`;
 
-  if (recent.length >= IP_HOURLY_MAX) return { statusCode: 429, retryAfter: 900 };
-  if (prune(recent, now, PER_IP_WINDOW).length >= PER_IP_MAX) {
+  const globalHits = prune(await readHits(store, 'global'), now, HOUR);
+  if (globalHits.length >= GLOBAL_MAX) return { statusCode: 429, retryAfter: 600 };
+
+  const ipHits = prune(await readHits(store, ipKey), now, HOUR);
+  if (ipHits.length >= IP_HOURLY_MAX) return { statusCode: 429, retryAfter: 900 };
+  if (prune(ipHits, now, PER_IP_WINDOW).length >= PER_IP_MAX) {
     return { statusCode: 429, retryAfter: 60 };
   }
 
-  recent.push(now);
-  hits.set(ip, recent);
-  instanceHits.push(now);
-
-  // Keep the Map from growing without bound on a long-lived instance.
-  if (hits.size > 5000) {
-    for (const [k, v] of hits) {
-      if (prune(v, now, HOUR).length === 0) hits.delete(k);
-    }
+  ipHits.push(now);
+  globalHits.push(now);
+  try {
+    await store.setJSON(ipKey, { hits: ipHits });
+    await store.setJSON('global', { hits: globalHits });
+  } catch {
+    // Could not record the hit. Refuse rather than serve an uncounted request.
+    return { statusCode: 503, retryAfter: 60 };
   }
 
   return null;
+}
+
+async function checkLimits(event) {
+  let store;
+  try {
+    const { getStore } = await import('@netlify/blobs');
+    store = getStore(STORE_NAME);
+  } catch {
+    // Fail closed. An open money-spending endpoint is worse than a brief outage.
+    return { statusCode: 503, retryAfter: 60 };
+  }
+  return _checkLimitsWith(store, event);
 }
 
 export const handler = async (event) => {
@@ -124,7 +151,7 @@ export const handler = async (event) => {
   }
 
   // Layers 2 and 3.
-  const limited = checkLimits(event);
+  const limited = await checkLimits(event);
   if (limited) {
     return {
       statusCode: limited.statusCode,
