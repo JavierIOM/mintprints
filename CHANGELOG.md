@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.1] - 2026-09-17
+
+### Fixed
+- **Tilly chat endpoint was open to the internet.** `/.netlify/functions/chat` accepted an unauthenticated POST from anywhere, forwarded it to Claude and returned the answer, with no origin check and no rate limit. Anyone who found the URL could spend the Anthropic balance at roughly $0.0025 a request. Now: requests must come from a mintprints.im origin (or localhost in dev), each IP is capped at 8 requests a minute and 40 an hour, and the whole function instance trips a breaker at 300 an hour. Throttled callers get a 429 with Retry-After.
+- Note the per-IP and instance limits live in memory, so they apply per warm function instance and a distributed flood can still get through. The only hard cap on spend is a spend limit set on the Anthropic account itself.
+
 ## [0.2.0] — 2026-07-19
 
 ### Added

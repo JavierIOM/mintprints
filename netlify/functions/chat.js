@@ -38,9 +38,102 @@ Redbubble (Isle of Man apparel): <a href="https://www.redbubble.com/people/manxc
 Instagram: <a href="https://www.instagram.com/mintprintsiom/" target="_blank" rel="noopener noreferrer" class="tilly-link">@mintprintsiom</a>
 Facebook: <a href="https://www.facebook.com/mintprintsiom" target="_blank" rel="noopener noreferrer" class="tilly-link">Mint Prints IOM</a>`;
 
+// ── Abuse controls ────────────────────────────────────────────────────────────
+// This endpoint spends real money on every call, so it is not left open.
+// Before 17 Sep 2026 it took an unauthenticated POST from anywhere, forwarded it
+// to Claude and returned the answer: no origin check, no rate limit, nothing.
+// The only reason it was never abused is that the Anthropic account happened to
+// be out of credit.
+//
+// Three layers below. Be honest about what each one is worth:
+//   1. Origin allowlist  - stops drive-by and embedding on someone else's site.
+//                          Bypassable with a forged header, so it is the cheap
+//                          filter, not the defence.
+//   2. Per-IP limit      - stops one source hammering it.
+//   3. Instance ceiling  - circuit breaker if something gets through 1 and 2.
+// Layers 2 and 3 are in-memory, so they are PER WARM INSTANCE. A distributed
+// attack across many cold starts defeats them. The only true cap on spend is a
+// spend limit set on the Anthropic account itself. Set one.
+
+const ALLOWED_ORIGINS = new Set([
+  'https://mintprints.im',
+  'https://www.mintprints.im',
+  'http://localhost:4321',   // astro dev
+  'http://localhost:8888',   // netlify dev
+]);
+
+const PER_IP_MAX    = 8;           // requests per window, per IP
+const PER_IP_WINDOW = 60 * 1000;   // 1 minute
+const IP_HOURLY_MAX = 40;          // requests per hour, per IP
+const HOUR          = 60 * 60 * 1000;
+const INSTANCE_MAX  = 300;         // requests per hour for this whole instance
+
+const hits = new Map();            // ip -> number[] (timestamps)
+let instanceHits = [];
+
+function prune(list, now, window) {
+  return list.filter(t => now - t < window);
+}
+
+function clientIp(event) {
+  return event.headers['x-nf-client-connection-ip']
+      || (event.headers['x-forwarded-for'] || '').split(',')[0].trim()
+      || 'unknown';
+}
+
+// Returns null when allowed, or a { statusCode, retryAfter } refusal.
+function checkLimits(event) {
+  const now = Date.now();
+
+  instanceHits = prune(instanceHits, now, HOUR);
+  if (instanceHits.length >= INSTANCE_MAX) {
+    return { statusCode: 429, retryAfter: 600 };
+  }
+
+  const ip = clientIp(event);
+  const recent = prune(hits.get(ip) || [], now, HOUR);
+
+  if (recent.length >= IP_HOURLY_MAX) return { statusCode: 429, retryAfter: 900 };
+  if (prune(recent, now, PER_IP_WINDOW).length >= PER_IP_MAX) {
+    return { statusCode: 429, retryAfter: 60 };
+  }
+
+  recent.push(now);
+  hits.set(ip, recent);
+  instanceHits.push(now);
+
+  // Keep the Map from growing without bound on a long-lived instance.
+  if (hits.size > 5000) {
+    for (const [k, v] of hits) {
+      if (prune(v, now, HOUR).length === 0) hits.delete(k);
+    }
+  }
+
+  return null;
+}
+
 export const handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method not allowed' };
+  }
+
+  // Layer 1: only serve the site's own front end.
+  const origin = event.headers.origin || event.headers.Origin || '';
+  if (!ALLOWED_ORIGINS.has(origin)) {
+    return { statusCode: 403, body: JSON.stringify({ error: 'Forbidden' }) };
+  }
+
+  // Layers 2 and 3.
+  const limited = checkLimits(event);
+  if (limited) {
+    return {
+      statusCode: limited.statusCode,
+      headers: {
+        'Content-Type': 'application/json',
+        'Retry-After': String(limited.retryAfter),
+      },
+      body: JSON.stringify({ error: 'Too many requests, please slow down.' }),
+    };
   }
 
   let body;
