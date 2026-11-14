@@ -128,58 +128,46 @@ const faqs = [
 ---
 
 <Layout title="FAQ - Frequently Asked Questions">
-  <!-- Hero Section -->
-  <section class="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 py-16">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-        Frequently Asked Questions
-      </h1>
-      <p class="text-lg text-gray-600 dark:text-gray-300">
-        Find answers to common questions about our 3D printing, laser cutting, and design services.
-      </p>
+  <section class="section-tight">
+    <div class="site-container">
+      <div class="max-w-4xl">
+        <p class="eyebrow">FAQ</p>
+        <h1 class="page-title mt-4">Answers before you ask.</h1>
+        <p class="lede mt-6">
+          Common questions about 3D printing, laser cutting, design work, ordering, files, and delivery.
+        </p>
+      </div>
+
+      <div class="mt-12 space-y-12">
+        {faqs.map(category => (
+          <section>
+            <h2 class="technical-label mb-5">{category.category}</h2>
+            <div class="space-y-3">
+              {category.questions.map(faq => (
+                <details class="faq-item">
+                  <summary>{faq.q}</summary>
+                  <p class="faq-item__answer">{faq.a}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
     </div>
   </section>
 
-  <!-- FAQ Section -->
-  <section class="py-16 bg-white dark:bg-gray-900">
-    <div class="max-w-4xl mx-auto px-4">
-      {faqs.map((category) => (
-        <div class="mb-12 last:mb-0">
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 pb-3 border-b-2 border-mint">
-            {category.category}
-          </h2>
-          <div class="space-y-6">
-            {category.questions.map((faq) => (
-              <div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border border-gray-100 dark:border-gray-700">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-start gap-3">
-                  <svg class="w-6 h-6 text-mint flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
-                  </svg>
-                  <span>{faq.q}</span>
-                </h3>
-                <p class="text-gray-700 dark:text-gray-300 pl-9">
-                  {faq.a}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="py-16 bg-gray-50 dark:bg-gray-800/50">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-        Still have questions?
-      </h2>
-      <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
-        We're here to help! Get in touch with us and we'll answer any questions you have about your project.
-      </p>
-      <a href="/contact/" class="inline-flex items-center justify-center px-8 py-4 bg-mint text-white font-semibold rounded-xl hover:bg-mint-dark transition-colors">
-        Contact Us
-      </a>
+  <section class="section-block">
+    <div class="site-container">
+      <div class="surface-invert corner-frame px-6 py-10 text-center md:px-10 md:py-14">
+        <p class="eyebrow !text-[#58b368]">Still unsure?</p>
+        <h2 class="section-title mt-4">Ask about your specific project.</h2>
+        <p class="lede mx-auto mt-5 !text-[#f4f4ee]/70">
+          Send the file, material, dimensions, or idea and we will point you in the right direction.
+        </p>
+        <a href="/contact/" class="button button-primary mt-8 !border-[#f4f4ee] !bg-[#f4f4ee] !text-[#171917] hover:!border-[#58b368] hover:!bg-[#58b368]">
+          Contact us
+        </a>
+      </div>
     </div>
   </section>
 </Layout>
