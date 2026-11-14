@@ -3,20 +3,39 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Contact" description="Get in touch with Mint Prints for your 3D printing and laser cutting needs">
-  <section class="py-20">
-    <div class="max-w-4xl mx-auto px-4">
-      <div class="text-center mb-12">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Contact Us</h1>
-        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-          Get in touch with us! We'd love to hear about your project.
+  <section class="section-tight">
+    <div class="site-container">
+      <div class="max-w-4xl">
+        <p class="eyebrow">Contact</p>
+        <h1 class="page-title mt-4">Tell us what you want to make.</h1>
+        <p class="lede mt-6">
+          Send a file, a sketch, a reference image, or a rough idea. We will come back with the best process, material, and quote.
         </p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-12">
-        <!-- Contact Form -->
-        <div class="md:col-span-2 bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
-          <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">Send us a message</h2>
-          <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you/" class="space-y-6" id="contact-form">
+      <div class="mt-12 grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+        <!-- Project brief form -->
+        <div class="panel corner-frame p-6 md:p-8">
+          <div class="mb-8 flex items-start justify-between gap-6">
+            <div>
+              <p class="technical-label">Project brief</p>
+              <h2 class="mt-2 text-2xl font-extrabold tracking-[-0.03em]">Send the details</h2>
+            </div>
+            <span class="hidden border border-[#58b368]/40 px-3 py-2 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-[#2f6f3d] dark:text-[#58b368] md:inline-block">
+              Reply in 1–2 days
+            </span>
+          </div>
+
+          <form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            action="/thank-you/"
+            enctype="multipart/form-data"
+            class="space-y-6"
+            id="contact-form"
+          >
             <input type="hidden" name="form-name" value="contact" />
             <input type="hidden" name="form-timestamp" id="form-timestamp" value="" />
 
@@ -27,160 +46,139 @@ import Layout from '../layouts/Layout.astro';
               <input type="email" name="confirm-email" tabindex="-1" autocomplete="off" />
             </div>
 
-            <div>
-              <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:border-mint focus:ring-2 focus:ring-mint/20 outline-none transition-colors"
-                placeholder="John Smith"
-              />
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for="name" class="form-label">Your name</label>
+                <input type="text" id="name" name="name" required class="form-field" placeholder="John Smith" />
+              </div>
+
+              <div>
+                <label for="email" class="form-label">Your email</label>
+                <input type="email" id="email" name="email" required class="form-field" placeholder="john@example.com" />
+              </div>
+            </div>
+
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for="service" class="form-label">Service</label>
+                <select id="service" name="service" class="form-field" required>
+                  <option value="">Choose a service</option>
+                  <option>FDM plastic printing</option>
+                  <option>SLA resin printing</option>
+                  <option>Laser cutting or etching</option>
+                  <option>Custom design</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="material" class="form-label">Material preference</label>
+                <input type="text" id="material" name="material" class="form-field" placeholder="PLA, resin, wood, slate..." />
+              </div>
+            </div>
+
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for="quantity" class="form-label">Quantity</label>
+                <input type="text" id="quantity" name="quantity" class="form-field" placeholder="1, 10, batch..." />
+              </div>
+
+              <div>
+                <label for="deadline" class="form-label">Needed by</label>
+                <input type="date" id="deadline" name="deadline" class="form-field" />
+              </div>
             </div>
 
             <div>
-              <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:border-mint focus:ring-2 focus:ring-mint/20 outline-none transition-colors"
-                placeholder="john@example.com"
-              />
-            </div>
-
-            <div>
-              <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your message</label>
+              <label for="message" class="form-label">Project notes</label>
               <textarea
                 id="message"
                 name="message"
-                rows="5"
+                rows="6"
                 required
-                class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:border-mint focus:ring-2 focus:ring-mint/20 outline-none transition-colors resize-y"
-                placeholder="Tell us about your project..."
+                class="form-field resize-y"
+                placeholder="Tell us about the size, use, finish, colours, or anything else useful..."
               ></textarea>
             </div>
 
             <div>
-              <label for="file-upload" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Attach files (optional)
-              </label>
-              <div class="relative">
-                <input
-                  type="file"
-                  id="file-upload"
-                  name="file-upload"
-                  multiple
-                  accept=".stl,.obj,.3mf,.step,.stp,.gcode,.lbrn,.lbrn2,.svg,.dxf,.pdf,.zip"
-                  class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:border-mint focus:ring-2 focus:ring-mint/20 outline-none transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-mint/10 file:text-mint hover:file:bg-mint/20 file:cursor-pointer"
-                />
-              </div>
-              <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                Accepted: STL, OBJ, 3MF, STEP, GCODE, LBRN, LBRN2, SVG, DXF, PDF, ZIP (Max 10MB per file)
+              <label for="file-upload" class="form-label">Attach files</label>
+              <input
+                type="file"
+                id="file-upload"
+                name="file-upload"
+                multiple
+                accept=".stl,.obj,.3mf,.step,.stp,.gcode,.lbrn,.lbrn2,.svg,.dxf,.pdf,.zip"
+                class="form-field file:mr-4 file:border-0 file:bg-[#dff0e2] file:px-4 file:py-2 file:text-sm file:font-bold file:text-[#2f6f3d] dark:file:bg-[#58b368]/15 dark:file:text-[#58b368]"
+              />
+              <p class="mt-2 text-xs leading-5 text-[#6e7470] dark:text-[#aab1aa]">
+                Accepted: STL, OBJ, 3MF, STEP, GCODE, LBRN, LBRN2, SVG, DXF, PDF, ZIP. Max 10MB per file.
               </p>
             </div>
 
             <!-- Human Verification Checkbox -->
-            <div class="flex items-start gap-3 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl border border-gray-200 dark:border-gray-600">
+            <div class="flex items-start gap-3 border border-[#d7dbd3] bg-[#f4f4ee]/70 p-4 dark:border-[#f4f4ee]/12 dark:bg-[#f4f4ee]/5">
               <input
                 type="checkbox"
                 id="human-check"
                 name="human-check"
                 required
-                class="mt-1 w-5 h-5 rounded border-gray-300 text-mint focus:ring-mint focus:ring-2 cursor-pointer"
+                class="mt-1 h-5 w-5 cursor-pointer rounded border-[#d7dbd3] text-[#58b368] focus:ring-[#58b368]"
               />
-              <label for="human-check" class="text-sm text-gray-700 dark:text-gray-300 cursor-pointer select-none">
-                <span class="font-medium">I am not a robot</span>
-                <span class="block text-xs text-gray-500 dark:text-gray-400 mt-1">Please check this box to verify you're human</span>
+              <label for="human-check" class="cursor-pointer select-none text-sm text-[#4c524e] dark:text-[#c3c9c2]">
+                <span class="font-bold text-[#1f211f] dark:text-[#f4f4ee]">I am not a robot</span>
+                <span class="mt-1 block text-xs">Please check this box to verify you're human.</span>
               </label>
             </div>
 
-            <button
-              type="submit"
-              class="w-full px-8 py-4 bg-mint text-white font-semibold rounded-xl hover:bg-mint-dark transition-colors"
-            >
-              Send Message
+            <button type="submit" class="button button-primary w-full">
+              Send project brief
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4-4 4M3 12h18" />
+              </svg>
             </button>
           </form>
         </div>
 
-        <!-- Contact Info -->
-        <div class="space-y-8">
-          <div>
-            <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-6">Other ways to reach us</h2>
+        <!-- Side information -->
+        <aside class="space-y-4">
+          <div class="panel corner-frame p-6 md:p-7">
+            <p class="technical-label">Useful details</p>
+            <ul class="mt-5 space-y-4 text-sm leading-6 text-[#4c524e] dark:text-[#c3c9c2]">
+              <li class="border-l-2 border-[#58b368] pl-4">Dimensions or intended size</li>
+              <li class="border-l-2 border-[#58b368] pl-4">Quantity and deadline</li>
+              <li class="border-l-2 border-[#58b368] pl-4">Material, colour, or finish preference</li>
+              <li class="border-l-2 border-[#58b368] pl-4">Whether the part is decorative or functional</li>
+            </ul>
+          </div>
 
-            <div class="space-y-6">
-              <div class="flex items-start gap-4">
-                <div class="w-12 h-12 bg-mint/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <svg class="w-6 h-6 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="font-medium text-gray-900 dark:text-white">Email</h3>
-                  <a href="mailto:info@mintprints.im" class="text-mint hover:text-mint-dark transition-colors">
-                    info@mintprints.im
-                  </a>
-                </div>
-              </div>
-
-              <div class="flex items-start gap-4">
-                <div class="w-12 h-12 bg-mint/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <svg class="w-6 h-6 text-mint" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12,2.16c3.2,0,3.58.01,4.85.07,1.17.05,1.8.25,2.23.41.56.22.96.48,1.38.9s.68.82.9,1.38c.16.43.35,1.06.41,2.23.06,1.27.07,1.65.07,4.85s-.01,3.58-.07,4.85c-.05,1.17-.25,1.8-.41,2.23-.22.56-.48.96-.9,1.38s-.82.68-1.38.9c-.43.16-1.06.35-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9s-.68-.82-.9-1.38c-.16-.43-.35-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38s.82-.68,1.38-.9c.43-.16,1.06-.35,2.23-.41,1.27-.06,1.65-.07,4.85-.07M12,0C8.74,0,8.33.01,7.05.07,5.78.13,4.9.33,4.14.63c-.78.3-1.44.71-2.1,1.37S.93,3.36.63,4.14C.33,4.9.13,5.78.07,7.05.01,8.33,0,8.74,0,12s.01,3.67.07,4.95c.06,1.27.26,2.15.56,2.91.3.78.71,1.44,1.37,2.1s1.32,1.07,2.1,1.37c.76.3,1.64.5,2.91.56C8.33,23.99,8.74,24,12,24s3.67-.01,4.95-.07c1.27-.06,2.15-.26,2.91-.56.78-.3,1.44-.71,2.1-1.37s1.07-1.32,1.37-2.1c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.3-.78-.71-1.44-1.37-2.1S21.64.93,20.86.63c-.76-.3-1.64-.5-2.91-.56C16.67.01,16.26,0,12,0Zm0,5.84A6.16,6.16,0,1,0,18.16,12,6.16,6.16,0,0,0,12,5.84ZM12,16a4,4,0,1,1,4-4A4,4,0,0,1,12,16ZM18.41,4.15a1.44,1.44,0,1,0,1.44,1.44A1.44,1.44,0,0,0,18.41,4.15Z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="font-medium text-gray-900 dark:text-white">Instagram</h3>
-                  <a href="https://www.instagram.com/mintprintsiom/" target="_blank" rel="noopener" class="text-mint hover:text-mint-dark transition-colors">
-                    @mintprintsiom
-                  </a>
-                </div>
-              </div>
-
-              <div class="flex items-start gap-4">
-                <div class="w-12 h-12 bg-mint/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <svg class="w-6 h-6 text-mint" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M18.77,7.46H14.5v-1.9c0-.9.6-1.1,1-1.1h3V.5L14.17.5C10.24.5,9.25,3.39,9.25,5.47v2H6.77v4h2.48V22h5.25V11.5h3.54l.72-4Z"/>
-                  </svg>
-                </div>
-                <div>
-                  <h3 class="font-medium text-gray-900 dark:text-white">Facebook</h3>
-                  <a href="https://www.facebook.com/mintprintsiom" target="_blank" rel="noopener" class="text-mint hover:text-mint-dark transition-colors">
-                    Mint Prints IOM
-                  </a>
-                </div>
+          <div class="panel p-6 md:p-7">
+            <p class="technical-label">Direct contact</p>
+            <div class="mt-5 space-y-4">
+              <a href="mailto:info@mintprints.im" class="block text-xl font-extrabold tracking-[-0.03em] text-[#1f211f] hover:text-[#2f6f3d] dark:text-[#f4f4ee] dark:hover:text-[#58b368]">
+                info@mintprints.im
+              </a>
+              <div class="grid gap-2 text-sm font-semibold">
+                <a class="footer-link !text-[#2f6f3d] dark:!text-[#58b368]" href="https://www.instagram.com/mintprintsiom/" target="_blank" rel="noopener">Instagram · @mintprintsiom</a>
+                <a class="footer-link !text-[#2f6f3d] dark:!text-[#58b368]" href="https://www.facebook.com/mintprintsiom" target="_blank" rel="noopener">Facebook · Mint Prints IOM</a>
               </div>
             </div>
           </div>
 
-          <!-- Shop Links -->
-          <div class="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
-            <h3 class="font-semibold text-gray-900 dark:text-white mb-4">Shop Our Products</h3>
-            <div class="flex flex-col gap-3">
-              <a
-                href="https://www.etsy.com/shop/MintPrintsIOM"
-                target="_blank"
-                rel="noopener"
-                class="flex items-center justify-center gap-2 px-4 py-3 bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-mint dark:hover:border-mint transition-colors"
-              >
-                <svg class="w-5 h-5 text-orange-500" fill="currentColor" viewBox="0 0 24 24"><path d="M8.559 2.445c0-.325.033-.52.59-.52h7.465c1.3 0 2.02 1.11 2.54 3.193l.42 1.666h1.27c.23-4.728.43-6.784.43-6.784s-3.196.36-5.09.36H6.635L1.521.196v1.37l1.725.326c1.21.24 1.5.496 1.6 1.606 0 0 .11 3.27.11 8.64 0 5.385-.09 8.61-.09 8.61 0 .973-.39 1.333-1.59 1.573l-1.722.33V24l5.13-.165h8.55c1.935 0 6.39.165 6.39.165.105-1.17.75-6.48.855-7.064h-1.2l-1.284 2.91c-1.005 2.28-2.476 2.445-4.11 2.445h-4.906c-1.63 0-2.415-.64-2.415-2.05V12.8s3.62 0 4.79.096c.912.064 1.463.325 1.76 1.598l.39 1.695h1.41l-.09-4.278.192-4.305h-1.391l-.45 1.89c-.283 1.244-.48 1.47-1.754 1.6-1.666.17-4.815.14-4.815.14V2.45h-.05z"/></svg>
-                <span class="font-medium text-gray-700 dark:text-gray-200">Etsy</span>
+          <div class="panel p-6 md:p-7">
+            <p class="technical-label">Ready-made products</p>
+            <div class="mt-5 grid gap-3">
+              <a href="https://www.etsy.com/shop/MintPrintsIOM" target="_blank" rel="noopener" class="button button-secondary justify-between">
+                Shop Etsy
+                <span aria-hidden="true">↗</span>
               </a>
-              <a
-                href="https://www.redbubble.com/people/manxcraft/shop"
-                target="_blank"
-                rel="noopener"
-                class="flex items-center justify-center gap-2 px-4 py-3 bg-white dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 hover:border-mint dark:hover:border-mint transition-colors"
-              >
-                <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M16.633 16.324h-3.199a.321.321 0 0 1-.32-.322V7.974a.32.32 0 0 1 .32-.32H16.4c2.226 0 2.693 1.31 2.693 2.408 0 .636-.169 1.14-.504 1.511.816.337 1.256 1.096 1.256 2.194 0 1.601-1.201 2.557-3.212 2.557m-4.644 0H5.345a.32.32 0 0 1-.32-.322V7.974a.32.32 0 0 1 .32-.32h3.103c1.939 0 3.096 1.043 3.096 2.791 0 1.163-.585 2.077-1.527 2.448l2.21 2.897a.322.322 0 0 1-.24.533M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12c6.628 0 12-5.373 12-12S18.63 0 12.001 0"/></svg>
-                <span class="font-medium text-gray-700 dark:text-gray-200">Redbubble</span>
+              <a href="https://www.redbubble.com/people/manxcraft/shop" target="_blank" rel="noopener" class="button button-secondary justify-between">
+                Shop Redbubble
+                <span aria-hidden="true">↗</span>
               </a>
             </div>
           </div>
-        </div>
+        </aside>
       </div>
     </div>
   </section>

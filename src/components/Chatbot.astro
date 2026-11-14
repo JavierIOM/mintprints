@@ -10,7 +10,7 @@
     id="chat-toggle"
     aria-label="Open chat assistant"
     aria-expanded="false"
-    class="w-14 h-14 bg-mint hover:bg-mint-dark text-white rounded-full shadow-xl flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95"
+    class="flex h-14 w-14 items-center justify-center border border-[#2f6f3d] bg-[#1f211f] text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#2f6f3d] active:translate-y-0 dark:border-[#58b368] dark:bg-[#0f110f] dark:hover:bg-[#58b368] dark:hover:text-[#171917]"
   >
     <!-- Chat icon (shown when closed) -->
     <svg id="chat-icon-open" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -26,12 +26,12 @@
   <div
     id="chat-panel"
     style="display:none; position:absolute; bottom:4.5rem; right:0; width:340px; max-height:calc(100vh - 8rem); flex-direction:column;"
-    class="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden"
+    class="panel overflow-hidden !bg-[#fbfbf7] dark:!bg-[#171917]"
     role="dialog"
     aria-label="Chat with Tilly, the Mint Prints virtual assistant"
   >
     <!-- Header -->
-    <div class="bg-mint px-4 py-3 flex items-center gap-3 flex-shrink-0">
+    <div class="flex flex-shrink-0 items-center gap-3 bg-[#1f211f] px-4 py-3 dark:bg-[#0f110f]">
       <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
         <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
           <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/>
@@ -47,13 +47,13 @@
     <!-- Messages area -->
     <div
       id="chat-messages"
-      class="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 dark:bg-gray-800/50"
+      class="flex-1 overflow-y-auto space-y-3 bg-[#f4f4ee] p-4 dark:bg-[#101210]"
       style="min-height:0; height:380px;"
       aria-live="polite"
     ></div>
 
     <!-- Input area -->
-    <div class="px-3 py-3 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 flex-shrink-0">
+    <div class="flex-shrink-0 border-t border-[#d7dbd3] bg-[#fbfbf7] px-3 py-3 dark:border-[#f4f4ee]/12 dark:bg-[#171917]">
       <div class="flex gap-2">
         <input
           id="chat-input"
@@ -61,12 +61,12 @@
           placeholder="Ask a question..."
           maxlength="200"
           autocomplete="off"
-          class="flex-1 px-3 py-2 text-sm bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg border-0 outline-none focus:ring-2 focus:ring-mint placeholder-gray-400 dark:placeholder-gray-500"
+          class="form-field min-h-0 flex-1 px-3 py-2 text-sm"
         />
         <button
           id="chat-send"
           aria-label="Send message"
-          class="px-3 py-2 bg-mint hover:bg-mint-dark text-white rounded-lg transition-colors flex-shrink-0"
+          class="flex-shrink-0 bg-[#1f211f] px-3 py-2 text-white transition-colors hover:bg-[#2f6f3d] dark:bg-[#58b368] dark:text-[#171917] dark:hover:bg-[#2f6f3d] dark:hover:text-white"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>

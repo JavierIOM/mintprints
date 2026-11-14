@@ -1,295 +1,124 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+const imageModules = import.meta.glob<{ default: ImageMetadata }>('../assets/images/hero/*.jpg', { eager: true });
+const machineImage = Object.entries(imageModules)
+  .sort(([a], [b]) => {
+    const nA = parseInt(a.match(/hero-(\d+)/)?.[1] ?? '0');
+    const nB = parseInt(b.match(/hero-(\d+)/)?.[1] ?? '0');
+    return nA - nB;
+  })
+  .map(([, mod]) => mod.default)[22];
+
+const equipment = [
+  {
+    category: 'Laser cutting & etching',
+    title: 'Omtech 80W CO2 Laser',
+    description: 'An 80W continuous / 100W peak CO2 laser for precision cutting and detailed engraving across wood, acrylic, glass, slate, leather, and more.',
+    specs: [
+      ['Workbed', '700 × 500mm'],
+      ['Power', '80W continuous / 100W peak'],
+      ['Strengths', 'Fine etching, clean cuts, personalisation'],
+      ['Materials', 'Wood, acrylic, leather, fabric, cardboard, glass, slate']
+    ]
+  },
+  {
+    category: 'FDM 3D printing',
+    title: 'Bambu Lab X1C Printers',
+    description: 'A dual FDM setup with fast CoreXY motion, multi-material capability, and built-in monitoring for reliable prototype and production work.',
+    specs: [
+      ['Build volume', '256 × 256 × 256mm per printer'],
+      ['Materials', 'PLA, PETG, ASA, TPU, and engineering filaments'],
+      ['Colour system', 'Automatic Material System for multi-colour prints'],
+      ['Strengths', 'Speed, repeatability, functional parts']
+    ]
+  },
+  {
+    category: 'SLA resin printing',
+    title: 'Elegoo 5K Resin Printers',
+    description: 'High-resolution resin printing for miniatures, jewellery, dental models, and intricate pieces where smooth surfaces and fine details matter.',
+    specs: [
+      ['Resolution', '5K monochrome LCD'],
+      ['Layer detail', 'Fine layers down to 0.05mm'],
+      ['Materials', 'Standard, tough, flexible, and specialty resins'],
+      ['Strengths', 'Miniatures, jewellery, detailed prototypes']
+    ]
+  }
+];
 ---
 
 <Layout title="What We Use" description="Discover the professional equipment and technology behind Mint Prints">
-  <section class="py-20">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="text-center mb-12">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">What We Use</h1>
-        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-          Professional-grade equipment delivering exceptional quality for all your 3D printing and laser cutting needs
-        </p>
+  <section class="section-tight">
+    <div class="site-container">
+      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+        <div>
+          <p class="eyebrow">Workshop equipment</p>
+          <h1 class="page-title mt-4">Professional machines, practical output.</h1>
+          <p class="lede mt-6">
+            The setup is built around speed, detail, and repeatability — from functional FDM parts to fine resin models and large-format laser work.
+          </p>
+        </div>
+        <figure class="image-frame corner-frame relative h-72 lg:h-96">
+          <Image
+            src={machineImage}
+            alt="3D printer and workshop equipment at Mint Prints"
+            class="h-full w-full object-cover"
+            loading="eager"
+          />
+          <figcaption class="technical-label absolute bottom-3 left-3 bg-[#1f211f]/85 px-3 py-2 text-[#f4f4ee]">
+            In the workshop
+          </figcaption>
+        </figure>
       </div>
+    </div>
+  </section>
 
-      <div class="space-y-8">
-        <!-- Omtech Laser -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
-          <div class="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <div class="inline-flex items-center gap-2 px-4 py-2 bg-mint/10 rounded-lg mb-4">
-                <svg class="w-5 h-5 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                </svg>
-                <span class="text-sm font-semibold text-mint">Laser Cutting & Etching</span>
-              </div>
-              <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Omtech 80W CO2 Laser</h2>
-              <p class="text-gray-600 dark:text-gray-300 mb-6">
-                Our 80W CO2 laser cutter (100W peak) delivers precision cutting and engraving on a wide range of materials.
-              </p>
-              <ul class="space-y-3">
-                <li class="flex items-start gap-3">
-                  <svg class="w-5 h-5 text-mint mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                  </svg>
-                  <div>
-                    <span class="font-semibold text-gray-900 dark:text-white">700mm × 500mm bed:</span>
-                    <span class="text-gray-600 dark:text-gray-300"> Large working area for bigger projects</span>
-                  </div>
-                </li>
-                <li class="flex items-start gap-3">
-                  <svg class="w-5 h-5 text-mint mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                  </svg>
-                  <div>
-                    <span class="font-semibold text-gray-900 dark:text-white">80W continuous / 100W peak:</span>
-                    <span class="text-gray-600 dark:text-gray-300"> Cuts through thick materials with ease</span>
-                  </div>
-                </li>
-                <li class="flex items-start gap-3">
-                  <svg class="w-5 h-5 text-mint mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                  </svg>
-                  <div>
-                    <span class="font-semibold text-gray-900 dark:text-white">Materials:</span>
-                    <span class="text-gray-600 dark:text-gray-300"> Wood, acrylic, leather, fabric, cardboard, and more</span>
-                  </div>
-                </li>
-                <li class="flex items-start gap-3">
-                  <svg class="w-5 h-5 text-mint mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                  </svg>
-                  <div>
-                    <span class="font-semibold text-gray-900 dark:text-white">Precision:</span>
-                    <span class="text-gray-600 dark:text-gray-300"> Intricate designs and fine details</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="bg-gradient-to-br from-mint/10 to-mint/5 rounded-xl p-8 flex items-center justify-center">
-              <svg class="w-48 h-48 text-mint/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-              </svg>
-            </div>
+  <section class="section-block border-t border-[#d7dbd3] dark:border-[#f4f4ee]/12">
+    <div class="site-container space-y-6">
+      {equipment.map((machine, index) => (
+        <article class:list={["panel corner-frame grid gap-8 p-6 md:p-8 lg:grid-cols-[0.8fr_1.2fr]", { "lg:[&>*:first-child]:order-2": index === 1 }]}>
+          <div>
+            <p class="technical-label">{machine.category}</p>
+            <h2 class="section-title mt-4 !text-[clamp(2rem,4vw,3.5rem)]">{machine.title}</h2>
+            <p class="lede mt-5">{machine.description}</p>
           </div>
-        </div>
-
-        <!-- Bambu Lab X1C -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
-          <div class="grid md:grid-cols-2 gap-8 items-center">
-            <div class="order-2 md:order-1 bg-gradient-to-br from-mint/10 to-mint/5 rounded-xl p-8 flex items-center justify-center">
-              <svg class="w-48 h-48 text-mint/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
-              </svg>
-            </div>
-            <div class="order-1 md:order-2">
-              <div class="inline-flex items-center gap-2 px-4 py-2 bg-mint/10 rounded-lg mb-4">
-                <svg class="w-5 h-5 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
-                </svg>
-                <span class="text-sm font-semibold text-mint">FDM 3D Printing</span>
+          <dl class="spec-table self-center">
+            {machine.specs.map(([label, value]) => (
+              <div class="spec-row">
+                <dt>{label}</dt>
+                <dd>{value}</dd>
               </div>
-              <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Bambu Lab X1C Printers</h2>
-              <p class="text-gray-600 dark:text-gray-300 mb-6">
-                Industry-leading FDM printers known for exceptional speed, reliability, and print quality. Our dual setup ensures faster turnaround times.
-              </p>
-              <ul class="space-y-3">
-                <li class="flex items-start gap-3">
-                  <svg class="w-5 h-5 text-mint mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                  </svg>
-                  <div>
-                    <span class="font-semibold text-gray-900 dark:text-white">CoreXY design:</span>
-                    <span class="text-gray-600 dark:text-gray-300"> Fast, accurate printing with incredible quality</span>
-                  </div>
-                </li>
-                <li class="flex items-start gap-3">
-                  <svg class="w-5 h-5 text-mint mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                  </svg>
-                  <div>
-                    <span class="font-semibold text-gray-900 dark:text-white">Multi-material AMS:</span>
-                    <span class="text-gray-600 dark:text-gray-300"> Print with multiple colours and materials</span>
-                  </div>
-                </li>
-                <li class="flex items-start gap-3">
-                  <svg class="w-5 h-5 text-mint mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                  </svg>
-                  <div>
-                    <span class="font-semibold text-gray-900 dark:text-white">AI monitoring:</span>
-                    <span class="text-gray-600 dark:text-gray-300"> Built-in camera and detection for print quality</span>
-                  </div>
-                </li>
-                <li class="flex items-start gap-3">
-                  <svg class="w-5 h-5 text-mint mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                  </svg>
-                  <div>
-                    <span class="font-semibold text-gray-900 dark:text-white">Materials:</span>
-                    <span class="text-gray-600 dark:text-gray-300"> PLA, PETG, ABS, TPU, and engineering filaments</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+            ))}
+          </dl>
+        </article>
+      ))}
+    </div>
+  </section>
 
-        <!-- Elegoo Resin Printers -->
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
-          <div class="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <div class="inline-flex items-center gap-2 px-4 py-2 bg-mint/10 rounded-lg mb-4">
-                <svg class="w-5 h-5 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                </svg>
-                <span class="text-sm font-semibold text-mint">Resin 3D Printing</span>
-              </div>
-              <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Elegoo 5K Resin Printers</h2>
-              <p class="text-gray-600 dark:text-gray-300 mb-6">
-                High-resolution resin printers perfect for detailed miniatures, jewelry, and intricate designs requiring ultra-fine detail.
-              </p>
-              <ul class="space-y-3">
-                <li class="flex items-start gap-3">
-                  <svg class="w-5 h-5 text-mint mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                  </svg>
-                  <div>
-                    <span class="font-semibold text-gray-900 dark:text-white">5K resolution:</span>
-                    <span class="text-gray-600 dark:text-gray-300"> Ultra-detailed prints with smooth surfaces</span>
-                  </div>
-                </li>
-                <li class="flex items-start gap-3">
-                  <svg class="w-5 h-5 text-mint mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                  </svg>
-                  <div>
-                    <span class="font-semibold text-gray-900 dark:text-white">Monochrome LCD:</span>
-                    <span class="text-gray-600 dark:text-gray-300"> Faster curing times and longer screen life</span>
-                  </div>
-                </li>
-                <li class="flex items-start gap-3">
-                  <svg class="w-5 h-5 text-mint mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                  </svg>
-                  <div>
-                    <span class="font-semibold text-gray-900 dark:text-white">Perfect for:</span>
-                    <span class="text-gray-600 dark:text-gray-300"> Miniatures, jewelry, dental models, and prototypes</span>
-                  </div>
-                </li>
-                <li class="flex items-start gap-3">
-                  <svg class="w-5 h-5 text-mint mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                  </svg>
-                  <div>
-                    <span class="font-semibold text-gray-900 dark:text-white">Materials:</span>
-                    <span class="text-gray-600 dark:text-gray-300"> Standard, tough, flexible, and specialty resins</span>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="bg-gradient-to-br from-mint/10 to-mint/5 rounded-xl p-8 flex items-center justify-center">
-              <svg class="w-48 h-48 text-mint/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Call to Action -->
-      <div class="mt-12 text-center bg-gradient-to-br from-mint/10 to-mint/5 rounded-2xl p-8">
-        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-          Ready to bring your project to life?
-        </h3>
-        <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
-          With our professional equipment and expertise, we can handle projects of any size and complexity.
+  <section class="section-block">
+    <div class="site-container grid gap-8 lg:grid-cols-[1fr_0.8fr] lg:items-center">
+      <div class="surface-invert corner-frame p-6 md:p-10">
+        <p class="eyebrow !text-[#58b368]">Project ready?</p>
+        <h2 class="section-title mt-4">Put the workshop to work.</h2>
+        <p class="lede mt-5 !text-[#f4f4ee]/70">
+          Send the project details and we will match it to the right machine, material, and finish.
         </p>
-        <a href="/contact/" class="inline-flex items-center justify-center px-8 py-4 bg-mint text-white font-semibold rounded-xl hover:bg-mint-dark transition-colors">
-          Get a Quote
+        <a href="/contact/" class="button button-primary mt-8 !border-[#f4f4ee] !bg-[#f4f4ee] !text-[#171917] hover:!border-[#58b368] hover:!bg-[#58b368]">
+          Get a quote
         </a>
       </div>
 
-      <!-- Redbubble Shop Section -->
-      <div class="mt-12 bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
-        <div class="grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <div class="flex items-center gap-3 mb-4">
-              <svg class="w-12 h-12 text-red-500" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M16.633 16.324h-3.199a.321.321 0 0 1-.32-.322V7.974a.32.32 0 0 1 .32-.32H16.4c2.226 0 2.693 1.31 2.693 2.408 0 .636-.169 1.14-.504 1.511.816.337 1.256 1.096 1.256 2.194 0 1.601-1.201 2.557-3.212 2.557m-4.644 0H5.345a.32.32 0 0 1-.32-.322V7.974a.32.32 0 0 1 .32-.32h3.103c1.939 0 3.096 1.043 3.096 2.791 0 1.163-.585 2.077-1.527 2.448l2.21 2.897a.322.322 0 0 1-.24.533M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12c6.628 0 12-5.373 12-12S18.63 0 12.001 0"/>
-              </svg>
-              <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Visit Our Redbubble Shop</h3>
-            </div>
-            <p class="text-gray-600 dark:text-gray-300 mb-6">
-              Looking for custom designs on apparel and accessories? Check out our Redbubble shop featuring unique Manx-inspired designs and more!
-            </p>
-            <ul class="space-y-3 mb-6">
-              <li class="flex items-center gap-3">
-                <svg class="w-5 h-5 text-mint flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                <span class="text-gray-700 dark:text-gray-200">Custom t-shirts and hoodies</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <svg class="w-5 h-5 text-mint flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                <span class="text-gray-700 dark:text-gray-200">Hats and caps with unique designs</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <svg class="w-5 h-5 text-mint flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                <span class="text-gray-700 dark:text-gray-200">Stickers and decals</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <svg class="w-5 h-5 text-mint flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                </svg>
-                <span class="text-gray-700 dark:text-gray-200">Mugs, phone cases, and more</span>
-              </li>
-            </ul>
-            <a
-              href="https://www.redbubble.com/people/manxcraft/shop"
-              target="_blank"
-              rel="noopener"
-              class="inline-flex items-center gap-2 px-8 py-4 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-xl transition-colors"
-            >
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M16.633 16.324h-3.199a.321.321 0 0 1-.32-.322V7.974a.32.32 0 0 1 .32-.32H16.4c2.226 0 2.693 1.31 2.693 2.408 0 .636-.169 1.14-.504 1.511.816.337 1.256 1.096 1.256 2.194 0 1.601-1.201 2.557-3.212 2.557m-4.644 0H5.345a.32.32 0 0 1-.32-.322V7.974a.32.32 0 0 1 .32-.32h3.103c1.939 0 3.096 1.043 3.096 2.791 0 1.163-.585 2.077-1.527 2.448l2.21 2.897a.322.322 0 0 1-.24.533M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12c6.628 0 12-5.373 12-12S18.63 0 12.001 0"/>
-              </svg>
-              Shop on Redbubble
-            </a>
-          </div>
-          <div class="bg-gradient-to-br from-red-500/10 to-red-500/5 rounded-xl p-8 flex items-center justify-center">
-            <div class="grid grid-cols-2 gap-4">
-              <div class="bg-white dark:bg-gray-700 rounded-lg p-4 text-center">
-                <svg class="w-12 h-12 mx-auto mb-2 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
-                </svg>
-                <p class="text-xs font-medium text-gray-600 dark:text-gray-300">T-Shirts</p>
-              </div>
-              <div class="bg-white dark:bg-gray-700 rounded-lg p-4 text-center">
-                <svg class="w-12 h-12 mx-auto mb-2 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
-                </svg>
-                <p class="text-xs font-medium text-gray-600 dark:text-gray-300">Stickers</p>
-              </div>
-              <div class="bg-white dark:bg-gray-700 rounded-lg p-4 text-center">
-                <svg class="w-12 h-12 mx-auto mb-2 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
-                </svg>
-                <p class="text-xs font-medium text-gray-600 dark:text-gray-300">Hats</p>
-              </div>
-              <div class="bg-white dark:bg-gray-700 rounded-lg p-4 text-center">
-                <svg class="w-12 h-12 mx-auto mb-2 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
-                </svg>
-                <p class="text-xs font-medium text-gray-600 dark:text-gray-300">More...</p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="panel p-6 md:p-8">
+        <p class="technical-label">Also available</p>
+        <h2 class="mt-4 text-3xl font-extrabold tracking-[-0.04em]">Redbubble shop</h2>
+        <p class="mt-4 leading-7 text-[#4c524e] dark:text-[#c3c9c2]">
+          Browse Isle of Man-inspired apparel, accessories, stickers, mugs, phone cases, and more through the Redbubble shop.
+        </p>
+        <a href="https://www.redbubble.com/people/manxcraft/shop" target="_blank" rel="noopener" class="button button-secondary mt-7">
+          Visit Redbubble
+          <span aria-hidden="true">↗</span>
+        </a>
       </div>
     </div>
   </section>

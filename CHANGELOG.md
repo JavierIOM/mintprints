@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.22] - 2026-11-14
+
+### Changed
+- Refreshed the front end with a precision-workshop design system: warm off-white surfaces, graphite text, sharper mint accents, technical mono labels, and asymmetric image-led sections.
+- Rebuilt the homepage around a stronger split hero, material marquee, service panels, process section, workshop capability table, gallery preview, and darker conversion CTA.
+- Restyled the header, footer, navigation, theme toggle, service cards, and chat widget for a more consistent premium workshop feel.
+- Converted the FAQ into an accordion and refreshed the contact, gallery, equipment, and testimonials pages with the new layout language.
+
+### Added
+- Project-brief fields for service, material preference, quantity, and deadline on the contact form.
+- `enctype="multipart/form-data"` on the contact form to support file uploads explicitly.
+- Homepage material marquee and local workshop capability summary.
+
 ## [0.0.21] - 2026-09-17
 
 ### Fixed

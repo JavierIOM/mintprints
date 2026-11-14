@@ -3,90 +3,74 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Testimonials" description="See what our customers are saying about Mint Prints">
-  <section class="py-20">
-    <div class="max-w-4xl mx-auto px-4">
-      <div class="text-center mb-12">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">Testimonials</h1>
-        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-          What our customers are saying
-        </p>
-        <p class="text-gray-500 dark:text-gray-400 mt-2">
-          Genuine feedback from satisfied customers
+  <section class="section-tight">
+    <div class="site-container">
+      <div class="max-w-4xl">
+        <p class="eyebrow">Reviews</p>
+        <h1 class="page-title mt-4">Trusted for the finish as much as the making.</h1>
+        <p class="lede mt-6">
+          Customer feedback for Mint Prints is hosted on Trustpilot, where reviews are verified and publicly visible.
         </p>
       </div>
 
-      <!-- Trust Message -->
-      <div class="bg-gradient-to-br from-mint/5 to-mint/10 dark:from-mint/10 dark:to-mint/5 rounded-2xl p-8 mb-12 text-center">
-        <div class="w-16 h-16 bg-mint/20 rounded-full flex items-center justify-center mx-auto mb-6">
-          <svg class="w-8 h-8 text-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-        </div>
-        <p class="text-lg text-gray-700 dark:text-gray-200 max-w-2xl mx-auto">
-          We pride ourselves on the quality of our work and products. Hear directly from those who have experienced the difference!
-        </p>
-      </div>
-
-      <!-- Trustpilot Section -->
-      <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
-        <div class="text-center">
-          <!-- Trustpilot Logo and Branding -->
-          <div class="flex items-center justify-center gap-3 mb-6">
-            <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div class="mt-12 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+        <div class="surface-invert corner-frame p-6 md:p-8">
+          <div class="flex items-center gap-3">
+            <svg class="h-10 w-10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="#00B67A"/>
             </svg>
-            <span class="text-4xl font-bold text-[#00B67A]">Trustpilot</span>
-          </div>
-
-          <p class="text-lg text-gray-700 dark:text-gray-200 mb-6">
-            See what our customers are saying about us
-          </p>
-
-          <!-- Review Stats Placeholder -->
-          <div class="bg-gray-50 dark:bg-gray-700/50 rounded-xl p-6 mb-6">
-            <div class="flex items-center justify-center gap-2 mb-3">
-              <svg class="w-8 h-8 text-[#00B67A]" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-              <svg class="w-8 h-8 text-[#00B67A]" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-              <svg class="w-8 h-8 text-[#00B67A]" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-              <svg class="w-8 h-8 text-[#00B67A]" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-              <svg class="w-8 h-8 text-[#00B67A]" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
+            <div>
+              <p class="text-2xl font-extrabold tracking-[-0.03em] text-[#00B67A]">Trustpilot</p>
+              <p class="technical-label mt-1 !text-[#f4f4ee]/60">Verified customer reviews</p>
             </div>
-            <p class="text-sm text-gray-600 dark:text-gray-300">
-              Rated <span class="font-semibold">Excellent</span> on Trustpilot
+          </div>
+          <div class="mt-8 space-y-4">
+            <div class="flex gap-1 text-[#00B67A]" aria-label="Five star rating">
+              {Array.from({ length: 5 }).map(() => (
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              ))}
+            </div>
+            <p class="text-lg font-bold">Rated Excellent on Trustpilot</p>
+            <p class="text-[#f4f4ee]/68">
+              Read customer feedback directly on the review platform.
             </p>
           </div>
+        </div>
 
+        <div class="panel corner-frame flex flex-col justify-between p-6 md:p-8">
+          <div>
+            <p class="technical-label">Customer feedback</p>
+            <h2 class="section-title mt-4 !text-[clamp(2rem,4vw,3.5rem)]">See what people say after the job is done.</h2>
+            <p class="lede mt-5">
+              Reviews cover finished print quality, communication, turnaround, and how well the final piece matched the request.
+            </p>
+          </div>
           <a
             href="https://uk.trustpilot.com/review/mintprints.im"
             target="_blank"
             rel="noopener"
-            class="inline-flex items-center gap-2 px-8 py-4 bg-[#00B67A] text-white font-semibold rounded-xl hover:bg-[#009567] transition-colors"
+            class="button button-primary mt-8 self-start"
           >
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-            </svg>
-            Read Our Reviews on Trustpilot
+            Read reviews on Trustpilot
+            <span aria-hidden="true">↗</span>
           </a>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- CTA -->
-      <div class="mt-12 text-center">
-        <p class="text-gray-600 dark:text-gray-300 mb-4">
-          Had a great experience? We'd love to hear from you!
+  <section class="section-block">
+    <div class="site-container">
+      <div class="surface-invert corner-frame px-6 py-10 text-center md:px-10 md:py-14">
+        <p class="eyebrow !text-[#58b368]">Had a good experience?</p>
+        <h2 class="section-title mt-4">Your project could be next.</h2>
+        <p class="lede mx-auto mt-5 !text-[#f4f4ee]/70">
+          Send the details and we will help you choose the right process from the start.
         </p>
-        <a href="/contact/" class="inline-flex items-center justify-center px-8 py-4 bg-mint text-white font-semibold rounded-xl hover:bg-mint-dark transition-colors">
-          Get in Touch
+        <a href="/contact/" class="button button-primary mt-8 !border-[#f4f4ee] !bg-[#f4f4ee] !text-[#171917] hover:!border-[#58b368] hover:!bg-[#58b368]">
+          Get in touch
         </a>
       </div>
     </div>
