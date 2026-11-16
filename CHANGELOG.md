@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.23] - 2026-11-16
+
+### Added
+- Browser-based call sign maker at `/callsign-stl-maker/`, with adjustable dimensions and base bar, an interactive light/dark preview, and STL/SVG downloads generated locally.
+
 ## [0.0.22] - 2026-11-14
 
 ### Changed
