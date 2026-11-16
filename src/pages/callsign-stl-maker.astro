@@ -335,7 +335,7 @@ import Layout from '../layouts/Layout.astro';
   function load() {
     let s = {};
     try { s = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
-    return Object.assign({}, DEF, s);
+    return Object.assign({}, DEF, s, { text: DEF.text });
   }
   function save(o) { try { localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {} }
   function setUI(o) {

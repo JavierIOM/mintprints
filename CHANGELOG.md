@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.26] - 2026-11-16
+
+### Fixed
+- The STL maker now opens with `2D0PEY` even when browser storage contains an older call sign. Other saved settings are still restored.
+
 ## [0.0.25] - 2026-11-16
 
 ### Changed
