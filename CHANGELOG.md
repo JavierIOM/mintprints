@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.24] - 2026-11-16
+
+### Added
+- “STL Maker” link to the desktop and mobile top navigation.
+
+### Changed
+- Desktop navigation now appears from 1280px, with the mobile menu used below that to prevent crowding.
+
 ## [0.0.23] - 2026-11-16
 
 ### Added

@@ -5,6 +5,7 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/gallery/', label: 'Gallery' },
   { href: '/equipment/', label: 'Equipment' },
+  { href: '/callsign-stl-maker/', label: 'STL Maker' },
   { href: '/testimonials/', label: 'Reviews' },
   { href: '/faq/', label: 'FAQ' },
   { href: '/contact/', label: 'Contact' },
@@ -45,7 +46,7 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
         <span>Mint Prints</span>
       </a>
 
-      <ul class="hidden lg:flex items-center gap-8">
+      <ul class="hidden xl:flex items-center gap-8">
         {navLinks.map(link => (
           <li>
             <a
@@ -59,7 +60,7 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
         ))}
       </ul>
 
-      <div class="hidden lg:flex items-center gap-3">
+      <div class="hidden xl:flex items-center gap-3">
         <div class="flex items-center gap-1" aria-label="Social profiles">
           {socialLinks.map(link => (
             <a
@@ -81,7 +82,7 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
         </a>
       </div>
 
-      <div class="flex lg:hidden items-center gap-2">
+      <div class="flex xl:hidden items-center gap-2">
         <ThemeToggle />
         <button
           id="mobile-menu-btn"
@@ -98,7 +99,7 @@ const isActive = (href: string) => href === '/' ? currentPath === '/' : currentP
       </div>
     </div>
 
-    <div id="mobile-menu" class="hidden lg:hidden border-t border-[#d7dbd3] pt-4 mt-4 dark:border-[#3a3f3a]">
+    <div id="mobile-menu" class="hidden xl:hidden border-t border-[#d7dbd3] pt-4 mt-4 dark:border-[#3a3f3a]">
       <ul class="flex flex-col gap-4">
         {navLinks.map(link => (
           <li>
