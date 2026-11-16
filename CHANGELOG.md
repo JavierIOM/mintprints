@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.25] - 2026-11-16
+
+### Changed
+- Call sign STL maker now opens with `2D0PEY` by default.
+
 ## [0.0.24] - 2026-11-16
 
 ### Added
