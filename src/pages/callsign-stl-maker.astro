@@ -43,9 +43,10 @@ import Layout from '../layouts/Layout.astro';
               <label class="f">Bar trim each end (negative = longer)<input id="barInset" type="number" step="0.1"></label>
               <label class="f">Bar shift (+ right, - left)<input id="barShift" type="number" step="0.1"></label>
               <label class="f">Bar overlap into letters<input id="barOverlap" type="number" step="0.1" min="0.1"></label>
+              <label class="f">J and Q tail sink into bar<input id="sink" type="number" step="0.1" min="0"></label>
             </div>
             <div class="row" style="margin-top:12px"><button id="reset">Reset to defaults</button></div>
-            <p class="hint">The bar is centred on where the letters stand. Letters print lying flat, thickness is the Z height.</p>
+            <p class="hint">The bar is centred on where the letters stand, and steps down under J and Q so their tails stay visible. Letters print lying flat, thickness is the Z height.</p>
           </details>
         </div>
         <p class="foot">Letters: Noto Serif ExtraBold (SIL Open Font License), stretched to match the original design. Supports A-Z, 0-9, / - . and space.</p>
@@ -79,7 +80,7 @@ import Layout from '../layouts/Layout.astro';
 .stl-maker .card { background: var(--tool-panel); border: 1px solid var(--tool-line); border-radius: 16px; padding: 20px; }
 .stl-maker .row { display: flex; gap: 10px; align-items: stretch; flex-wrap: wrap; }
 .stl-maker .tool-label { display: block; color: var(--tool-mute); font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-.stl-maker #text { flex: 1 1 220px; font: 600 30px/1.1 Georgia, "Times New Roman", serif; letter-spacing: 2px; text-transform: uppercase; padding: 10px 14px; border: 1px solid var(--tool-line); border-radius: 10px; background: var(--tool-bg); color: var(--tool-ink); min-width: 0; }
+.stl-maker #text { flex: 1 1 220px; font: 600 30px/1.1 ui-monospace, "SF Mono", "Cascadia Mono", Consolas, Menlo, "Liberation Mono", monospace; font-variant-numeric: slashed-zero; letter-spacing: 2px; text-transform: uppercase; padding: 10px 14px; border: 1px solid var(--tool-line); border-radius: 10px; background: var(--tool-bg); color: var(--tool-ink); min-width: 0; }
 .stl-maker button { font: inherit; font-weight: 600; border-radius: 10px; border: 1px solid var(--tool-line); background: var(--tool-panel); color: var(--tool-ink); padding: 10px 16px; cursor: pointer; white-space: nowrap; }
 .stl-maker button:hover { border-color: var(--tool-mute); }
 .stl-maker button:active:not(:disabled) { transform: translateY(1px); }
@@ -128,15 +129,30 @@ import Layout from '../layouts/Layout.astro';
     return a / 2;
   }
 
-  // opts: text, cap (mm), stretch, spacing (mm), thick (mm), bar (bool), barDepth, barOverlap, barInset (trim from the letters' feet), barShift (mm, + right), slash (bool), slashW (mm)
+  // opts: text, cap (mm), stretch, spacing (mm), thick (mm), bar (bool), barDepth, barOverlap, barInset (trim from the letters' feet), barShift (mm, + right), slash (bool), slashW (mm),
+  //       sink (mm, how far a J or Q descender sinks into the notched bar)
   // CL = ClipperLib. Glyph rings keep TrueType winding (outer clockwise, counter anticlockwise), so a
   // non-zero union gives the right shape; the bar is wound the same way as the outer contours.
   const S = 1000; // clipper integer units per mm
+
+  // x-extent of the rings at or below height lim (clipper units): vertices below it plus edges crossing it
+  function spanBelow(rings, lim) {
+    let x0 = Infinity, x1 = -Infinity;
+    for (const r of rings) for (let i = 0; i < r.length; i++) {
+      const p = r[i], q = r[(i + 1) % r.length];
+      if (p.Y <= lim) { x0 = Math.min(x0, p.X); x1 = Math.max(x1, p.X); }
+      if ((p.Y - lim) * (q.Y - lim) < 0) { const x = p.X + (q.X - p.X) * (lim - p.Y) / (q.Y - p.Y); x0 = Math.min(x0, x); x1 = Math.max(x1, x); }
+    }
+    return [x0, x1];
+  }
+
   function outline(opts, G, CL) {
     const unit = opts.cap / G.cap;          // mm per font unit (vertical)
     const sx = unit * opts.stretch;         // mm per font unit (horizontal)
+    const capS = opts.cap * S;
     const paths = [];
-    const feet = [];                         // outer-contour polygons in mm, for the baseline footprint
+    const feet = [];                         // outer-contour polygons, for the baseline footprint
+    const drops = [];                        // descenders the bar must step down under: { x0, x1, low }
     const area = r => { let a = 0; for (let i = 0; i < r.length; i++) { const p = r[i], q = r[(i + 1) % r.length]; a += p.X * q.Y - q.X * p.Y; } return a / 2; };
     let pen = 0;
     for (const ch of opts.text.toUpperCase()) {
@@ -162,41 +178,81 @@ import Layout from '../layouts/Layout.astro';
         ic.Execute(CL.ClipType.ctIntersection, sol, CL.PolyFillType.pftNonZero, CL.PolyFillType.pftNonZero);
         for (const p of sol) { if (area(p) > 0) p.reverse(); paths.push(p); }   // outers are clockwise (negative area)
       }
+      // J and Q hang about a third of the cap height below the baseline, where a plain bar would swallow them.
+      // Record how far down and across each one reaches so the bar can step down underneath it.
+      let low = Infinity;
+      for (const r of outerPaths) for (const p of r) if (p.Y < low) low = p.Y;
+      if (low < -0.25 * capS) {
+        const [d0, d1] = spanBelow(outerPaths, -0.03 * capS);
+        drops.push({ x0: d0, x1: d1, low });
+      }
       pen += g.adv * sx + opts.spacing;
     }
-    if (!paths.length) return { mp: [], ink: null };
-    // Footprint: horizontal extent of the letters within a thin band above the baseline. The bar is centred
+    if (!paths.length) return { mp: [], ink: null, barDepth: opts.barDepth };
+    // Footprint: horizontal extent of the letters within a band just above the baseline. The bar is centred
     // on this (where the letters actually stand), not on the full ink width, so wide top serifs (Y, T, V...) don't skew it.
-    const band = 8 * S;
-    let f0 = Infinity, f1 = -Infinity;
-    for (const r of feet) for (let i = 0; i < r.length; i++) {
-      const p = r[i], q = r[(i + 1) % r.length];
-      if (p.Y <= band) { f0 = Math.min(f0, p.X); f1 = Math.max(f1, p.X); }
-      if ((p.Y - band) * (q.Y - band) < 0) { const x = p.X + (q.X - p.X) * (band - p.Y) / (q.Y - p.Y); f0 = Math.min(f0, x); f1 = Math.max(f1, x); }
-    }
-    const x0 = f0 / S, x1 = f1 / S;
-    if (opts.bar) {
-      const sh = (opts.barShift || 0) * S;
-      const bx0 = Math.round(f0 + opts.barInset * S + sh), bx1 = Math.round(f1 - opts.barInset * S + sh);
-      const by0 = Math.round(-opts.barDepth * S), by1 = Math.round(opts.barOverlap * S);
-      if (bx1 > bx0 && by1 > by0) paths.push([{ X: bx0, Y: by0 }, { X: bx0, Y: by1 }, { X: bx1, Y: by1 }, { X: bx1, Y: by0 }]);
-    }
-    const c = new CL.Clipper(CL.Clipper.ioStrictlySimple);
-    c.AddPaths(paths, CL.PolyType.ptSubject, true);
-    const tree = new CL.PolyTree();
-    c.Execute(CL.ClipType.ctUnion, tree, CL.PolyFillType.pftNonZero, CL.PolyFillType.pftNonZero);
-    const conv = n => n.Contour().map(p => [p.X / S, p.Y / S]);
-    const mp = [];
-    const walk = node => {
-      for (const ch of node.Childs()) {
-        if (ch.IsHole()) { walk(ch); continue; }
-        const poly = [conv(ch)];
-        for (const h of ch.Childs()) { poly.push(conv(h)); walk(h); }
-        mp.push(poly);
-      }
+    const [f0, f1] = spanBelow(feet, 0.27 * capS);
+    const ink = [f0 / S, f1 / S];
+    const unite = extra => {
+      const c = new CL.Clipper(CL.Clipper.ioStrictlySimple);
+      c.AddPaths(paths.concat(extra), CL.PolyType.ptSubject, true);
+      const tree = new CL.PolyTree();
+      c.Execute(CL.ClipType.ctUnion, tree, CL.PolyFillType.pftNonZero, CL.PolyFillType.pftNonZero);
+      const conv = n => n.Contour().map(p => [p.X / S, p.Y / S]);
+      const mp = [];
+      const walk = node => {
+        for (const ch of node.Childs()) {
+          if (ch.IsHole()) { walk(ch); continue; }
+          const poly = [conv(ch)];
+          for (const h of ch.Childs()) { poly.push(conv(h)); walk(h); }
+          mp.push(poly);
+        }
+      };
+      walk(tree);
+      return mp;
     };
-    walk(tree);
-    return { mp, ink: [x0, x1] };
+
+    let barDepth = opts.barDepth;
+    if (!opts.bar) return { mp: unite([]), ink, barDepth };
+    const sh = (opts.barShift || 0) * S;
+    const sink = Math.max(0, opts.sink == null ? 2 : opts.sink) * S;   // descender depth left inside the bar
+    const floor = 2 * S;                                                // minimum bar left under a notch
+    const gap = 0.04 * capS;                                            // clearance either side of a descender
+    const stub = 0.25 * capS;                                           // notches closer than this merge
+    for (const d of drops) barDepth = Math.max(barDepth, (floor - d.low - sink) / S);   // deepen rather than let a tail poke through
+    const bx0 = Math.round(f0 + opts.barInset * S + sh), bx1 = Math.round(f1 - opts.barInset * S + sh);
+    const by0 = Math.round(-barDepth * S), by1 = Math.round(opts.barOverlap * S);
+    if (!(bx1 > bx0 && by1 > by0)) return { mp: unite([]), ink, barDepth };
+    const plain = [[{ X: bx0, Y: by0 }, { X: bx0, Y: by1 }, { X: bx1, Y: by1 }, { X: bx1, Y: by0 }]];
+    let mp = unite(plain);
+    if (drops.length) {
+      // Notch the bar under each descender so the tail stays visible. The notch floor sits `sink` above the
+      // descender's lowest point, so the letter still sinks into the bar. Close notches merge, so no thin posts are left between them.
+      const notched = merge => {
+        const cuts = [];
+        for (const d of drops.slice().sort((a, b) => a.x0 - b.x0)) {
+          const n = { x0: d.x0 - gap, x1: d.x1 + gap, y: d.low + sink }, last = cuts[cuts.length - 1];
+          if (merge && last && n.x0 - last.x1 < stub) { last.x1 = Math.max(last.x1, n.x1); last.y = Math.max(last.y, n.y); }
+          else cuts.push(n);
+        }
+        const bc = new CL.Clipper();
+        bc.AddPaths(plain, CL.PolyType.ptSubject, true);
+        for (const n of cuts) {
+          const x0 = Math.round(n.x0), x1 = Math.round(n.x1), y = Math.round(n.y);
+          bc.AddPath([{ X: x0, Y: y }, { X: x0, Y: by1 + S }, { X: x1, Y: by1 + S }, { X: x1, Y: y }], CL.PolyType.ptClip, true);
+        }
+        const bar = new CL.Paths();
+        bc.Execute(CL.ClipType.ctDifference, bar, CL.PolyFillType.pftNonZero, CL.PolyFillType.pftNonZero);
+        for (const p of bar) if (area(p) > 0) p.reverse();   // clockwise, like the glyph outers
+        return bar;
+      };
+      // A notch must never cut a neighbouring letter loose: if it adds a separate part, try unmerged notches, then keep the plain bar.
+      for (const merge of [true, false]) {
+        const m = unite(notched(merge));
+        if (m.length <= mp.length) { mp = m; break; }
+      }
+    }
+    return { mp, ink, barDepth };
   }
 
   // Drop exactly-collinear points (earcut would drop them silently and leave T-junctions against the side walls).
@@ -326,8 +382,8 @@ import Layout from '../layouts/Layout.astro';
 </script>
   <script is:inline>
 (function () {
-  const DEF = { text:'2D0PEY', cap:30, stretch:1.27, spacing:0, thick:13, bar:true, barDepth:11.2, barInset:7, barShift:0, barOverlap:0.4, slash:true, slashW:2.4 };
-  const NUM = ['cap','stretch','spacing','thick','barDepth','barInset','barShift','barOverlap','slashW'];
+  const DEF = { text:'2D0PEY', cap:30, stretch:1.27, spacing:0, thick:13, bar:true, barDepth:11.2, barInset:7, barShift:0, barOverlap:0.4, slash:true, slashW:2.4, sink:2 };
+  const NUM = ['cap','stretch','spacing','thick','barDepth','barInset','barShift','barOverlap','slashW','sink'];
   const $ = id => document.getElementById(id);
   const cdt = (typeof __cdt === 'function') ? __cdt : (__cdt.default || __cdt);
   const KEY = 'callsign-stl-maker-v3';
@@ -359,7 +415,8 @@ import Layout from '../layouts/Layout.astro';
     const st = $('status');
     o.cap = Math.max(3, o.cap); o.stretch = Math.max(0.3, o.stretch); o.thick = Math.max(0.4, o.thick);
     o.slashW = Math.max(0.6, o.slashW); o.barDepth = Math.max(0.5, o.barDepth); o.barOverlap = Math.max(0.1, o.barOverlap);
-    const { mp, ink } = CallSignCore.outline(o, GLYPHS, ClipperLib);
+    o.sink = Math.max(0, o.sink);
+    const { mp, barDepth } = CallSignCore.outline(o, GLYPHS, ClipperLib);
     if (!mp.length) {
       model = null; $('dl').disabled = true; $('dlsvg').disabled = true;
       st.innerHTML = 'Type a call sign (A-Z, 0-9, / - .)'; draw(); return;
@@ -370,6 +427,7 @@ import Layout from '../layouts/Layout.astro';
     $('dl').disabled = false; $('dlsvg').disabled = false;
     let msg = '<b>' + model.w.toFixed(1) + ' &times; ' + model.h.toFixed(1) + ' &times; ' + model.d.toFixed(1) + ' mm</b> &middot; ' +
       s.tris.toLocaleString() + ' triangles &middot; ' + (s.badEdges ? '<span class="bad">mesh check failed (' + s.badEdges + ' open edges)</span>' : 'watertight');
+    if (o.bar && barDepth > o.barDepth + 0.005) msg += ' &middot; <span class="warn">bar deepened to ' + barDepth.toFixed(1) + ' mm to fit the J/Q tails</span>';
     if (model.w > 250) msg += ' &middot; <span class="warn">wider than 250 mm, check your bed</span>';
     if (ignored.length) msg += ' &middot; <span class="warn">ignored: ' + ignored.map(c => c === ' ' ? 'space' : c).join(' ') + '</span>';
     st.innerHTML = msg;

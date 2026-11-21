@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.0.27] - 2026-11-21
+
+### Added
+- STL maker setting for how far the J and Q tails sink into the base bar (default 2 mm).
+
+### Changed
+- The call sign input uses a monospace font with a distinct zero, so `0` no longer looks like a lowercase `o`.
+- The footprint band the base bar is centred on now scales with letter height instead of being a fixed 8 mm.
+
+### Fixed
+- J and Q tails no longer vanish into the base bar. The bar steps down under them, so the J hook and Q tail stay visible (previously Q printed as O). Close notches merge, and the bar deepens if a tail would otherwise poke through the bottom.
+
 ## [0.0.26] - 2026-11-16
 
 ### Fixed
